@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="description" content="description"><meta name="author" content="Jan Lühr"><title>Apache Flink Worshop</title><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport"><link href="reveal.js-3.9.2/css/reveal.css" rel="stylesheet"><link href="reveal.js-3.9.2/plugin/title-footer/title-footer.css" rel="stylesheet"><link rel="stylesheet" href="reveal.js-3.9.2/css/theme/anderscore.css" id="theme"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><style>/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
+pre.CodeRay{background:#f7f7f8}
+.CodeRay .line-numbers{border-right:1px solid currentColor;opacity:.35;padding:0 .5em 0 0}
+.CodeRay span.line-numbers{display:inline-block;margin-right:.75em}
+.CodeRay .line-numbers strong{color:#000}
+table.CodeRay{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.CodeRay td{vertical-align:top;line-height:inherit}
+table.CodeRay td.line-numbers{text-align:right}
+table.CodeRay td.code{padding:0 0 0 .75em}
+.CodeRay .debug{color:#fff !important;background:#000080 !important}
+.CodeRay .annotation{color:#007}
+.CodeRay .attribute-name{color:#000080}
+.CodeRay .attribute-value{color:#700}
+.CodeRay .binary{color:#509}
+.CodeRay .comment{color:#998;font-style:italic}
+.CodeRay .char{color:#04d}
+.CodeRay .char .content{color:#04d}
+.CodeRay .char .delimiter{color:#039}
+.CodeRay .class{color:#458;font-weight:bold}
+.CodeRay .complex{color:#a08}
+.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
+.CodeRay .color{color:#099}
+.CodeRay .class-variable{color:#369}
+.CodeRay .decorator{color:#b0b}
+.CodeRay .definition{color:#099}
+.CodeRay .delimiter{color:#000}
+.CodeRay .doc{color:#970}
+.CodeRay .doctype{color:#34b}
+.CodeRay .doc-string{color:#d42}
+.CodeRay .escape{color:#666}
+.CodeRay .entity{color:#800}
+.CodeRay .error{color:#808}
+.CodeRay .exception{color:inherit}
+.CodeRay .filename{color:#099}
+.CodeRay .function{color:#900;font-weight:bold}
+.CodeRay .global-variable{color:#008080}
+.CodeRay .hex{color:#058}
+.CodeRay .integer,.CodeRay .float{color:#099}
+.CodeRay .include{color:#555}
+.CodeRay .inline{color:#000}
+.CodeRay .inline .inline{background:#ccc}
+.CodeRay .inline .inline .inline{background:#bbb}
+.CodeRay .inline .inline-delimiter{color:#d14}
+.CodeRay .inline-delimiter{color:#d14}
+.CodeRay .important{color:#555;font-weight:bold}
+.CodeRay .interpreted{color:#b2b}
+.CodeRay .instance-variable{color:#008080}
+.CodeRay .label{color:#970}
+.CodeRay .local-variable{color:#963}
+.CodeRay .octal{color:#40e}
+.CodeRay .predefined{color:#369}
+.CodeRay .preprocessor{color:#579}
+.CodeRay .pseudo-class{color:#555}
+.CodeRay .directive{font-weight:bold}
+.CodeRay .type{font-weight:bold}
+.CodeRay .predefined-type{color:inherit}
+.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
+.CodeRay .key{color:#808}
+.CodeRay .key .delimiter{color:#606}
+.CodeRay .key .char{color:#80f}
+.CodeRay .value{color:#088}
+.CodeRay .regexp .delimiter{color:#808}
+.CodeRay .regexp .content{color:#808}
+.CodeRay .regexp .modifier{color:#808}
+.CodeRay .regexp .char{color:#d14}
+.CodeRay .regexp .function{color:#404;font-weight:bold}
+.CodeRay .string{color:#d20}
+.CodeRay .string .string .string{background:#ffd0d0}
+.CodeRay .string .content{color:#d14}
+.CodeRay .string .char{color:#d14}
+.CodeRay .string .delimiter{color:#d14}
+.CodeRay .shell{color:#d14}
+.CodeRay .shell .delimiter{color:#d14}
+.CodeRay .symbol{color:#990073}
+.CodeRay .symbol .content{color:#a60}
+.CodeRay .symbol .delimiter{color:#630}
+.CodeRay .tag{color:#008080}
+.CodeRay .tag-special{color:#d70}
+.CodeRay .variable{color:#036}
+.CodeRay .insert{background:#afa}
+.CodeRay .delete{background:#faa}
+.CodeRay .change{color:#aaf;background:#007}
+.CodeRay .head{color:#f8f;background:#505}
+.CodeRay .insert .insert{color:#080}
+.CodeRay .delete .delete{color:#800}
+.CodeRay .change .change{color:#66f}
+.CodeRay .head .head{color:#f4f}</style><link href="reveal.js-3.9.2/lib/css/zenburn.css" rel="stylesheet"><script>document.write( '<link rel="stylesheet" href="reveal.js-3.9.2/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );</script><script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script></head><body><div class="reveal"><div class="slides"><section id="_einführung_flink_table_api"><h2>Einführung Flink Table API</h2><div class="paragraph heading center"><p>Einführung Flink Table API</p></div></section>
+<section id="_flink_table_api_kurzeinführung"><h2>Flink Table API: Kurzeinführung</h2><div class="ulist"><ul><li><p>inspiriert von relationalen Datenbanken</p><div class="ulist"><ul><li><p>API-Calls ähneln SQL-Syntax, aber mit fluent API statt Befehlen als Strings</p></li></ul></div></li><li><p>Grundabstraktion ist das "Table" Interface (analog zu DataStream in Streams API)</p></li><li><p>Eigentliche Streams werden als Folge von Inserts und Updates auf Tabellen interpretiert</p></li><li><p>benötigt Erstellung eines TableEnvironment (z.B. StreamTableEnvironment ) analog zu ExeutionEnvironment für Streams API</p></li><li><p>Streams und Table API sind kombinierbar, es gibt Möglichkeiten zwischen DataStream und Table zu konvertieren:</p><div class="ulist"><ul><li><p>Komponenten von Datensätzen in DataStreams können als Spalten einer Table genommen werden</p><div class="ulist"><ul><li><p>einzelne Datensätze im Stream sind Inserts oder auch Updates (bei gleichem Primärschlüssel) in die Tabelle</p></li></ul></div></li><li><p>entsprechend können Zeilen in Tabellen zu Stream-Datensätzen konvertiert werden</p></li></ul></div></li><li><p>Table API kann prinzipiell alles, was die Streams API auch kann</p></li></ul></div></section>
+<section id="_flink_table_api_kurzeinführung_2"><h2>Flink Table API: Kurzeinführung (2)</h2><div class="ulist"><ul><li><p>Beispiel:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">EnvironmentSettings settings = EnvironmentSettings
+    .newInstance()
+    .inStreamingMode()
+    .build();
+
+TableEnvironment tEnv = TableEnvironment.create(settings);
+
+<span class="comment">// register Orders table in table environment</span>
+<span class="comment">// ...</span>
+
+<span class="comment">// specify table program</span>
+Table orders = tEnv.from(<span class="string"><span class="delimiter">&quot;</span><span class="content">Orders</span><span class="delimiter">&quot;</span></span>); <span class="comment">// Orders Tabelle folgt dem Schema (a, b, c, rowtime), wurde vorher registriert (nicht gezeigt)</span>
+
+Table counts = orders
+        .groupBy(<span class="error">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">a</span><span class="delimiter">&quot;</span></span>))
+        .select(<span class="error">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">a</span><span class="delimiter">&quot;</span></span>), <span class="error">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">b</span><span class="delimiter">&quot;</span></span>).count().as(<span class="string"><span class="delimiter">&quot;</span><span class="content">cnt</span><span class="delimiter">&quot;</span></span>));
+
+counts.execute().print();</code></pre>
+<div class="ulist"><ul><li><p>Codebeispiel und mehr Details auf <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/table/tableapi/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/table/tableapi/</a></p></li><li><p>Ein Unterschied zur Streams API: "Table" ist kein generischer Typ. Statt dessen gibt es für das Tabellenschema einen spezielle Klasse "Schema"</p></li></ul></div></section>
+<section id="_machine_learning_mit_flink_ml"><h2>Machine Learning mit Flink ML</h2><div class="paragraph heading center"><p>Machine Learning mit Flink ML</p></div></section>
+<section id="_machine_learning_mit_flink_ml_2"><h2>Machine Learning mit Flink ML</h2><div class="ulist"><ul><li><p>Flink ML ist eine Library, die wie Flink selbst von der Flink Community entwickelt wird</p></li><li><p>Stellt eine API zu Verfügung, um Pipelines (oder Graphen) für ML-Jobs zu bauen</p></li><li><p>Enthält gebundled bereits einige grundlegende ML Algorithmen</p><div class="ulist"><ul><li><p>Klassifikation: K nearest neighbours (KNN), Naive Bayes, ..</p></li><li><p>Clustering: KMeans, ..</p></li><li><p>Feature Engineering: diverse kleinere Algorithmen zum Transformieren von Daten und Extrahieren von Features</p></li></ul></div></li><li><p>API ist high-level und basiert auf der <strong>Flink Table API</strong></p></li><li><p>Für Java müssen zur Verwendung von Flink ML folgende Dependencies eingebunden werden:</p><div class="ulist"><ul><li><p>flink-table-api-java-bridge (für die Table API)</p></li><li><p>flink-ml-uber (für Flink ML selbst)</p></li></ul></div></li></ul></div></section>
+<section id="_flink_ml_komponenten"><h2>Flink ML Komponenten</h2><div class="ulist"><ul><li><p>Komponenten von Flink ML-Jobs (Interfacetypen):</p><div class="ulist"><ul><li><p>AlgoOperator</p><div class="ulist"><ul><li><p>Abstraktion für beliebige Operatoren mit n Inputtabellen und m Outputtabellen</p></li></ul></div></li><li><p>Transformer</p><div class="ulist"><ul><li><p>Spezieller AlgoOperator</p></li><li><p>Für 1:1 Mapping von einzelnen Datensätzen (keine Aggregation möglich)</p></li></ul></div></li><li><p>Model</p><div class="ulist"><ul><li><p>Spezieller Transformer</p></li><li><p>Hat einen State (ModelData), der eine Anpassung des Models an Trainingsdaten repräsentiert</p></li></ul></div></li><li><p>Estimator</p><div class="ulist"><ul><li><p>Generiert Model (inkl. ModelData) aus Inputtabellen</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_flink_ml_beispiel_tokenizer"><h2>Flink ML Beispiel (Tokenizer)</h2><div class="ulist"><ul><li><p>Beispiel zur Anwendung eines Transformers (Tokenizer):</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        StreamTableEnvironment tEnv = StreamTableEnvironment.create(env);
+
+        <span class="comment">// Generates input data.</span>
+        DataStream&lt;Row&gt; inputStream =
+                env.fromElements(Row.of(<span class="string"><span class="delimiter">&quot;</span><span class="content">Test for tokenization.</span><span class="delimiter">&quot;</span></span>), Row.of(<span class="string"><span class="delimiter">&quot;</span><span class="content">Te,st. punct</span><span class="delimiter">&quot;</span></span>));
+        Table inputTable = tEnv.fromDataStream(inputStream).as(<span class="string"><span class="delimiter">&quot;</span><span class="content">input</span><span class="delimiter">&quot;</span></span>);
+
+        <span class="comment">// Creates a Tokenizer object and initializes its parameters.</span>
+        Tokenizer tokenizer = <span class="keyword">new</span> Tokenizer().setInputCol(<span class="string"><span class="delimiter">&quot;</span><span class="content">input</span><span class="delimiter">&quot;</span></span>).setOutputCol(<span class="string"><span class="delimiter">&quot;</span><span class="content">output</span><span class="delimiter">&quot;</span></span>);
+
+        <span class="comment">// Uses the Tokenizer object for feature transformations.</span>
+        Table outputTable = tokenizer.transform(inputTable)[<span class="integer">0</span>];
+
+        <span class="comment">// Extracts and displays the results.</span>
+        <span class="keyword">for</span> (CloseableIterator&lt;Row&gt; it = outputTable.execute().collect(); it.hasNext(); ) {
+            Row row = it.next();
+
+            <span class="predefined-type">String</span> inputValue = (<span class="predefined-type">String</span>) row.getField(tokenizer.getInputCol());
+            <span class="predefined-type">String</span><span class="type">[]</span> outputValues = (<span class="predefined-type">String</span><span class="type">[]</span>) row.getField(tokenizer.getOutputCol());
+
+            <span class="predefined-type">System</span>.out.printf(
+                    <span class="string"><span class="delimiter">&quot;</span><span class="content">Input Value: %s </span><span class="char">\t</span><span class="content">Output Values: %s</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>,
+                    inputValue, <span class="predefined-type">Arrays</span>.toString(outputValues));
+        }</code></pre>
+<div class="ulist"><ul><li><p>Beispielcode aus aus org.apache.flink.ml.examples.feature.TokenizerExample</p></li></ul></div></section>
+<section id="_flink_ml_beispiel_naivebayes"><h2>Flink ML Beispiel (NaiveBayes)</h2><div class="ulist"><ul><li><p>Beispiel zur Anwendung eines Estimators, der ein Model erstellt (NaiveBayes):</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">        <span class="comment">// Generates input training and prediction data.</span>
+        DataStream&lt;Row&gt; trainStream =
+                env.fromElements(
+                        Row.of(Vectors.dense(<span class="integer">0</span>, <span class="integer">0</span>.), <span class="integer">11</span>), (...weitere...));
+        Table trainTable = tEnv.fromDataStream(trainStream).as(<span class="string"><span class="delimiter">&quot;</span><span class="content">features</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">label</span><span class="delimiter">&quot;</span></span>);
+
+        DataStream&lt;Row&gt; predictStream =
+                env.fromElements(
+                        Row.of(Vectors.dense(<span class="integer">0</span>, <span class="integer">1</span>.)), (...weitere...));
+        Table predictTable = tEnv.fromDataStream(predictStream).as(<span class="string"><span class="delimiter">&quot;</span><span class="content">features</span><span class="delimiter">&quot;</span></span>);
+
+        <span class="comment">// Creates a NaiveBayes object and initializes its parameters.</span>
+        NaiveBayes naiveBayes =
+                <span class="keyword">new</span> NaiveBayes()
+                        .setSmoothing(<span class="float">1.0</span>)
+                        .setFeaturesCol(<span class="string"><span class="delimiter">&quot;</span><span class="content">features</span><span class="delimiter">&quot;</span></span>)
+                        .setLabelCol(<span class="string"><span class="delimiter">&quot;</span><span class="content">label</span><span class="delimiter">&quot;</span></span>)
+                        .setPredictionCol(<span class="string"><span class="delimiter">&quot;</span><span class="content">prediction</span><span class="delimiter">&quot;</span></span>)
+                        .setModelType(<span class="string"><span class="delimiter">&quot;</span><span class="content">multinomial</span><span class="delimiter">&quot;</span></span>);
+
+        <span class="comment">// Trains the NaiveBayes Model.</span>
+        NaiveBayesModel naiveBayesModel = naiveBayes.fit(trainTable);
+
+        <span class="comment">// Uses the NaiveBayes Model for predictions.</span>
+        Table outputTable = naiveBayesModel.transform(predictTable)[<span class="integer">0</span>];</code></pre>
+<div class="ulist"><ul><li><p>Beispielcode abgekürzt aus aus org.apache.flink.ml.examples.classification.NaiveBayesExample</p></li></ul></div></section>
+<section id="_flink_ml_pipeline"><h2>Flink ML : Pipeline</h2><div class="ulist"><ul><li><p>Pipeline</p><div class="ulist"><ul><li><p>Basisklasse für einfache Flink ML-Jobs</p></li><li><p>Besteht aus Stages</p><div class="ulist"><ul><li><p>AlgoOperator und Estimator sind Stages</p></li></ul></div></li><li><p>Ist selbst ein Estimator</p></li></ul></div></li><li><p>Erstellung eines <strong>PipelineModel</strong> aus einer Pipeline folgt folgendem Algorithmus:</p><div class="ulist"><ul><li><p>Führe die Stages hintereinander aus</p><div class="ulist"><ul><li><p>Die erste Stage erhält gegebene Tabellen (Parameter) als Input</p></li><li><p>Jede folgende Stage erhält als Input den Output der vorherigen Stage</p></li></ul></div></li><li><p>Wenn eine Stage ein Estimator ist, <strong>fitte</strong> diesen erst mit seinem Input</p><div class="ulist"><ul><li><p>Wende dann das erhaltene Model auf den (gleichen) Input an</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_flink_ml_pipeline_2"><h2>Flink ML : Pipeline (2)</h2><div class="ulist"><ul><li><p>zu beachten ist noch, dass Input und Output einer Pipeline und aller Operatoren in der Pipeline immer ein Array von Tables ist</p></li><li><p>Beispiel zur Erstellung einer Pipeline (aus der Flink-Dokumentation):</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="comment">// Suppose SumModel is a concrete subclass of Model, SumEstimator is a concrete subclass of Estimator.</span>
+
+Model modelA = <span class="keyword">new</span> SumModel().setModelData(tEnv.fromValues(<span class="integer">10</span>));
+Estimator estimatorA = <span class="keyword">new</span> SumEstimator();
+Model modelB = <span class="keyword">new</span> SumModel().setModelData(tEnv.fromValues(<span class="integer">30</span>));
+
+<span class="predefined-type">List</span>&lt;Stage&lt;?&gt;&gt; stages = <span class="predefined-type">Arrays</span>.asList(modelA, estimatorA, modelB);
+Estimator&lt;?, ?&gt; estimator = <span class="keyword">new</span> Pipeline(stages);</code></pre>
+<div class="ulist"><ul><li><p>ergibt eine Pipeline der Form</p><div class="ulist"><ul><li><p>modelA &#8594; estimatorA &#8594; modelB</p></li></ul></div></li><li><p>nach Fitten mit Daten (nicht im Code gezeigt) erhält man ein PipelineModel der Form</p><div class="ulist"><ul><li><p>modelA &#8594; model_from_estimatorA &#8594; modelB</p></li></ul></div></li><li><p>da Pipelines bzw. PipelineModels Estimators bzw. Models sind, können sie auch selbst als Bausteine für weitere Pipelines verwendet werden</p></li></ul></div></section>
+<section id="_flink_ml_offline_und_online_learning"><h2>Flink ML : Offline und Online Learning</h2><div class="ulist"><ul><li><p>Offline Learning mit Flink ML:</p><div class="ulist"><ul><li><p>Trainingsdaten sind beschränkte Streams</p></li><li><p>Nach Generieren der Models können die Pipelines zur Prediction auf beschränkte oder unbeschränkte Inputstreams angewendet werden</p></li></ul></div></li><li><p>Online Learning mit Flink ML:</p><div class="ulist"><ul><li><p>Trainingsdaten sind unbeschränkte Streams</p></li><li><p>Models werden kontinuierlich angepasst</p></li></ul></div></li><li><p>Estimators und Pipelines unterstützen beide Varianten</p></li><li><p>Manche vordefinierten Algorithmen von Flink ML haben eine Online-Variante</p><div class="ulist"><ul><li><p>z.B. OnlineKMeans, OnlineLogisticRegression</p></li></ul></div></li></ul></div></section>
+<section id="_flink_ml_graph"><h2>Flink ML : Graph</h2><div class="ulist"><ul><li><p>Für komplexere ML-Jobs, die sich nicht durch eine einfache Pipeline beschreiben lassen, gibt es noch die Klasse Graph</p></li><li><p>Ein Graph besteht aus GraphNodes, die jeweils einen AlgOperator oder Estimator enthalten</p></li><li><p>GraphNodes können Input aus mehreren GraphNodes erhalten und Output an mehrere GraphNodes übergeben (Kanten im Graphen)</p><div class="ulist"><ul><li><p>Graph ist konzeptuell ähnlich wie ein JobGraph</p></li></ul></div></li><li><p>Es gibt NodeIds für die Knoten und TableIds für die Tabellen</p><div class="ulist"><ul><li><p>über diese wird in der API bei der Erstellung einer GraphNode festgelegt, welche Outputtabellen von anderen GraphNodes diese als Input erhalten soll</p><div class="ulist"><ul><li><p>die initialen Inputtabellen haben natürlich auch IDs</p></li></ul></div></li></ul></div></li><li><p>Der Graph muss azyklisch sein (darf keine Kreise enthalten)</p><div class="ulist"><ul><li><p>für iterative Operationen, bei denen Outputs eines Operators wieder vom gleichen Operator bearbeitet werden sollen, gibt es eine spezielle API (kommt später)</p></li></ul></div></li></ul></div></section>
+<section id="_flink_ml_graph_2"><h2>Flink ML : Graph (2)</h2><div class="ulist"><ul><li><p>Für das Erstellen eines GraphModel wird in der API ein GraphBuilder verwendet</p></li><li><p>Anders als ein PipelineModel enthält ein GraphModel weiterhin die im Builder angegebenen Estimators</p><div class="ulist"><ul><li><p>bei jeder Anwendung des GraphModels (transform Operation) wird der Graph in einer topologischen Ordnung der Knoten durchlaufen</p></li><li><p>wenn ein Estimator durchlaufen wird, wird ähnlich wie bei der Erstellung eines PipelineModel erst ein Model durch Fitten der Inputs erstellt</p></li><li><p>dann wird dieses Model auf den Input erneut angewendet</p></li></ul></div></li><li><p>Im GraphBuilder wird festgelegt, welche Nodes es gibt, und wie diese miteinander verdrahtet werden sollen</p></li><li><p>mit builder.createTableId() wird eine neue Id für eine Inputtabelle des Graphen erstellt</p><div class="ulist"><ul><li><p>diese kann bei Erstellung von neuen Nodes als Input angegeben werden</p></li></ul></div></li><li><p>hinzufügen eines Operators oder Estimators gibt einen Array von TableIds für den Output zurück</p><div class="ulist"><ul><li><p>diese können in der Definition weiterer Operatoren verwendet werden</p></li></ul></div></li></ul></div></section>
+<section id="_flink_ml_graph_3"><h2>Flink ML : Graph (3)</h2><div class="ulist"><ul><li><p>Bei Bauen des Models mit builder.buildModel wird angegeben, welche TableIds als Input bzw. Output des gesamten Graphen verwendet werden sollen</p><div class="ulist"><ul><li><p>hierbei können gesondert TableIds für Inputs bzw. Outputs von Aufrufen von getModelData bzw. setModelData auf GraphNodes, die Models sind, festgelegt werden</p></li></ul></div></li><li><p>Beispiel zur Erstellung eines Graph (aus der Flink-Dokumentation):</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">GraphBuilder builder = <span class="keyword">new</span> GraphBuilder();
+<span class="comment">// Creates nodes.</span>
+SumModel stage1 = <span class="keyword">new</span> SumModel().setModelData(tEnv.fromValues(<span class="integer">1</span>));
+SumModel stage2 = <span class="keyword">new</span> SumModel();
+SumModel stage3 = <span class="keyword">new</span> SumModel().setModelData(tEnv.fromValues(<span class="integer">3</span>));
+<span class="comment">// Creates inputs and modelDataInputs.</span>
+TableId input = builder.createTableId();
+TableId modelDataInput = builder.createTableId();
+<span class="comment">// Feeds inputs and gets outputs.</span>
+TableId output1 = builder.addAlgoOperator(stage1, input)[<span class="integer">0</span>];
+TableId output2 = builder.addAlgoOperator(stage2, output1)[<span class="integer">0</span>];
+builder.setModelDataOnModel(stage2, modelDataInput);
+TableId output3 = builder.addAlgoOperator(stage3, output2)[<span class="integer">0</span>];
+TableId modelDataOutput = builder.getModelDataFromModel(stage3)[<span class="integer">0</span>];
+
+<span class="comment">// Builds a Model from the graph.</span>
+TableId<span class="type">[]</span> inputs = <span class="keyword">new</span> TableId<span class="type">[]</span> {input};
+TableId<span class="type">[]</span> outputs = <span class="keyword">new</span> TableId<span class="type">[]</span> {output3};
+TableId<span class="type">[]</span> modelDataInputs = <span class="keyword">new</span> TableId<span class="type">[]</span> {modelDataInput};
+TableId<span class="type">[]</span> modelDataOutputs = <span class="keyword">new</span> TableId<span class="type">[]</span> {modelDataOutput};
+Model&lt;?&gt; model = builder.buildModel(inputs, outputs, modelDataInputs, modelDataOutputs);</code></pre></section>
+<section id="_flink_ml_graph_4"><h2>Flink ML : Graph (4)</h2><div class="ulist"><ul><li><p>Der gerade gezeigte Code generiert einen Graph der folgenden Form:</p></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="imageblock" style=""><img src="images/eigene/ml_Graph.svg" alt="ml Graph" width="1500"></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p>Der Graph selbst hat genau die Nodes "stage1", "stage2", "stage3"</p></li><li><p>"Input", "Model Data Input", "Output", "Model Data Output" repräsentieren Input und Output, wenn das generierte GraphModel als Transformation verwendet wird</p></li></ul></div></section>
+<section id="_flink_ml_iterations"><h2>Flink ML : Iterations</h2><div class="ulist"><ul><li><p>Flink ML <strong>Iterations API</strong> basiert auf DataStreams API</p></li><li><p>Für die Definition einer <strong>iterativen Operation</strong> werden benötigt :</p><div class="ulist"><ul><li><p>Eine Liste von initialen Werten für die <strong>variablen</strong> Datenstreams</p></li><li><p>Eine zusätzliche Liste von <strong>nicht variablen</strong> Datenstreams</p></li><li><p>Einen <strong>IterationBody</strong>, der den iterativen Code enthält</p><div class="ulist"><ul><li><p>Dieser enthält optional eine Abbruchbedingung (&#8594; bounded Iteration, sonst unbounded)</p></li></ul></div></li><li><p>Eine Konfiguration</p></li></ul></div></li><li><p>Bei jeder Iteration:</p><div class="ulist"><ul><li><p>IterationBody wird durchlaufen</p></li><li><p>Variable Streams erhalten ein Updates</p></li><li><p>Es wird ein Output emittiert</p></li></ul></div></li></ul></div></section>
+<section id="_flink_ml_iterations_2"><h2>Flink ML : Iterations (2)</h2><div class="ulist"><ul><li><p>Beispiel für Iterations API : Implementierung von Bounded KMeans (Ausschnitt)</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">        StreamTableEnvironment tEnv =
+                (StreamTableEnvironment) ((TableImpl) inputs[<span class="integer">0</span>]).getTableEnvironment();
+        DataStream&lt;DenseVector&gt; points =
+                tEnv.toDataStream(inputs[<span class="integer">0</span>])
+                        .map(row -&gt; ((<span class="predefined-type">Vector</span>) row.getField(getFeaturesCol())).toDense());
+
+        DataStream&lt;DenseVector<span class="type">[]</span>&gt; initCentroids = selectRandomCentroids(points, getK(), getSeed());
+
+        IterationConfig config =
+                IterationConfig.newBuilder()
+                        .setOperatorLifeCycle(IterationConfig.OperatorLifeCycle.ALL_ROUND)
+                        .build();
+
+        IterationBody body =
+                <span class="keyword">new</span> KMeansIterationBody(  <span class="comment">// Abbruchbedingung : max. Anzahl von Iterationen</span>
+                        getMaxIter(), DistanceMeasure.getInstance(getDistanceMeasure()));
+
+        DataStream&lt;KMeansModelData&gt; finalModelData =
+                Iterations.iterateBoundedStreamsUntilTermination(
+                                DataStreamList.of(initCentroids),  <span class="comment">// variable Streams</span>
+                                ReplayableDataStreamList.notReplay(points),  <span class="comment">// konstante Streams</span>
+                                config,
+                                body)
+                        .get(<span class="integer">0</span>);
+
+        Table finalModelDataTable = tEnv.fromDataStream(finalModelData);</code></pre></section>
+<section id="_flink_ml_beispiel_kmeans"><h2>Flink ML : Beispiel KMeans</h2><div class="ulist"><ul><li><p>Beispiel zur Anwendung von KMeans (abgekürzt aus org.apache.flink.ml.examples.clustering.KMeansExample):</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        StreamTableEnvironment tEnv = StreamTableEnvironment.create(env);
+
+        <span class="comment">// Generates input data.</span>
+        DataStream&lt;DenseVector&gt; inputStream =
+                env.fromElements(
+                        Vectors.dense(<span class="float">0.0</span>, <span class="float">0.0</span>),
+                        Vectors.dense(<span class="float">0.0</span>, <span class="float">0.3</span>),
+                        (... weitere...) );
+        Table inputTable = tEnv.fromDataStream(inputStream).as(<span class="string"><span class="delimiter">&quot;</span><span class="content">features</span><span class="delimiter">&quot;</span></span>);
+
+        <span class="comment">// Creates a K-means object and initializes its parameters.</span>
+        KMeans kmeans = <span class="keyword">new</span> KMeans().setK(<span class="integer">2</span>).setSeed(<span class="integer">1L</span>);
+
+        <span class="comment">// Trains the K-means Model.</span>
+        KMeansModel kmeansModel = kmeans.fit(inputTable);
+
+        <span class="comment">// Uses the K-means Model for predictions.</span>
+        Table outputTable = kmeansModel.transform(inputTable)[<span class="integer">0</span>];
+
+        <span class="comment">// Extracts and displays the results.</span>
+        <span class="keyword">for</span> (CloseableIterator&lt;Row&gt; it = outputTable.execute().collect(); it.hasNext(); ) {
+            Row row = it.next();
+            DenseVector features = (DenseVector) row.getField(kmeans.getFeaturesCol());
+            <span class="type">int</span> clusterId = (<span class="predefined-type">Integer</span>) row.getField(kmeans.getPredictionCol());
+            <span class="predefined-type">System</span>.out.printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Features: %s </span><span class="char">\t</span><span class="content">Cluster ID: %s</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, features, clusterId);
+        }</code></pre></section>
+<section id="_aufgabe_8_einfache_textklassifikation"><h2>Aufgabe 8 : Einfache Textklassifikation</h2><div class="ulist"><ul><li><p>Wir möchten einen (primitiven) Klassifikator erstellen, der einen gegebenen Text als String einliest und eine Kategorie ausgibt</p></li><li><p>Input ist eine Tabelle mit einer Spalte (String) für den Text und einer weiteren möglichen Spalte für ein Label</p></li></ul></div>
+<div class="olist arabic"><ol class="arabic" start="1"><li><p>Bauen Sie dazu mit Hilfe von Flink eine Pipeline, die folgende Schritte enthält:</p><div class="olist loweralpha"><ol class="loweralpha" type="a"><li><p>ein Tokenizer um aus den Texten String Arrays zu machen</p></li><li><p>eine HashingTF, um aus einem String Array einen Featurevektor konstanter Länge zu extrahieren</p><div class="ulist"><ul><li><p>die Features beschreiben, welche Wörter wie oft vorkommen</p></li></ul></div></li><li><p>ein Knn Estimator, der die Featurevektoren zusammen mit den Labels benutzt</p></li></ol></div></li><li><p>Wenden Sie Ihre Pipeline auf ein paar einfache Strings als Trainings- und Testdaten an</p></li></ol></div></section>
+<section id="_aufgabe_8_einfache_textklassifikation_hinweise"><h2>Aufgabe 8 : Einfache Textklassifikation (Hinweise)</h2><div class="ulist"><ul><li><p>Die HashingTF ordnet den Wörtern Hashwerte (ganze nichtnegative Zahlen in einem festgelegten Bereich) zu, und gibt als Featurewert an, wie viele Wörter im Text vorkommen,
+deren Hashwert der Nummer des Features entspricht</p><div class="ulist"><ul><li><p>zur Verwendung siehe z.B. <a href="https://nightlies.apache.org/flink/flink-ml-docs-master/docs/operators/feature/hashingtf/" class="bare">https://nightlies.apache.org/flink/flink-ml-docs-master/docs/operators/feature/hashingtf/</a></p></li><li><p>Wählen Sie die Anzahl der Features in HashingTF genügend groß, damit unterschiedliche Wörter möglichst nicht gleich gehasht werden</p></li></ul></div></li><li><p>Da Tables in der Table API eine variable Anzahl von Spalten haben können, kann die Pipeline erst mit einer zweispaltigen Tabelle (Text, Labels) als Transformer ausgeführt
+werden, um ein PipelineModel erstellen, und dann dieses Model mit einer einspaltigen Tabelle (nur Text) als Transformer verwendet werden</p></li><li><p>Die Namen der Input- und Outputspalten in der Konfiguration der Komponenten der Pipeline müssen aufeinander abgestimmt sein</p></li><li><p>Der Einfachheit halber können Sie in Knn den Wert 1 für K wählen, dann wird jedem Testfeaturevektor das Label des nächstgelegenden Trainingsfeaturevektors zugeordnet</p></li></ul></div></section></div></div><script src="reveal.js-3.9.2/lib/js/head.min.js"></script><script src="reveal.js-3.9.2/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
+Reveal.initialize({
+  // Display controls in the bottom right corner
+  controls: true,
+  // Display a presentation progress bar
+  progress: true,
+  // Display the page number of the current slide
+  slideNumber: true,
+  // Push each slide change to the browser history
+  history: true,
+  // Enable keyboard shortcuts for navigation
+  keyboard: true,
+  // Enable the slide overview mode
+  overview: true,
+  // Vertical centering of slides
+  center: true,
+  // Enables touch navigation on devices with touch input
+  touch: true,
+  // Loop the presentation
+  loop: false,
+  // Change the presentation direction to be RTL
+  rtl: false,
+  // Turns fragments on and off globally
+  fragments: true,
+  // Flags if the presentation is running in an embedded mode,
+  // i.e. contained within a limited portion of the screen
+  embedded: false,
+  // Number of milliseconds between automatically proceeding to the
+  // next slide, disabled when set to 0, this value can be overwritten
+  // by using a data-autoslide attribute on your slides
+  autoSlide: 0,
+  // Stop auto-sliding after user input
+  autoSlideStoppable: true,
+  // Enable slide navigation via mouse wheel
+  mouseWheel: true,
+  // Hides the address bar on mobile devices
+  hideAddressBar: true,
+  // Opens links in an iframe preview overlay
+  previewLinks: false,
+  // Theme (e.g., beige, black, league, night, serif, simple, sky, solarized, white)
+  // NOTE setting the theme in the config no longer works in reveal.js 3.x
+  //theme: Reveal.getQueryHash().theme || 'anderscore',
+  // Transition style (e.g., none, fade, slide, convex, concave, zoom)
+  transition: Reveal.getQueryHash().transition || 'linear',
+  // Transition speed (e.g., default, fast, slow)
+  transitionSpeed: 'default',
+  // Transition style for full page slide backgrounds (e.g., none, fade, slide, convex, concave, zoom)
+  backgroundTransition: 'fade',
+  // Number of slides away from the current that are visible
+  viewDistance: 3,
+  // Parallax background image (e.g., "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'")
+  parallaxBackgroundImage: '',
+  // Parallax background size in CSS syntax (e.g., "2100px 900px")
+  parallaxBackgroundSize: '',
+
+  // The "normal" size of the presentation, aspect ratio will be preserved
+  // when the presentation is scaled to fit different resolutions. Can be
+  // specified using percentage units.
+  width: 1728,
+  height: 972,
+
+  // Factor of the display size that should remain empty around the content
+  margin: 0.1,
+
+  // Bounds for smallest/largest possible scale to apply to content
+  minScale: 0.2,
+  maxScale: 1.5,
+
+  // Optional libraries used to extend on reveal.js
+  dependencies: [
+      { src: 'reveal.js-3.9.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'reveal.js-3.9.2/plugin/title-footer/title-footer.js', async: true, callback: function()
+          {title_footer.initialize('Schulung Java Data Pipelines mit Apache Flink', 'Jan Lühr', 'anderScore GmbH • Frankenwerft 35 • 50667 Köln');}},
+      { src: 'reveal.js-3.9.2/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal.js-3.9.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      
+      { src: 'reveal.js-3.9.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: 'reveal.js-3.9.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+  ]
+});</script></body></html>

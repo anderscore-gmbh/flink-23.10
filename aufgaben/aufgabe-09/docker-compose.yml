@@ -1,0 +1,68 @@
+version: '3.8'
+services:
+  jobmanager:
+    build: jobmanager/.
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    volumes:
+      - flink_data:/tmp/
+      - flink_config:/opt/flink/conf
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        state.backend: filesystem
+        state.checkpoints.dir: file:///tmp/flink-checkpoints
+        heartbeat.interval: 1000
+        heartbeat.timeout: 5000
+        rest.flamegraph.enabled: true
+        web.backpressure.refresh-interval: 10000
+        execution.checkpointing.interval: 10000
+  taskmanager:
+    image: flink:1.17.1-java11
+    depends_on:
+      - jobmanager
+    command: taskmanager
+    volumes:
+      - flink_data:/tmp/
+      - flink_config:/opt/flink/conf
+      - flink-joblog:/joblog/
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 2
+        state.backend: filesystem
+        state.checkpoints.dir: file:///tmp/flink-checkpoints
+        heartbeat.interval: 1000
+        heartbeat.timeout: 5000
+        execution.checkpointing.interval: 10000
+  taskmanager2:
+    image: flink:1.17.1-java11
+    depends_on:
+      - jobmanager
+    command: taskmanager
+    volumes:
+      - flink_data:/tmp/
+      - flink_config:/opt/flink/conf
+      - flink-joblog:/joblog/
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 2
+        state.backend: filesystem
+        state.checkpoints.dir: file:///tmp/flink-checkpoints
+        heartbeat.interval: 1000
+        heartbeat.timeout: 5000
+        execution.checkpointing.interval: 10000
+volumes:
+  flink_data:
+  flink_config:
+  flink-joblog:
+        driver: local
+        driver_opts:
+          o: bind
+          type: none
+          device: /aufgabe9-joblog

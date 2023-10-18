@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="description" content="description"><meta name="author" content="Jan Lühr"><title>Apache Flink Worshop</title><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport"><link href="reveal.js-3.9.2/css/reveal.css" rel="stylesheet"><link href="reveal.js-3.9.2/plugin/title-footer/title-footer.css" rel="stylesheet"><link rel="stylesheet" href="reveal.js-3.9.2/css/theme/anderscore.css" id="theme"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><style>/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
+pre.CodeRay{background:#f7f7f8}
+.CodeRay .line-numbers{border-right:1px solid currentColor;opacity:.35;padding:0 .5em 0 0}
+.CodeRay span.line-numbers{display:inline-block;margin-right:.75em}
+.CodeRay .line-numbers strong{color:#000}
+table.CodeRay{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.CodeRay td{vertical-align:top;line-height:inherit}
+table.CodeRay td.line-numbers{text-align:right}
+table.CodeRay td.code{padding:0 0 0 .75em}
+.CodeRay .debug{color:#fff !important;background:#000080 !important}
+.CodeRay .annotation{color:#007}
+.CodeRay .attribute-name{color:#000080}
+.CodeRay .attribute-value{color:#700}
+.CodeRay .binary{color:#509}
+.CodeRay .comment{color:#998;font-style:italic}
+.CodeRay .char{color:#04d}
+.CodeRay .char .content{color:#04d}
+.CodeRay .char .delimiter{color:#039}
+.CodeRay .class{color:#458;font-weight:bold}
+.CodeRay .complex{color:#a08}
+.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
+.CodeRay .color{color:#099}
+.CodeRay .class-variable{color:#369}
+.CodeRay .decorator{color:#b0b}
+.CodeRay .definition{color:#099}
+.CodeRay .delimiter{color:#000}
+.CodeRay .doc{color:#970}
+.CodeRay .doctype{color:#34b}
+.CodeRay .doc-string{color:#d42}
+.CodeRay .escape{color:#666}
+.CodeRay .entity{color:#800}
+.CodeRay .error{color:#808}
+.CodeRay .exception{color:inherit}
+.CodeRay .filename{color:#099}
+.CodeRay .function{color:#900;font-weight:bold}
+.CodeRay .global-variable{color:#008080}
+.CodeRay .hex{color:#058}
+.CodeRay .integer,.CodeRay .float{color:#099}
+.CodeRay .include{color:#555}
+.CodeRay .inline{color:#000}
+.CodeRay .inline .inline{background:#ccc}
+.CodeRay .inline .inline .inline{background:#bbb}
+.CodeRay .inline .inline-delimiter{color:#d14}
+.CodeRay .inline-delimiter{color:#d14}
+.CodeRay .important{color:#555;font-weight:bold}
+.CodeRay .interpreted{color:#b2b}
+.CodeRay .instance-variable{color:#008080}
+.CodeRay .label{color:#970}
+.CodeRay .local-variable{color:#963}
+.CodeRay .octal{color:#40e}
+.CodeRay .predefined{color:#369}
+.CodeRay .preprocessor{color:#579}
+.CodeRay .pseudo-class{color:#555}
+.CodeRay .directive{font-weight:bold}
+.CodeRay .type{font-weight:bold}
+.CodeRay .predefined-type{color:inherit}
+.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
+.CodeRay .key{color:#808}
+.CodeRay .key .delimiter{color:#606}
+.CodeRay .key .char{color:#80f}
+.CodeRay .value{color:#088}
+.CodeRay .regexp .delimiter{color:#808}
+.CodeRay .regexp .content{color:#808}
+.CodeRay .regexp .modifier{color:#808}
+.CodeRay .regexp .char{color:#d14}
+.CodeRay .regexp .function{color:#404;font-weight:bold}
+.CodeRay .string{color:#d20}
+.CodeRay .string .string .string{background:#ffd0d0}
+.CodeRay .string .content{color:#d14}
+.CodeRay .string .char{color:#d14}
+.CodeRay .string .delimiter{color:#d14}
+.CodeRay .shell{color:#d14}
+.CodeRay .shell .delimiter{color:#d14}
+.CodeRay .symbol{color:#990073}
+.CodeRay .symbol .content{color:#a60}
+.CodeRay .symbol .delimiter{color:#630}
+.CodeRay .tag{color:#008080}
+.CodeRay .tag-special{color:#d70}
+.CodeRay .variable{color:#036}
+.CodeRay .insert{background:#afa}
+.CodeRay .delete{background:#faa}
+.CodeRay .change{color:#aaf;background:#007}
+.CodeRay .head{color:#f8f;background:#505}
+.CodeRay .insert .insert{color:#080}
+.CodeRay .delete .delete{color:#800}
+.CodeRay .change .change{color:#66f}
+.CodeRay .head .head{color:#f4f}</style><link href="reveal.js-3.9.2/lib/css/zenburn.css" rel="stylesheet"><script>document.write( '<link rel="stylesheet" href="reveal.js-3.9.2/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );</script><script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script></head><body><div class="reveal"><div class="slides"><section id="_was_ist_flink"><h2>Was ist Flink?</h2><div class="paragraph heading"><p>Was ist Flink?</p></div>
+<div class="paragraph center"><p><em>"Apache Flink is an open-source, unified stream-processing and batch-processing framework developed by the Apache Software Foundation."</em></p></div>
+<div class="paragraph center"><p>(aus Wikipedia <a href="https://en.wikipedia.org/wiki/Apache_Flink" class="bare">https://en.wikipedia.org/wiki/Apache_Flink</a>)</p></div>
+<div class="paragraph center"><p><em>"Apache Flink is a framework and distributed processing engine for stateful computations over unbounded and bounded data streams.<br>
+ Flink has been designed to run in all common cluster environments, perform computations at in-memory speed and at any scale."</em></p></div>
+<div class="paragraph center"><p>(aus der Flink-Dokumentation <a href="https://nightlies.apache.org/flink/flink-docs-release-1.17/" class="bare">https://nightlies.apache.org/flink/flink-docs-release-1.17/</a>)</p></div></section>
+<section id="_streamverarbeitung_motivation"><h2>Streamverarbeitung Motivation</h2><div class="paragraph heading center"><p>Wozu Datenstreaming?</p></div></section>
+<section id="_ausgangspunkt_traditionelle_batch_datenverarbeitung"><h2>Ausgangspunkt: Traditionelle Batch-Datenverarbeitung</h2><table class="tableblock frame-none grid-none" style="width:100%"><colgroup><col style="width:50%"><col style="width:50%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><div><div class="ulist"><ul><li><p>Extract-Transform-Load (ETL) Prozess</p><div class="ulist"><ul><li><p>Daten werden aus transaktionalen Datenbanken extrahiert</p></li><li><p>für die Verarbeitung in geeignete Formate transformiert</p></li><li><p>dann in ein Datenlager geladen</p></li></ul></div></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p>regelmäßiges <strong>Batching</strong></p><div class="ulist"><ul><li><p>oft große Verzögerung zwischen Generierung und Auswertung der Daten</p></li><li><p>bei einem Fehler muss der gesamte Prozess neu gestartet werden</p></li></ul></div></li></ul></div></div></td><td class="tableblock halign-left valign-top"><div><div class="imageblock" style=""><img src="images/data_warehouse_architecture.png" alt="data warehouse architecture"></div>
+<div class="paragraph small"><small><em>(Bildquelle: "Stream Processing with Apache Flink" (F. Hueske, V. Kalavri), 1. Ed., 2019)</em></small></div></div></td></tr></table></section>
+<section id="_ansatz_streaming"><h2>Ansatz Streaming</h2><div class="ulist"><ul><li><p>Daten werden als eine kontinuierliche Folge (<strong>Stream</strong>) von Ereignissen modelliert</p></li><li><p>Daten können über Pipelines in Echtzeit transportiert, transformiert und verarbeitet werden</p></li><li><p>&#8594; Ergebnisse mit sehr geringer Verzögerung</p></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p>erfordert <strong>komplexere Systeme</strong></p><div class="ulist"><ul><li><p>Herausforderungen im Bereich der Organisation und Kommunikation der einzelnen Prozesse</p></li><li><p>Zustandshaltung wird teilweise in die Anwendungen verlegt</p></li><li><p>Ziele wie Konsistenz, Performance und Verfügbarkeit sollten möglichst erreicht werden</p></li></ul></div></li><li><p>&#8594; Notwendigkeit für spezialisierte Frameworks wie Flink und Kafka</p></li></ul></div></section>
+<section id="_stateful_stream_processing"><h2>Stateful Stream Processing</h2><div class="ulist"><ul><li><p>Streaming-Anwendungen können <strong>stateless</strong> (zustandslos) oder <strong>stateful</strong> (zustandsbehaftet) sein</p></li><li><p>Stateless Anwendungen verarbeiten Datensätze unabhängig voneinander</p></li><li><p>Stateful Anwendungen können Datensätze in Abhängigkeit voneinander verarbeiten</p></li><li><p>Für komplexere Aufgaben wird <strong>State</strong> (Zustand) benötigt</p></li></ul></div></section>
+<section id="_3_use_cases_für_den_streaming_ansatz"><h2>3 Use Cases für den Streaming-Ansatz</h2><div class="ulist"><ul><li><p>Event-driven Application</p></li><li><p>Data Pipelines</p></li><li><p>Data Analytics</p></li></ul></div></section>
+<section id="_use_case_event_driven_application"><h2>Use Case: Event-driven Application</h2><div class="imageblock" style=""><img src="images/usecases-eventdrivenapps.png" alt="usecases eventdrivenapps"></div>
+<div class="paragraph small"><small><em>(Bildquelle: <a href="https://flink.apache.org/use-cases/" class="bare">https://flink.apache.org/use-cases/</a>)</em></small></div>
+<div class="ulist"><ul><li><p>Events lösen Berechnungen, Zustandsupdates oder externe Aktionen aus</p></li><li><p>geeignet auch für Microservice-Architektur</p></li><li><p>Beispiele: Real-time Empfehlungen, regelbasiertes Alerting, Fraud Detection</p></li></ul></div></section>
+<section id="_use_case_data_pipelines"><h2>Use Case: Data Pipelines</h2><div class="imageblock" style=""><img src="images/usecases-datapipelines.png" alt="usecases datapipelines"></div>
+<div class="paragraph small"><small><em>(Bildquelle: <a href="https://flink.apache.org/use-cases/" class="bare">https://flink.apache.org/use-cases/</a>)</em></small></div>
+<div class="ulist"><ul><li><p>Transformation von Daten</p></li><li><p>Anreicherung von Daten</p></li><li><p>Verarbeitung von vielen Daten in kurzer Zeit</p></li><li><p>Beispiele: Datensynchronisierung, einfaches Monitoring, Search Index Building (E-Commerce)</p></li></ul></div></section>
+<section id="_use_case_data_analytics"><h2>Use Case: Data Analytics</h2><div class="imageblock" style=""><img src="images/usecases-analytics.png" alt="usecases analytics"></div>
+<div class="paragraph small"><small><em>(Bildquelle: <a href="https://flink.apache.org/use-cases/" class="bare">https://flink.apache.org/use-cases/</a>)</em></small></div>
+<div class="ulist"><ul><li><p>Extraktion von Information aus Rohdaten</p></li><li><p>Kontinuierliche Datenanalyse</p></li><li><p>Beispiele: Analyse von Nutzerverhalten, Quality Monitoring</p></li></ul></div></section>
+<section><section id="_flink_eckdaten"><h2>Flink Eckdaten</h2><div class="paragraph heading"><p>Flink</p></div><div class="ulist"><ul><li><p>Ursprung im deutschen Forschungsprojekt 'Stratosphere: Information Management on the Cloud' (2011)</p></li><li><p>seit 2014 Apache Projekt</p></li><li><p>Open-Source, betrieben durch die Apache Flink Community</p></li><li><p>entwickelt in Java und Scala</p></li><li><p>Anwendungen für Flink können in Java, Scala, Python und SQL entwickelt werden</p></li><li><p>findet heute zahlreiche Verwendung v.a. in Cloud-Anwendungen</p><div class="ulist"><ul><li><p>für Beispiele siehe <a href="https://flink.apache.org/powered-by/" class="bare">https://flink.apache.org/powered-by/</a></p></li></ul></div></li></ul></div></section><section id="_flink"><h2>Flink..</h2><div class="ulist"><ul><li><p>..beschränkt sich auf die Verarbeitung von Daten</p><div class="ulist"><ul><li><p>Für Sourcing, Transfer und Persistierung sind weitere Lösungen erforderlich (z.B. Apache Kafka; S3)</p></li></ul></div></li><li><p>..nutzt parallelisierte, stateful Streamverarbeitung</p></li><li><p>..wird in der Form eines dedicated Clusters betrieben</p></li><li><p>..ist daher besonders für Anwendungsfälle mit aufwändigen oder komplexen Datenverarbeitungsschritten geeignet</p><div class="ulist"><ul><li><p>für eine einfache Microservice-Architektur ist Apache Kafka ausreichend</p></li></ul></div></li></ul></div></section></section>
+<section id="_aufgabe_0_lokaler_flink_cluster_setup_1"><h2>Aufgabe 0: Lokaler Flink Cluster Setup (1)</h2><div class="olist arabic"><ol class="arabic"><li><p>Laden Sie sich Flink auf <a href="https://flink.apache.org/downloads/" class="bare">https://flink.apache.org/downloads/</a> in der aktuellen Version herunter</p></li><li><p>Extrahieren Sie das Archiv in einen Ordner</p></li><li><p>Starten Sie den Flink-Cluster (standalone), indem Sie im erstellten Ordner ./bin/start-cluster.sh ausführen</p></li><li><p>Überprüfen Sie, dass der Cluster läuft, indem Sie im Browser die URL <a href="http://localhost:8081" class="bare">http://localhost:8081</a> aufrufen</p></li><li><p>Machen Sie sich etwas mit der angezeigten Web UI vertraut</p><div class="olist loweralpha"><ol class="loweralpha" type="a"><li><p>Sehen Sie nach, ob es bereits einen Task Manager gibt</p></li><li><p>Starten Sie einen neuen Task Manager mit ./bin/taskmanager.sh start</p></li><li><p>Verifizieren Sie, dass in der Web UI jetzt ein (weiterer) Task Manager erscheint</p></li></ol></div></li></ol></div></section>
+<section id="_aufgabe_0_lokaler_flink_cluster_setup_2"><h2>Aufgabe 0: Lokaler Flink Cluster Setup (2)</h2><div class="ulist"><ul><li><p>Im Verzeichnis aufgaben/aufgabe-00 der Schulung (Git Repository) finden Sie eine demo-job.jar</p><div class="olist arabic"><ol class="arabic"><li><p>Kopieren Sie diese in Ihr Flink-Verzeichnis</p></li><li><p>Lassen Sie die JAR auf dem Flink-Cluster als Job laufen, indem Sie folgenden Befehl ausführen:</p><div class="ulist"><ul><li><p>./bin/flink run demo-job.jar</p></li><li><p>Ignorieren Sie etwaige Warnungen in der Konsole mit "illegal reflective access"; diese sind harmlos</p></li></ul></div></li><li><p>Überprüfen Sie in der Konsolenausgabe und in der Web UI, dass der Job erfolgreich läuft</p></li><li><p>Überprüfen Sie, dass Flink im "log"-Verzeichnis in einer .out Datei mit dem Wort "taskexecutor" im Namen Ausgaben der folgenden Art generiert hat:</p></li></ol></div>
+<div class="paragraph"><p><span class="blue-font"><em>Abhebung{automat_id=45678, person_name='Lisa C.', betrag_abgehoben=50}</em></span><br></p></div></li></ul></div>
+<div class="olist arabic"><ol class="arabic" start="5"><li><p>(Optional) Stoppen Sie den Job und starten Sie ihn erneut über die Web UI</p></li></ol></div></section>
+<section id="_grundlagen_stream_processing"><h2>Grundlagen Stream-Processing</h2><div class="paragraph heading center"><p>Grundlagen Stream-Processing</p></div></section>
+<section id="_latenz_und_throughput"><h2>Latenz und Throughput</h2><div class="ulist"><ul><li><p>Um über die Performance von Anwendungen zu sprechen, betrachten wir 2 Metriken:</p><div class="ulist"><ul><li><p><strong>Latenz</strong> (latency) ist die Zeitverzögerung, die zwischen Input eines Datensatzes und Output des auf diesem Datensatz basierenden Resultats entsteht</p><div class="ulist"><ul><li><p>Beispiel im Café: Wie lange muss ein Kunde auf seine Bestellung warten?</p></li></ul></div></li><li><p><strong>Throughput</strong> ist die Anzahl der Input-Datensätze, die in einer gegebenen Zeit (z.B. 1 Sekunde) vollständig verarbeitet wurden</p><div class="ulist"><ul><li><p>Beispiel im Café: Wie viele Bestellungen wurden innerhalb eines Tages erfolgreich abgewickelt?</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_event_time_und_processing_time"><h2>Event Time und Processing Time</h2><div class="ulist"><ul><li><p>Daten sind oft mit einem Zeitpunkt assoziiert</p><div class="ulist"><ul><li><p><strong>processing time</strong>: Zeit der Verarbeitung durch den jeweiligen Prozess</p></li><li><p><strong>event time</strong>: Zeit der ursprünglichen Generierung der Daten</p><div class="ulist"><ul><li><p>muss dem Datensatz als zusätzliche Information angeheftet werden.</p></li></ul></div></li></ul></div></li><li><p>Nutzung von processing time ist einfacher zu konfigurieren und führt zu schnellerer Verarbeitung, da Prozesse nicht auf out-of-order Ereignisse warten müssen</p></li><li><p>event time ist genauer und wird benötigt, wenn</p><div class="ulist"><ul><li><p>die Zeit der Erstellung relevant für die Verarbeitung ist <strong>und</strong></p></li><li><p>die Zeit der Erstellung nicht genau genug mit der Zeit der Verarbeitung übereinstimmt</p></li></ul></div></li></ul></div></section>
+<section id="_event_time_und_processing_time_beispiel"><h2>Event Time und Processing Time : Beispiel</h2><div class="imageblock" style=""><img src="images/eigene/eventtime-processingtime.svg" alt="eventtime processingtime" height="700"></div>
+<div class="ulist"><ul><li><p>Eine Wetterstation schickt minütlich ihre Messdaten an einen Flink-Cluster</p></li><li><p>Aufgrund von einer Störung treffen die Daten von 8:25 und 8:26 verzögert ein</p><div class="ulist"><ul><li><p>&#8594; Processing Time ist nicht durch Event Time determiniert</p></li></ul></div></li></ul></div></section>
+<section id="_operators_und_operator_state"><h2>Operators und Operator State</h2><div class="ulist"><ul><li><p>Eine Streaming-Anwendungen besteht aus mit einander verbundenen <strong>Operators</strong></p></li><li><p>Einzelne Operators können stateless oder stateful sein</p></li><li><p>Beispiele für stateless Operators:</p><div class="ulist"><ul><li><p>Konvertierung zwischen Datenformaten</p></li><li><p>Filterung</p></li></ul></div></li><li><p>Beispiele für stateful Operators:</p><div class="ulist"><ul><li><p>Aggregierung von Informationen innerhalb eines Zeitraums</p></li><li><p>Berechnung von statistischen Metriken</p></li></ul></div></li></ul></div></section>
+<section id="_arten_von_operators"><h2>Arten von Operators</h2><div class="ulist"><ul><li><p>Quelle : beschafft Input der Anwendung</p></li><li><p>Senke : erzeugt Output der Anwendung</p></li><li><p>Transformation : Synonym für stateless Operator</p></li><li><p>Rolling Aggregation :</p><div class="ulist"><ul><li><p>stateful, State ist ein einzelner Wert</p></li><li><p>ankommende Datensätze updaten diesen Wert</p><div class="ulist"><ul><li><p>der neue Wert wird jeweils als Output emittiert</p></li></ul></div></li><li><p>Zustandsupdate hängt nicht von der Reihenfolge der Datensätze ab</p></li><li><p>Beispiel : Zählen, Summieren von Werten</p></li></ul></div></li><li><p>Window Operator</p></li></ul></div></section>
+<section id="_window_operators"><h2>Window Operators</h2><div class="ulist"><ul><li><p>stateful</p></li><li><p>arbeiten mit <strong>Windows</strong> (Zeitfenstern)</p></li><li><p>für jedes Window exisitiert in separater Zustand</p></li><li><p>dies ermöglicht es, auch auf unbeschränkten Streams Operationen zu verwenden, die sonst nur auf beschränkten Streams Sinn ergeben</p><div class="ulist"><ul><li><p>z.B. Median von Zahlen bilden</p></li></ul></div></li><li><p>konkretes Beispiel : Anzahl der Loginversuche nach User über einen Zeitraum von 2 Minuten bestimmen</p></li></ul></div></section>
+<section id="_arten_von_windows"><h2>Arten von Windows</h2><div class="ulist"><ul><li><p>Zeitbasierte Windows:</p><div class="ulist"><ul><li><p><strong>Tumbling Windows</strong></p><div class="ulist"><ul><li><p>nicht überlappende Windows einer festgelegten zeitlichen Länge</p></li></ul></div></li><li><p><strong>Sliding Windows</strong></p><div class="ulist"><ul><li><p>überlappende Windows einer festgelegten zeitlichen Länge</p></li></ul></div></li></ul></div></li><li><p>Datenbasierte Windows :</p><div class="ulist"><ul><li><p><strong>Counting Windows</strong></p><div class="ulist"><ul><li><p>nicht überlappende Windows, die je eine festgelegte Anzahl von Datensätzen enthalten</p></li></ul></div></li><li><p><strong>Session Windows</strong></p><div class="ulist"><ul><li><p>nicht überlappende Fenster, deren Start und Länge dynamisch nach Aktivität des Streams festgelegt werden</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_zeitbasierte_windows"><h2>Zeitbasierte Windows</h2><div class="imageblock" style=""><img src="images/eigene/windows/tumblingwindowsfixedtime.png" alt="tumblingwindowsfixedtime" width="1500"></div>
+<div class="imageblock" style=""><img src="images/eigene/windows/slidingwindows.png" alt="slidingwindows" width="1500"></div></section>
+<section id="_datenbasierte_windows"><h2>Datenbasierte Windows</h2><div class="imageblock" style=""><img src="images/eigene/windows/countingwindows.png" alt="countingwindows" width="1500"></div>
+<div class="imageblock" style=""><img src="images/eigene/windows/sessionwindows.png" alt="sessionwindows" width="1500"></div></section>
+<section id="_watermarks_motivation"><h2>Watermarks (Motivation)</h2><div class="ulist"><ul><li><p>Probleme bei zeitbasierten <strong>Window Operators</strong> in Kombination mit <strong>event time</strong>:</p><div class="ulist"><ul><li><p>Reihenfolge der Datensätze im Stream muss nicht Reihenfolge der event times entsprechen</p></li><li><p>Es kann immer Datensätze geben, die verspätet erscheinen</p></li></ul></div></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p>Frage: Wann sollte ein Window Operator ein zeitbasiertes Window für die weitere Bearbeitung schließen und die Ergebnisse weitergeben?</p><div class="ulist"><ul><li><p>In Flink wird wird hierfür ein Mechanismus namens <strong>Watermarks</strong> verwendet</p></li></ul></div></li></ul></div></section>
+<section id="_watermarks"><h2>Watermarks</h2><div class="ulist"><ul><li><p>Watermarks sind spezielle Datensätze, die einen Timestamp und keine Daten enthalten und zwischen die regulären Datensätze eines Streams gemischt werden</p></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p><strong>Ein Watermark entspricht der Information, dass ab dieser Stelle im Stream keine weiteren Datensätze mit einer Eventzeit zu erwarten sind, die früher als die im Watermark angegebene ist</strong></p><div class="ulist"><ul><li><p>Windowed Operators schließen ein Window, wenn sie dem ersten Watermark begegnen, das später als der späteste Zeitpunkt im Window ist</p></li></ul></div></li><li><p>Die Art des Umgangs mit <strong>zu späten</strong> Datensätzen enthält einen Trade-Off zwischen Latenz und Vollständigkeit</p></li></ul></div></section>
+<section id="_watermarks_beispiel"><h2>Watermarks (Beispiel)</h2><div class="imageblock" style=""><img src="images/eigene/watermark.png" alt="watermark"></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="paragraph"><p><strong>Beispiel: Bestimmen einer Durchschnittstemperatur im Window</strong></p></div>
+<div class="ulist"><ul><li><p>Tolerierte Verspätung : 3 Minuten</p><div class="ulist"><ul><li><p>Window schließt nach Erhalt einer Watermark mit Zeit 13:00 oder später</p><div class="ulist"><ul><li><p>Diese folgt auf (manche) Datensätze mit Zeit 13:03 oder später</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_herausforderung_von_statefulness"><h2>Herausforderung von Statefulness</h2><div class="ulist"><ul><li><p><strong>State Management</strong></p><div class="ulist"><ul><li><p>Effiziente und sichere Verwaltung von State durch das System</p></li></ul></div></li><li><p><strong>State Partitioning</strong></p><div class="ulist"><ul><li><p>Wenn ein Operator parallelisiert wird, muss sein State partitioniert (aufgeteilt) oder repliziert werden</p></li></ul></div></li><li><p><strong>State Recovery</strong></p><div class="ulist"><ul><li><p>Im Fehlerfall sollte der State wiederhergestellt werden können</p></li><li><p>&#8594; Regelmäßige sichere Persistierung des States ("Checkpointing")</p></li></ul></div></li></ul></div></section>
+<section id="_konsistenz"><h2>Konsistenz</h2><div class="ulist"><ul><li><p>Die Ausführung einer Anwendung kann auf verschiedene Weisen fehlschlagen</p><div class="ulist"><ul><li><p>&#8594; State der Anwendung kann inkonsistent mit den Inputdaten werden</p></li><li><p>&#8594; Output der Anwendung wird verfälscht</p></li></ul></div></li><li><p>Wir möchten einen Recovery-Mechanismus, der im Fehlerfall den State auf einen konsistenten Zustand zurückversetzt</p></li><li><p>Es sollte eine Garantie geben, dass sich der Output auch im Fehlerfall nicht oder zumindest nur in einer bekannten, beschränkten
+Weise, ändert</p></li><li><p>&#8594; <strong>Konsistenzgarantien</strong></p></li></ul></div></section>
+<section><section id="_konsistenzgarantien"><h2>Konsistenzgarantien</h2><div class="paragraph"><p>Was passiert bei einem Fehler?</p></div><div class="ulist"><ul><li><p>At least once</p><div class="ulist"><ul><li><p>Mindestens ein Mal : Risiko von Duplikaten</p></li></ul></div></li><li><p>At most once</p><div class="ulist"><ul><li><p>Maximal ein Mal: Kein Neuversuch beim Fehlschlag</p></li></ul></div></li><li><p>Exactly once</p><div class="ulist"><ul><li><p>Genau ein Mal: In Praxis schwer zu erreichen</p></li></ul></div></li><li><p>End-to-end exactly once</p><div class="ulist"><ul><li><p>Genau einmal unter Einbeziehung aller Systeme: Erfordert zusätzliche Abstimmung von Systemen, die alle exactly once unterstützen</p></li></ul></div></li></ul></div></section><section id="_at_least_once_beispiel_print_server" class="center"><h2>At Least Once Beispiel: Print Server</h2><div class="imageblock" style=""><img src="images/printer.png" alt="printer" width="150px"></div>
+<div class="paragraph"><p><strong>Situation: Druckfehler / Toner leer: Ausdruck zu hell!</strong></p></div>
+<div class="olist arabic"><ol class="arabic"><li><p>Fehler wird behoben</p></li><li><p>Alle Seiten in der Warteschlange werden gedruckt</p></li><li><p>… sehr viel Papier</p></li></ol></div></section><section id="_at_most_once_beispiel_print_server" class="center"><h2>At Most Once Beispiel: Print Server</h2><div class="imageblock" style=""><img src="images/printer.png" alt="printer" width="150px"></div>
+<div class="paragraph"><p><strong>Situation: Druckfehler / Toner leer: Ausdruck zu hell!</strong></p></div>
+<div class="olist arabic"><ol class="arabic"><li><p>Fehler wird behoben</p></li><li><p>Keine Seite in der Warteschlange wird gedruckt</p></li><li><p>… hin und her laufen.</p></li></ol></div></section><section id="_exactly_once_beispiel_print_server" class="center"><h2>Exactly Once Beispiel: Print Server</h2><div class="imageblock" style=""><img src="images/printer.png" alt="printer" width="150px"></div>
+<div class="paragraph"><p><strong>Situation: Druckfehler / Toner leer: Ausdruck zu hell!</strong></p></div>
+<div class="olist arabic"><ol class="arabic"><li><p>Fehler wird behoben</p></li><li><p>Genau die zu hellen Seiten werden gedruckt</p></li><li><p>Perfekt :)</p></li></ol></div></section><section id="_exactly_once_beispiel_print_server_2" class="center"><h2>Exactly Once Beispiel: Print Server</h2><div class="imageblock" style=""><img src="images/printer.png" alt="printer" width="150px"></div>
+<div class="paragraph"><p><strong>Woher weiß der Drucker, welche Seiten zu hell sind?</strong></p></div>
+<div class="ulist"><ul><li><p>Idee: Seitennummer am Bedienfeld eingeben</p></li><li><p>Im Allgemeinen: schwer umsetzbar</p></li></ul></div></section></section>
+<section id="_datenflussgraphen"><h2>Datenflussgraphen</h2><div class="ulist"><ul><li><p>Jede Streaminganwendung enthält einen oder mehrere <strong>Jobs</strong>, die auf logischer Ebene durch einen Datenflussgraphen (<strong>JobGraph</strong>) beschrieben werden</p></li><li><p>Die Knoten sind die Operatoren der Anwendung</p></li><li><p>gerichtete Kanten zwischen den Knoten beschreiben die Abfolge von Verarbeitungsschritten</p><div class="ulist"><ul><li><p>Wenn es eine Kante von Knoten A zu Knoten B gibt, leitet Knoten A seinen Outputstream an Knoten B als Inputstream weiter</p></li></ul></div></li><li><p>Daten fließen von Quellen über verarbeitende Operatoren zu Senken</p></li></ul></div></section>
+<section id="_parallele_verarbeitung"><h2>Parallele Verarbeitung</h2><div class="ulist"><ul><li><p>Ein Job kann auf unterschiedliche Weisen parallelisiert werden:</p><div class="ulist"><ul><li><p><strong>Datenparallelität</strong></p><div class="ulist"><ul><li><p>Einzelne Operatoren können ihre ankommenden Daten parallel verarbeiten</p></li><li><p><strong>Parallelismus</strong> des Operators = Anzahl der parallelen Instanzen</p></li></ul></div></li><li><p><strong>Taskparallelität</strong></p><div class="ulist"><ul><li><p>verschiedene Operatoren können parallel arbeiten</p></li></ul></div></li></ul></div></li><li><p>Datensätze werden mit <strong>Keys</strong> versehen und nach Gruppen von Keys partitioniert den parallelen Instanzen eines Operators zugeordnet</p></li><li><p>Bestimmte Operationen erfordern ein Neuzuordnen von Keys (<strong>rebalance</strong>)</p></li></ul></div></section>
+<section id="_task"><h2>Task</h2><div class="ulist"><ul><li><p>kleinste ausführbare Einheit in einem Job</p></li><li><p>wird von einem einzelnen Thread ausgeführt</p></li><li><p>jede parallele Instanz eines Operators in einem Job wird genau einem Task zugeordnet</p></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p><strong>Verkettung von Operatoren</strong>:</p><div class="ulist"><ul><li><p>ein Task kann auch mehrere verkettete Operatorinstanzen als <strong>Subtasks</strong> hintereinander ausführen</p></li><li><p>Die Verkettung ist eher technisch begründet (Performance), als inhaltlich</p></li></ul></div></li></ul></div></section>
+<section id="_executiongraph"><h2>ExecutionGraph</h2><div class="ulist"><ul><li><p>Ein JobGraph ist ein <strong>logischer</strong> Graph</p></li><li><p>Um einen Job auszuführen, muss aus dem JobGraph ein <strong>physicher</strong> Graph (ExecutionGraph) erstellt werden</p><div class="ulist"><ul><li><p>Dies ist eine parallelisierte Form des JobGraphs, bei dem die Knoten physische Tasks sind</p></li><li><p>Die Knoten enthalten je eine oder mehrere verkettete Operatorinstanzen von Operatoren im JobGraph</p></li></ul></div></li><li><p>Die Tasks können dann basierend auf dem ExecutionGraph vom Framework organisiert auf der Hardware ausgeführt werden</p></li></ul></div></section>
+<section id="_jobgraph_beispiel"><h2>JobGraph (Beispiel)</h2><div class="paragraph"><p>&#160;<br>
+&#160;<br></p></div>
+<div class="imageblock" style=""><img src="images/eigene/dataflow.png" alt="dataflow" width="1500"></div></section>
+<section id="_executiongraph_beispiel"><h2>ExecutionGraph (Beispiel)</h2><div class="imageblock" style=""><img src="images/eigene/dataflow_parallel.png" alt="dataflow parallel" width="1500"></div>
+<div class="ulist"><ul><li><p>Quelle und Verarbeitung haben einen Parallelismus von 2, Senke von 1</p></li><li><p>Nach Filterung werden Datensätze <strong>repartitioniert</strong></p></li></ul></div></section>
+<section id="_datentransferstrategien"><h2>Datentransferstrategien</h2><div class="ulist"><ul><li><p>Jeder Task muss seinen Output an die Tasks schicken, zu denen im ExecutionGraph direkt eine Kante führt</p></li><li><p>Kanten im JobGraph können auf unterschiedliche Arten in Kanten im ExecutionGraph übersetzt werden und Daten für den Transfer nach unterschiedlichen Strategien aufgeteilt werden:</p><div class="ulist"><ul><li><p>Forward Strategy</p></li><li><p>Broadcast Strategy</p></li><li><p>Key-Based Strategy</p></li><li><p>Random Strategy</p></li></ul></div></li></ul></div></section>
+<section id="_datentransferstrategien_2"><h2>Datentransferstrategien (2)</h2><div class="ulist"><ul><li><p>Gegeben sei jeweils eine Kante zwischen Operatoren im JobGraph</p></li></ul></div>
+<div class="imageblock" style=""><img src="images/eigene/transfer-strategies/statJobGraphLessWhite.svg" alt="statJobGraphLessWhite" height="500"></div>
+<div class="ulist"><ul><li><p>Wir nehmen vereinfacht an, dass es keine Verkettung von Subtasks gibt</p><div class="ulist"><ul><li><p>Somit werden aus jedem Operator A im JobGraph <strong>n</strong> Knoten A#1, A#2, .., A#n im ExecutionGraph, wobei <strong>n</strong> die Parallelität von A ist</p></li></ul></div></li></ul></div></section>
+<section id="_datentransfer_forward_strategy"><h2>Datentransfer: Forward Strategy</h2><div class="ulist"><ul><li><p>Jeder Knoten im ExecutionGraph, der zu A gehört, erhält genau eine Kante zu einem Knoten im ExecutionGraph, der zu B gehört</p></li><li><p>Alle vom ersten Knoten generierten Daten werden zum zweiten Knoten geschickt</p></li><li><p>Hierfür sollten A und B möglichst die gleiche Parallelität haben</p></li></ul></div>
+<div class="imageblock" style=""><img src="images/eigene/transfer-strategies/forwardStrategy.svg" alt="forwardStrategy" height="500"></div></section>
+<section id="_datentransfer_broadcast_strategy"><h2>Datentransfer: Broadcast Strategy</h2><div class="ulist"><ul><li><p>Jeder Knoten im ExecutionGraph, der zu A gehört, erhält Kanten zu jedem Knoten im ExecutionGraph, der zu B gehört</p></li><li><p>Alle vom ersten Knoten generierten Daten werden zu allen damit verbundenen Knoten geschickt</p><div class="ulist"><ul><li><p>Nachteil: teuer, insbesondere kann dies zu erhöhtem Netzwerk Traffic führen</p></li></ul></div></li></ul></div>
+<div class="imageblock" style=""><img src="images/eigene/transfer-strategies/broadcastStrategy.svg" alt="broadcastStrategy" height="500"></div></section>
+<section id="_datentransfer_key_based_strategy"><h2>Datentransfer: Key-based Strategy</h2><div class="ulist"><ul><li><p>Kanten wie bei broadcast</p></li><li><p>jeder Datensatz wird nur zu einem der verbundenen Knoten geschickt</p></li><li><p>jeder Datensatz hat einen deterministisch bestimmten Key, der entscheidet, zu welchem Knoten er geschickt wird</p></li></ul></div>
+<div class="imageblock" style=""><img src="images/eigene/transfer-strategies/keybasedStrategy.svg" alt="keybasedStrategy" height="500"></div></section>
+<section id="_datentransfer_random_strategy"><h2>Datentransfer: Random Strategy</h2><div class="ulist"><ul><li><p>Kanten wie bei broadcast</p></li><li><p>wie bei key-based werden Daten aufgeteilt</p></li><li><p>die Aufteilung geschieht aber zufällig</p></li></ul></div>
+<div class="imageblock" style=""><img src="images/eigene/transfer-strategies/randomStrategy.svg" alt="randomStrategy" height="500"></div></section>
+<section id="_features_von_flink"><h2>Features von Flink</h2><div class="ulist"><ul><li><p>starke Unterstützung für Event Time Processing</p></li><li><p>Exactly-Once Konsistenzgarantien</p></li><li><p>Latenzen im Millisekundenbereich bei einem Throughput von Millionen von Daten pro Sekunde</p></li><li><p>Skalierbarkeit auf tausende Prozessorkerne</p></li><li><p>Geschichtete APIs (Flexibilität oder Einfache Benutzbarkeit)</p></li><li><p>Kann mit allen verbreiteten Speichersystemen arbeiten</p></li><li><p>High-Availability Betrieb mit sehr geringen Downtimes möglich</p></li><li><p>Updates und Migrationen ohne Verlust von State</p></li><li><p>Zahlreiche eingebaute Metriken, selbst definierbare Metriken</p></li><li><p>Auch für Batch-Processing einsetzbar</p></li></ul></div></section>
+<section id="_aufgabe_1"><h2>Aufgabe 1</h2><div class="ulist"><ul><li><p>In einem System zur Betrugserkennung sollen verdächtige Abhebungen an Geldautomaten erkannt und unterbunden werden.</p></li><li><p>Falls innerhalb einer kurzen Zeit (10 Minuten) eine Abhebung an 2 Automaten erfolgt, die mehr als 100km auseinander liegen, liegt ein
+Betrugsfall vor.</p></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="olist arabic"><ol class="arabic"><li><p>Zeichnen Sie einen logischen Datenflussgraphen</p></li><li><p>Zeichnen Sie ein physisches Äquivalent</p><div class="ulist"><ul><li><p>Aus Performancegründen gibt es 3 parallele Verarbeitungsstränge.</p></li></ul></div></li><li><p>Nach welcher Zeit werden Überweisungen gruppiert? Welche Art von Fenster wird verwendet?</p></li><li><p>Welche Resultgarantie wird benötigt?</p></li></ol></div></section></div></div><script src="reveal.js-3.9.2/lib/js/head.min.js"></script><script src="reveal.js-3.9.2/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
+Reveal.initialize({
+  // Display controls in the bottom right corner
+  controls: true,
+  // Display a presentation progress bar
+  progress: true,
+  // Display the page number of the current slide
+  slideNumber: true,
+  // Push each slide change to the browser history
+  history: true,
+  // Enable keyboard shortcuts for navigation
+  keyboard: true,
+  // Enable the slide overview mode
+  overview: true,
+  // Vertical centering of slides
+  center: true,
+  // Enables touch navigation on devices with touch input
+  touch: true,
+  // Loop the presentation
+  loop: false,
+  // Change the presentation direction to be RTL
+  rtl: false,
+  // Turns fragments on and off globally
+  fragments: true,
+  // Flags if the presentation is running in an embedded mode,
+  // i.e. contained within a limited portion of the screen
+  embedded: false,
+  // Number of milliseconds between automatically proceeding to the
+  // next slide, disabled when set to 0, this value can be overwritten
+  // by using a data-autoslide attribute on your slides
+  autoSlide: 0,
+  // Stop auto-sliding after user input
+  autoSlideStoppable: true,
+  // Enable slide navigation via mouse wheel
+  mouseWheel: true,
+  // Hides the address bar on mobile devices
+  hideAddressBar: true,
+  // Opens links in an iframe preview overlay
+  previewLinks: false,
+  // Theme (e.g., beige, black, league, night, serif, simple, sky, solarized, white)
+  // NOTE setting the theme in the config no longer works in reveal.js 3.x
+  //theme: Reveal.getQueryHash().theme || 'anderscore',
+  // Transition style (e.g., none, fade, slide, convex, concave, zoom)
+  transition: Reveal.getQueryHash().transition || 'linear',
+  // Transition speed (e.g., default, fast, slow)
+  transitionSpeed: 'default',
+  // Transition style for full page slide backgrounds (e.g., none, fade, slide, convex, concave, zoom)
+  backgroundTransition: 'fade',
+  // Number of slides away from the current that are visible
+  viewDistance: 3,
+  // Parallax background image (e.g., "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'")
+  parallaxBackgroundImage: '',
+  // Parallax background size in CSS syntax (e.g., "2100px 900px")
+  parallaxBackgroundSize: '',
+
+  // The "normal" size of the presentation, aspect ratio will be preserved
+  // when the presentation is scaled to fit different resolutions. Can be
+  // specified using percentage units.
+  width: 1728,
+  height: 972,
+
+  // Factor of the display size that should remain empty around the content
+  margin: 0.1,
+
+  // Bounds for smallest/largest possible scale to apply to content
+  minScale: 0.2,
+  maxScale: 1.5,
+
+  // Optional libraries used to extend on reveal.js
+  dependencies: [
+      { src: 'reveal.js-3.9.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'reveal.js-3.9.2/plugin/title-footer/title-footer.js', async: true, callback: function()
+          {title_footer.initialize('Schulung Java Data Pipelines mit Apache Flink', 'Jan Lühr', 'anderScore GmbH • Frankenwerft 35 • 50667 Köln');}},
+      { src: 'reveal.js-3.9.2/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal.js-3.9.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      
+      { src: 'reveal.js-3.9.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: 'reveal.js-3.9.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+  ]
+});</script></body></html>

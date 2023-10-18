@@ -1,0 +1,33 @@
+digraph dataflow_serial {
+  rankdir=LR;
+  "Quelle\n(Server 1 Logs)" -> "Filter\n(Loglevel >= WARN)" 
+    [label=
+<<B><FONT POINT-SIZE="18.0">
+<FONT COLOR="#00BB00">:) &nbsp;</FONT>
+<FONT COLOR="ORANGE">:| &nbsp;</FONT>
+<FONT COLOR="RED">:( &nbsp;</FONT>
+</FONT></B>>
+   ];
+  "Quelle\n(Server 2 Logs)" -> "Filter\n(Loglevel >= WARN)" 
+  [label=
+<<B><FONT POINT-SIZE="18.0">
+<FONT COLOR="#00BB00">:-) &nbsp;</FONT>
+<FONT COLOR="ORANGE">:-| &nbsp;</FONT>
+</FONT></B>>
+  ];
+  "Filter\n(Loglevel >= WARN)" -> "Zähler\n(nach Severity)" 
+  [label=
+<<B><FONT POINT-SIZE="18.0">
+<FONT COLOR="ORANGE">:| &nbsp;</FONT>
+<FONT COLOR="RED">:( &nbsp;</FONT>
+<FONT COLOR="ORANGE">:-| &nbsp;</FONT>
+</FONT></B>>
+  ];
+  "Zähler\n(nach Severity)" -> "Senke\n(Update Metrics)" 
+  [label=
+<<B><FONT POINT-SIZE="18.0">
+<FONT COLOR="ORANGE">2 </FONT>
+<FONT COLOR="RED">1 </FONT>
+<FONT COLOR="ORANGE">1 </FONT>
+</FONT></B>>];
+}

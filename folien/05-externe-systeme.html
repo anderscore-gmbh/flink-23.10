@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="description" content="description"><meta name="author" content="Jan Lühr"><title>Apache Flink Worshop</title><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport"><link href="reveal.js-3.9.2/css/reveal.css" rel="stylesheet"><link href="reveal.js-3.9.2/plugin/title-footer/title-footer.css" rel="stylesheet"><link rel="stylesheet" href="reveal.js-3.9.2/css/theme/anderscore.css" id="theme"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><style>/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
+pre.CodeRay{background:#f7f7f8}
+.CodeRay .line-numbers{border-right:1px solid currentColor;opacity:.35;padding:0 .5em 0 0}
+.CodeRay span.line-numbers{display:inline-block;margin-right:.75em}
+.CodeRay .line-numbers strong{color:#000}
+table.CodeRay{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.CodeRay td{vertical-align:top;line-height:inherit}
+table.CodeRay td.line-numbers{text-align:right}
+table.CodeRay td.code{padding:0 0 0 .75em}
+.CodeRay .debug{color:#fff !important;background:#000080 !important}
+.CodeRay .annotation{color:#007}
+.CodeRay .attribute-name{color:#000080}
+.CodeRay .attribute-value{color:#700}
+.CodeRay .binary{color:#509}
+.CodeRay .comment{color:#998;font-style:italic}
+.CodeRay .char{color:#04d}
+.CodeRay .char .content{color:#04d}
+.CodeRay .char .delimiter{color:#039}
+.CodeRay .class{color:#458;font-weight:bold}
+.CodeRay .complex{color:#a08}
+.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
+.CodeRay .color{color:#099}
+.CodeRay .class-variable{color:#369}
+.CodeRay .decorator{color:#b0b}
+.CodeRay .definition{color:#099}
+.CodeRay .delimiter{color:#000}
+.CodeRay .doc{color:#970}
+.CodeRay .doctype{color:#34b}
+.CodeRay .doc-string{color:#d42}
+.CodeRay .escape{color:#666}
+.CodeRay .entity{color:#800}
+.CodeRay .error{color:#808}
+.CodeRay .exception{color:inherit}
+.CodeRay .filename{color:#099}
+.CodeRay .function{color:#900;font-weight:bold}
+.CodeRay .global-variable{color:#008080}
+.CodeRay .hex{color:#058}
+.CodeRay .integer,.CodeRay .float{color:#099}
+.CodeRay .include{color:#555}
+.CodeRay .inline{color:#000}
+.CodeRay .inline .inline{background:#ccc}
+.CodeRay .inline .inline .inline{background:#bbb}
+.CodeRay .inline .inline-delimiter{color:#d14}
+.CodeRay .inline-delimiter{color:#d14}
+.CodeRay .important{color:#555;font-weight:bold}
+.CodeRay .interpreted{color:#b2b}
+.CodeRay .instance-variable{color:#008080}
+.CodeRay .label{color:#970}
+.CodeRay .local-variable{color:#963}
+.CodeRay .octal{color:#40e}
+.CodeRay .predefined{color:#369}
+.CodeRay .preprocessor{color:#579}
+.CodeRay .pseudo-class{color:#555}
+.CodeRay .directive{font-weight:bold}
+.CodeRay .type{font-weight:bold}
+.CodeRay .predefined-type{color:inherit}
+.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
+.CodeRay .key{color:#808}
+.CodeRay .key .delimiter{color:#606}
+.CodeRay .key .char{color:#80f}
+.CodeRay .value{color:#088}
+.CodeRay .regexp .delimiter{color:#808}
+.CodeRay .regexp .content{color:#808}
+.CodeRay .regexp .modifier{color:#808}
+.CodeRay .regexp .char{color:#d14}
+.CodeRay .regexp .function{color:#404;font-weight:bold}
+.CodeRay .string{color:#d20}
+.CodeRay .string .string .string{background:#ffd0d0}
+.CodeRay .string .content{color:#d14}
+.CodeRay .string .char{color:#d14}
+.CodeRay .string .delimiter{color:#d14}
+.CodeRay .shell{color:#d14}
+.CodeRay .shell .delimiter{color:#d14}
+.CodeRay .symbol{color:#990073}
+.CodeRay .symbol .content{color:#a60}
+.CodeRay .symbol .delimiter{color:#630}
+.CodeRay .tag{color:#008080}
+.CodeRay .tag-special{color:#d70}
+.CodeRay .variable{color:#036}
+.CodeRay .insert{background:#afa}
+.CodeRay .delete{background:#faa}
+.CodeRay .change{color:#aaf;background:#007}
+.CodeRay .head{color:#f8f;background:#505}
+.CodeRay .insert .insert{color:#080}
+.CodeRay .delete .delete{color:#800}
+.CodeRay .change .change{color:#66f}
+.CodeRay .head .head{color:#f4f}</style><link href="reveal.js-3.9.2/lib/css/zenburn.css" rel="stylesheet"><script>document.write( '<link rel="stylesheet" href="reveal.js-3.9.2/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );</script><script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script></head><body><div class="reveal"><div class="slides"><section id="_anbindung_externer_systeme"><h2>Anbindung externer Systeme</h2><div class="paragraph heading center"><p>Anbindung externer Systeme</p></div></section>
+<section id="_anbindung_externer_systeme_agenda"><h2>Anbindung externer Systeme : Agenda</h2><div class="ulist"><ul><li><p>Wir behandeln in diesem Kapitel folgende Themen:</p><div class="ulist"><ul><li><p>End-To-End Consistency mit externen Systemen</p><div class="ulist"><ul><li><p>Was für Lösungen bietet Flink an, um end-to-end exactly-once Konsistenz zu erreichen?</p></li></ul></div></li><li><p>File System Connector</p><div class="ulist"><ul><li><p>Wie funktioniert die API für Datei I/O?</p></li></ul></div></li><li><p>Kafka Connector</p><div class="ulist"><ul><li><p>Wie funktioniert die API für Kommunikation mit Kafka-Clustern?</p></li></ul></div></li><li><p>Eigener Connector</p><div class="ulist"><ul><li><p>Wie kann man I/O-Logik für eigene (nichtstandard) Systeme implementieren?</p></li></ul></div></li><li><p>Async I/O</p><div class="ulist"><ul><li><p>Wie kann ein Operator non-blocking und ohne Quellen externe Systeme abfragen?</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_anbindung_externer_systeme_connectors"><h2>Anbindung externer Systeme : Connectors</h2><div class="ulist"><ul><li><p>Flink Jobs sind über <strong>Quellen</strong> und <strong>Senken</strong> jeweils mit <strong>externen Systemen</strong> verbunden</p></li><li><p>Für die unterstützten externen Systeme bietet Flink <strong>Connectors</strong> an</p><div class="ulist"><ul><li><p>Diese sind spezielle Dependencies, die Implementierungen von Quellen und Senken enthalten</p></li></ul></div></li><li><p>Maven Dependencies für Connectors:</p><div class="ulist"><ul><li><p>flink-connector-files</p></li><li><p>flink-connector-kafka</p></li><li><p>flink-connector-jdbc</p></li><li><p>flink-connector-cassandra</p></li></ul></div></li><li><p>Für eine vollständige Liste vordefinierter Connectors, siehe <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/datastream/overview/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/datastream/overview/</a></p></li></ul></div></section>
+<section id="_end_to_end_consistency_mit_externen_systemen"><h2>End-To-End Consistency mit externen Systemen</h2><div class="paragraph heading center"><p>End-To-End Consistency mit externen Systemen</p></div></section>
+<section id="_end_to_end_consistency_mit_externen_systemen_2"><h2>End-To-End Consistency mit externen Systemen</h2><div class="ulist"><ul><li><p>Wie erwähnt kann über Senken end-to-end at-most-once garantiert werden, wenn diese effektiv zurückrollbar sind</p></li><li><p>Wir gehen auf 2 Techniken für Senken ein, die dies ermöglichen können</p></li></ul></div></section>
+<section id="_idempotent_writes"><h2>Idempotent Writes</h2><div class="ulist"><ul><li><p>Idempotent Writes</p><div class="ulist"><ul><li><p>dies sind Schreiboperationen, die bei wiederholter Ausführung in keinen weiteren Änderungen im Zielsystem resultieren</p></li><li><p>wenn die Senke idempotente Writes unterstützt, dann werden Writes, die der Flinkcluster bei erneuter (deterministischer) Bearbeitung der gleichen Datensätze auslöst,
+keine weitere Veränderung im Zielsystem bewirken</p></li><li><p>somit werden die erneuten Writes nach Laden eines Checkpoints effektiv übersprungen &#8594; at-most-once</p></li><li><p>Einschränkung: Wenn ein Zustand im Zielsystem bei Bearbeitung der Datensätze nach dem geladenen Checkpoint mehr als einmal verändert wurde (Update),
+dann wird auch die Neubearbeitung die Zwischenzustände wiederholen</p><div class="ulist"><ul><li><p>damit dieser Fall eintreten kann, muss das Zielsystem Zustandupdates unterstützen</p></li></ul></div></li><li><p>Weitere Einschränkung: Falls das Zielsystem die Daten selbst an weitere Clients weiterleitet, ist es dafür zuständig, seinerseits at-most-once zu garantieren</p></li></ul></div></li></ul></div></section>
+<section id="_transactional_writes"><h2>Transactional Writes</h2><div class="ulist"><ul><li><p>Transactional Writes</p><div class="ulist"><ul><li><p>Wenn transaktionale Writes aktiviert sind, dann werden alle Schreiboperationen einer Senke gebündelt nur einmal (als Transaktion)
+nach jedem erfolgreichen Checkpoint ausgeführt (committed)</p></li><li><p>dadurch sind bei Recovery effektiv keine Writes seit dem letzten Checkpoint passiert &#8594; at-most-once</p></li><li><p>es ergibt sich aber eine erhöhte Latenz</p></li><li><p>Die noch nicht ausgeführten Writes gehören zum Zustand der jeweiligen Senken und werden im Checkpoint gespeichert</p></li><li><p>Es kann allerdings immer noch zu Inkonsistenzen führen, wenn die Commits von verschiedenen (Instanzen von) Senken nicht koordiniert werden</p><div class="ulist"><ul><li><p>diese Commits sollten daher effektiv als eine Transaktion passieren, d.h. wenn einer der Commits fehlschlägt, sollten die anderen zurückgerollt werden können
+und die Transaktion wiederholt werden</p></li><li><p>&#8594; dies erfordert, dass das externe System transaktionale Commits unterstützt</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_transactional_writes_write_ahead_log_wal"><h2>Transactional Writes : Write-Ahead-Log (WAL)</h2><div class="ulist"><ul><li><p>Flink stellt 2 Mechanismen für transaktionale Senken-Konnektoren zu Verfügung:</p></li><li><p>Write-Ahead-Log (WAL)</p><div class="ulist"><ul><li><p>Noch nicht commitete Writes werden von den Senken gebuffert</p></li><li><p>Diese gehören zum internen Zustand des Flinkclusters und werden mit dem Checkpoint gespeichert</p></li><li><p>Vorteil : Geringe Anforderungen an das Zielsystem</p></li><li><p>Nachteile :</p><div class="ulist"><ul><li><p>Konsistenz nicht wirklich garantiert (s.o.)</p></li><li><p>vergrößert Speicherbedarf des internen Zustands des Flink-Clusters</p></li><li><p>kann ineffizient sein</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_transactional_writes_two_phase_commit_2pc"><h2>Transactional Writes : Two-Phase-Commit (2PC)</h2><div class="ulist"><ul><li><p>Wenn 2PC verwendet wird, dann emittieren die Quellen ihre Ausgaben kontinuierlich an ihr Zielsystem</p></li><li><p>alle Ausgaben von Senken eines Jobs in ein Zielsystem zwischen 2 Checkpoints werden vom Zielsystem als gehörig zu einer einzelnen Transaktion betrachtet</p></li><li><p>Nach einem erfolgreichen Checkpoint wird das Zielsystem benachrichtigt, einen Commit für diese Transaktion auszuführen</p></li><li><p>Bei Recovery nach failure wird stattdessen die Transaktion zurückgerollt</p></li><li><p>&#8594; at-most-once</p></li><li><p>erfordert offensichtlich ein kompatibles Zielsystem wie z.B. einen Kafka Cluster</p></li><li><p>Zustandshaltung wird in das Zielsystem verlagert</p></li></ul></div></section>
+<section id="_transactional_writes_two_phase_commit_2pc_2"><h2>Transactional Writes : Two-Phase-Commit (2PC) (2)</h2><div class="ulist"><ul><li><p>2PC involviert vor dem Commit eine zusätzliche Precommit Phase während des Checkpointings</p></li><li><p>Wenn eine Senkeninstanz eine Checkpoint Barrier erhält, speichert sie nicht nur ihren internen Zustand, sondern flusht auch ihre noch vorhandenen Outputbuffer
+in das externe System und meldet dort einen Precommit an</p></li><li><p>nach Erfolg wird der Checkpoint Coordinator benachrichtigt</p></li><li><p>nachdem alle beteiligten Komponenten des Jobs ihren Erfolg gemeldet haben, stößt der Checkpoint Coordinator einen koordinierten Commit auf dem externen System an</p></li><li><p>&#8594; Inkonsistenzen sind (fast) ausgeschlossen</p></li><li><p>2PC ist meist der bevorzugte Mechanismus, um end-to-end consistency zu erreichen, wenn verfügbar</p></li></ul></div></section>
+<section id="_transactional_writes_two_phase_commit_2pc_beispielgrafik"><h2>Transactional Writes : Two-Phase-Commit (2PC) (Beispielgrafik)</h2><div class="imageblock" style=""><img src="images/eo-post-graphic-4.png" alt="eo post graphic 4" height="380"></div>
+<div class="imageblock" style=""><img src="images/eo-post-graphic-5.png" alt="eo post graphic 5" height="380"></div>
+<div class="paragraph center small"><small><em>(Bildquellen: <a href="https://flink.apache.org/2018/02/28/an-overview-of-end-to-end-exactly-once-processing-in-apache-flink-with-apache-kafka-too/" class="bare">https://flink.apache.org/2018/02/28/an-overview-of-end-to-end-exactly-once-processing-in-apache-flink-with-apache-kafka-too/</a>)</em></small></div></section>
+<section id="_file_system_connector"><h2>File System Connector</h2><div class="paragraph heading center"><p>File System Connector</p></div></section>
+<section id="_filesystem_connector_filesource"><h2>Filesystem Connector: FileSource</h2><div class="ulist"><ul><li><p>FileSystem Connector funktioniert mit allen gängigen Dateisystemen</p></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-release-1.13/api/java/org/apache/flink/connector/file/src/FileSource.html">FileSource</a></strong> :</p><div class="ulist"><ul><li><p>Kann aus beliebig vielen Pfaden lesen</p></li><li><p>Benötigt ein <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/file/src/reader/StreamFormat.html">StreamFormat</a></strong> oder ein <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/file/src/reader/BulkFormat.html">BulkFormat</a></strong></p></li><li><p>Erfordert Einstellung zum <strong>Splitting</strong> der Dateien</p><div class="ulist"><ul><li><p>&#8594; Paralleles Lesen</p></li></ul></div></li><li><p>Monitoring</p><div class="ulist"><ul><li><p>Pfade werden regelmäßig auf Änderungen geprüft</p></li><li><p>Bei Änderung oder Erstellung einer Datei wird diese <strong>vollständig neu</strong> eingelesen</p></li><li><p>Wenn nicht konfiguriert : Beschränkter Stream</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_filesystem_connector_filesource_2"><h2>Filesystem Connector: FileSource (2)</h2><div class="ulist"><ul><li><p>Erstellung eines <strong><a href="https://nightlies.apache.org/flink/flink-docs-release-1.13/api/java/org/apache/flink/connector/file/src/FileSource.FileSourceBuilder.html">FileSourceBuilder</a></strong> :</p><div class="ulist"><ul><li><p><a href="https://nightlies.apache.org/flink/flink-docs-release-1.13/api/java/org/apache/flink/connector/file/src/FileSource.html#forRecordStreamFormat-org.apache.flink.connector.file.src.reader.StreamFormat-org.apache.flink.core.fs.Path&#8230;&#8203;-"><em>FileSource.forRecordStreamFormat(StreamFormat,Path&#8230;&#8203;)</em></a></p><div class="ulist"><ul><li><p>Liest Datensätze aus einem Filestream (high level API)</p></li></ul></div></li><li><p><a href="https://nightlies.apache.org/flink/flink-docs-release-1.13/api/java/org/apache/flink/connector/file/src/FileSource.html#forBulkFileFormat-org.apache.flink.connector.file.src.reader.BulkFormat-org.apache.flink.core.fs.Path&#8230;&#8203;-"><em>FileSource.forBulkFileFormat(BulkFormat,Path&#8230;&#8203;)</em></a></p><div class="ulist"><ul><li><p>Liest Datensätze in Batches ein (low level API)</p></li></ul></div></li></ul></div></li><li><p>Wichtige Einstellungen im <strong><a href="https://nightlies.apache.org/flink/flink-docs-release-1.13/api/java/org/apache/flink/connector/file/src/FileSource.FileSourceBuilder.html">FileSourceBuilder</a></strong>:</p><div class="ulist"><ul><li><p><a href="https://nightlies.apache.org/flink/flink-docs-release-1.13/api/java/org/apache/flink/connector/file/src/AbstractFileSource.AbstractFileSourceBuilder.html#monitorContinuously-java.time.Duration-"><em>monitorContinuously</em></a></p></li><li><p><a href="https://nightlies.apache.org/flink/flink-docs-release-1.13/api/java/org/apache/flink/connector/file/src/AbstractFileSource.AbstractFileSourceBuilder.html#setFileEnumerator-org.apache.flink.connector.file.src.enumerate.FileEnumerator.Provider-"><em>setFileEnumerator</em></a></p></li><li><p><a href="https://nightlies.apache.org/flink/flink-docs-release-1.13/api/java/org/apache/flink/connector/file/src/AbstractFileSource.AbstractFileSourceBuilder.html#setSplitAssigner-org.apache.flink.connector.file.src.assigners.FileSplitAssigner.Provider-"><em>setSplitAssigner</em></a></p></li></ul></div></li></ul></div></section>
+<section id="_filesystem_connector_filesource_beispiel"><h2>Filesystem Connector : FileSource Beispiel</h2><pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">final</span> FileSource&lt;<span class="predefined-type">String</span>&gt; source =
+        FileSource.forRecordStreamFormat(
+                        <span class="keyword">new</span> TextLineInputFormat(),
+                        <span class="string"><span class="delimiter">&quot;</span><span class="content">/path/to/files</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">/path/to/other/files</span><span class="delimiter">&quot;</span></span>)
+                  .monitorContinuously(<span class="predefined-type">Duration</span>.ofMillis(<span class="integer">5</span>))
+                  .build();</code></pre>
+<div class="ulist"><ul><li><p>Beispiel für Erstellung einer FileSource</p><div class="ulist"><ul><li><p>Liest Textzeilen aus allen Dateien in den Ordnern "/path/to/files" und "/path/to/other/files"</p></li><li><p>Prüft alle 5 Millisekunden auf Veränderungen</p><div class="ulist"><ul><li><p>Liest kontinuierlich neue oder veränderte Dateien ein</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_filesystem_connector_streamformat"><h2>Filesystem Connector: StreamFormat</h2><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/file/src/reader/StreamFormat.html">StreamFormat</a></strong></p><div class="ulist"><ul><li><p>Legt als Teil einer <a href="https://nightlies.apache.org/flink/flink-docs-release-1.13/api/java/org/apache/flink/connector/file/src/FileSource.html">FileSource</a> fest, wie Inhalte einer Datei in Datensätze übersetzt werden</p></li><li><p>Enthält Einstellung für Splitting der Inputdatei</p><div class="ulist"><ul><li><p><strong>State</strong> der FileSource enthält n Dateioffsets, wobei n die Anzahl der Splits ist</p></li></ul></div></li><li><p>Enthält Default-Einstellungen für IO-Batching und Checkpointing, die in den meisten Fällen sinnvoll sind</p></li></ul></div></li><li><p>Alternativ zu StreamFormat kann <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/file/src/reader/BulkFormat.html">BulkFormat</a> verwendet werden, das mehr Flexibilität bietet</p></li></ul></div></section>
+<section id="_filesystem_connector_simplestreamformat"><h2>Filesystem Connector: SimpleStreamFormat</h2><div class="ulist"><ul><li><p><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/index.html?org/apache/flink/connector/file/src/reader/SimpleStreamFormat.html">SimpleStreamFormat</a></p><div class="ulist"><ul><li><p><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/file/src/reader/StreamFormat.html">StreamFormat</a> ohne Splitting</p><div class="ulist"><ul><li><p>&#8594; State der <a href="https://nightlies.apache.org/flink/flink-docs-release-1.13/api/java/org/apache/flink/connector/file/src/FileSource.html">FileSource</a> enthält nur <strong>ein</strong> File Offset</p></li></ul></div></li></ul></div></li><li><p>Vordefinierte Beispiele:</p><div class="ulist"><ul><li><p><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java//org/apache/flink/connector/file/src/reader/TextLineInputFormat.html">TextLineInputFormat</a></p><div class="ulist"><ul><li><p>Liest Textdateien zeilenweise ein</p></li></ul></div></li><li><p><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/formats/csv/CsvReaderFormat.html">CsvReaderFormat</a></p></li></ul></div></li><li><p>Eigenes <strong>SimpleStreamFormat</strong> :</p><div class="ulist"><ul><li><p>Erfordert nur Angabe eines <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/file/src/reader/StreamFormat.Reader.html"><em>StreamFormat.Reader</em></a></p><div class="ulist"><ul><li><p>Reader liest seriell aus einer Datei und kann z.B. mittels java.io Klassen wie BufferedReader implementiert werden</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_filesystem_connector_simplestreamformat_beispiel"><h2>Filesystem Connector : SimpleStreamFormat Beispiel</h2><div class="ulist"><ul><li><p>Beispiel Implementierung von TextLineInputFormat (vereinfacht) :</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="type">class</span> <span class="class">TextLineInputFormat</span> <span class="directive">extends</span> SimpleStreamFormat&lt;<span class="predefined-type">String</span>&gt; {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">Reader</span> createReader(<span class="predefined-type">Configuration</span> config, FSDataInputStream stream) <span class="directive">throws</span> <span class="exception">IOException</span> {
+        <span class="predefined-type">BufferedReader</span> reader = <span class="keyword">new</span> <span class="predefined-type">BufferedReader</span>(<span class="keyword">new</span> <span class="predefined-type">InputStreamReader</span>(stream, <span class="string"><span class="delimiter">&quot;</span><span class="content">UTF-8</span><span class="delimiter">&quot;</span></span>));
+        <span class="keyword">return</span> <span class="keyword">new</span> TextLineInputFormat.Reader(reader);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> TypeInformation&lt;<span class="predefined-type">String</span>&gt; getProducedType() {
+        <span class="keyword">return</span> <span class="predefined-type">Types</span>.STRING;
+    }
+
+    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="type">class</span> <span class="class">Reader</span> <span class="directive">implements</span> StreamFormat.Reader&lt;<span class="predefined-type">String</span>&gt; {
+        <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">BufferedReader</span> reader;
+
+        <span class="predefined-type">Reader</span>(<span class="predefined-type">BufferedReader</span> reader) {
+            <span class="local-variable">this</span>.reader = reader;
+        }
+        <span class="directive">public</span> <span class="predefined-type">String</span> read() <span class="directive">throws</span> <span class="exception">IOException</span> {
+            <span class="keyword">return</span> <span class="local-variable">this</span>.reader.readLine();
+        }
+        <span class="directive">public</span> <span class="type">void</span> close() <span class="directive">throws</span> <span class="exception">IOException</span> {
+            <span class="local-variable">this</span>.reader.close();
+        }
+    }
+}</code></pre></section>
+<section id="_filesystem_connector_filesink"><h2>Filesystem Connector: FileSink</h2><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/file/sink/FileSink.html">FileSinks</a></strong> schreiben ihre Datensätze in <strong>Buckets</strong></p><div class="ulist"><ul><li><p>Buckets entsprechen einem Ordner (bei seriellen Senken einer Datei)</p></li><li><p>In gewissen zeitlichen Abständen (Default: einmal pro Stunde) wird der Bucket gewechselt</p></li></ul></div></li><li><p>Innerhalb eines Buckets schreiben Subtasks der Senke ihre Outputs in verschiedene <strong>Teile</strong></p></li><li><p>Gemäß einer <strong>rolling policy</strong> können die Teile ihre Zieldatei ändern</p><div class="ulist"><ul><li><p>z.B. Wechsel nach Erreichen einer maximalen Größe oder nach Zeit, oder bei Checkpoints</p></li></ul></div></li></ul></div></section>
+<section id="_filesystem_connector_filesink_2"><h2>Filesystem Connector: FileSink (2)</h2><div class="imageblock" style=""><img src="images/streamfilesink_bucketing.png" alt="streamfilesink bucketing" height="600"></div>
+<div class="paragraph center small"><small><em>(Bildquelle: <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/datastream/filesystem/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/datastream/filesystem/</a>)</em></small></div></section>
+<section id="_filesystem_connector_filesink_3"><h2>Filesystem Connector: FileSink (3)</h2><div class="ulist"><ul><li><p>Beispiel für Erstellen einer <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/file/sink/FileSink.html"><strong>FileSink</strong></a>:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">final</span> FileSink&lt;<span class="predefined-type">String</span>&gt; sink = FileSink
+    .forRowFormat(<span class="keyword">new</span> Path(outputPath), <span class="keyword">new</span> SimpleStringEncoder&lt;<span class="predefined-type">String</span>&gt;(<span class="string"><span class="delimiter">&quot;</span><span class="content">UTF-8</span><span class="delimiter">&quot;</span></span>))
+    .withRollingPolicy(
+        DefaultRollingPolicy.builder()
+            .withRolloverInterval(<span class="predefined-type">Duration</span>.ofMinutes(<span class="integer">15</span>))
+            .withInactivityInterval(<span class="predefined-type">Duration</span>.ofMinutes(<span class="integer">5</span>))
+            .withMaxPartSize(MemorySize.ofMebiBytes(<span class="integer">1024</span>))
+            .build())
+        .build();</code></pre>
+<div class="ulist"><ul><li><p>Mit <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/file/sink/FileSink.html#forRowFormat-org.apache.flink.core.fs.Path-org.apache.flink.api.common.serialization.Encoder-"><strong><em>forRowFormat</em></strong></a> ist die Angabe eines <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/serialization/Encoder.html"><strong>Encoder&lt;T&gt;</strong></a> nötig, der einzelne Datensätze serialisiert in eine Datei schreibt</p></li><li><p>Alternativ mit <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/file/sink/FileSink.html#forBulkFormat-org.apache.flink.core.fs.Path-org.apache.flink.api.common.serialization.BulkWriter.Factory-"><strong><em>forBulkFormat</em></strong></a> und Angabe einer <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/serialization/BulkWriter.Factory.html"><strong>BulkWriter&lt;T&gt;.Factory</strong></a></p><div class="ulist"><ul><li><p>Batching-Verhalten muss dann zusätzlich angegeben werden</p></li></ul></div></li></ul></div></section>
+<section id="_filesystem_connector_filesink_4"><h2>Filesystem Connector: FileSink (4)</h2><div class="ulist"><ul><li><p>Beispiele für vordefinierte <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/serialization/BulkWriter.Factory.html"><strong>BulkWriter.Factory</strong></a> :</p><div class="ulist"><ul><li><p><a href="https://nightlies.apache.org/flink/flink-docs-release-1.11/api/java/org/apache/flink/formats/avro/AvroWriterFactory.html">AvroWriterFactory</a></p></li><li><p><a href="https://nightlies.apache.org/flink/flink-docs-release-1.10/api/java/org/apache/flink/formats/compress/CompressWriterFactory.html">CompressWriterFactory</a></p></li><li><p><a href="https://nightlies.apache.org/flink/flink-docs-release-1.9/api/java/org/apache/flink/formats/parquet/ParquetWriterFactory.html">ParquetWriterFactory</a></p></li></ul></div></li></ul></div></section>
+<section id="_filesystem_connector_link_zur_dokumentation"><h2>Filesystem Connector : Link zur Dokumentation</h2><div class="ulist"><ul><li><p>&#8594; Für mehr Details zum File System Connector siehe <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/datastream/filesystem/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/datastream/filesystem/</a></p></li></ul></div></section>
+<section id="_aufgabe_6"><h2>Aufgabe 6</h2><div class="olist arabic"><ol class="arabic"><li><p>Implementieren Sie eine <a href="https://nightlies.apache.org/flink/flink-docs-release-1.13/api/java/org/apache/flink/connector/file/src/FileSource.html"><strong>FileSource</strong></a>, die eine Textdatei einliest und für jede Zeile einen int Array generiert</p><div class="ulist"><ul><li><p>Sie müssen die Dependency <a href="https://mvnrepository.com/artifact/org.apache.flink/flink-connector-files">flink-connector-files</a> nutzen</p></li><li><p>Die Zeilen der Inputdatei sollen als kommaseparierte ganze Zahlen angenommen werden</p></li><li><p>Erweitern Sie <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/index.html?org/apache/flink/connector/file/src/reader/SimpleStreamFormat.html">SimpleStreamFormat</a> und lassen Sie sich von der Implementierung von <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java//org/apache/flink/connector/file/src/reader/TextLineInputFormat.html">TextLineInputFormat</a> inspirieren</p><div class="ulist"><ul><li><p>Als <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/typeinfo/TypeInformation.html">TypeInformation&lt;int[</a>&gt;] kann <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/typeinfo/PrimitiveArrayTypeInfo.html">PrimitiveArrayTypeInfo.INT_PRIMITIVE_ARRAY_TYPE_INFO</a> gewählt werden</p></li></ul></div></li></ul></div></li><li><p>Implementieren Sie dann noch eine <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/file/sink/FileSink.html"><strong>FileSink</strong></a>, die int Arrays wieder als Zeilen in eine Textdatei schreibt</p><div class="ulist"><ul><li><p>separiert mit "+" statt ","</p></li><li><p>Als Beispiel für einen Encoder können Sie sich die Implementierung von <a href="https://nightlies.apache.org/flink/flink-docs-stable/api/java/index.html?org/apache/flink/api/common/serialization/SimpleStringEncoder.html">SimpleStringEncoder</a> ansehen</p></li></ul></div></li><li><p>Testen Sie ihre Quelle und Senke in einem Flink Job, bei dem Sie eine von Ihnen erstellte Inputdatei als DataStream&lt;int[]&gt; einlesen
+und wieder in eine Datei schreiben</p></li></ol></div></section>
+<section id="_kafka_connector"><h2>Kafka Connector</h2><div class="paragraph heading center"><p>Kafka Connector</p></div></section>
+<section id="_kafka_connector_kafkasource"><h2>Kafka Connector : KafkaSource</h2><div class="ulist"><ul><li><p>Datenstreams in Kafka sind in <strong>Topics</strong> organisiert, die wiederum in <strong>Partitionen</strong> unterteilt sind</p><div class="ulist"><ul><li><p>Die Partitionen werden auf die Instanzen der <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/kafka/source/KafkaSource.html">KafkaSource</a></strong> aufgeteilt</p></li></ul></div></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/kafka/source/KafkaSource.html">KafkaSource</a></strong> wird über einen <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/kafka/source/KafkaSourceBuilder.html">KafkaBuilder</a> erstellt</p><div class="ulist"><ul><li><p>Beispiel:</p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">KafkaSource&lt;<span class="predefined-type">String</span>&gt; source = KafkaSource.&lt;<span class="predefined-type">String</span>&gt;builder()
+    .setBootstrapServers(brokers)
+    .setTopics(<span class="string"><span class="delimiter">&quot;</span><span class="content">input-topic</span><span class="delimiter">&quot;</span></span>)
+    .setGroupId(<span class="string"><span class="delimiter">&quot;</span><span class="content">my-group</span><span class="delimiter">&quot;</span></span>)
+    .setStartingOffsets(OffsetsInitializer.earliest())
+    .setValueOnlyDeserializer(<span class="keyword">new</span> SimpleStringSchema())
+    .build();
+
+env.fromSource(source, WatermarkStrategy.noWatermarks(), <span class="string"><span class="delimiter">&quot;</span><span class="content">Kafka Source</span><span class="delimiter">&quot;</span></span>);</code></pre></section>
+<section id="_kafka_connector_kafkasource_2"><h2>Kafka Connector : KafkaSource (2)</h2><div class="ulist"><ul><li><p>Auswahl der Topics und Partitionen :</p><div class="ulist"><ul><li><p><strong><em>setTopics</em></strong> für alle Partitionen der angegebenen Topics</p></li><li><p>Oder Topics mit Pattern auswählen mit <strong><em>setTopicPattern</em></strong></p></li><li><p>Auswahl einzelner Partitionen (Beispiel):</p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">final</span> <span class="predefined-type">HashSet</span>&lt;TopicPartition&gt; partitionSet = <span class="keyword">new</span> <span class="predefined-type">HashSet</span>&lt;&gt;(<span class="predefined-type">Arrays</span>.asList(
+        <span class="keyword">new</span> TopicPartition(<span class="string"><span class="delimiter">&quot;</span><span class="content">topic-a</span><span class="delimiter">&quot;</span></span>, <span class="integer">0</span>),    <span class="comment">// Partition 0 of topic &quot;topic-a&quot;</span>
+        <span class="keyword">new</span> TopicPartition(<span class="string"><span class="delimiter">&quot;</span><span class="content">topic-b</span><span class="delimiter">&quot;</span></span>, <span class="integer">5</span>)));  <span class="comment">// Partition 5 of topic &quot;topic-b&quot;</span>
+KafkaSource.builder().setPartitions(partitionSet);</code></pre></section>
+<section id="_kafka_connector_kafkasource_3"><h2>Kafka Connector : KafkaSource (3)</h2><div class="ulist"><ul><li><p><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/kafka/source/KafkaSourceBuilder.html">Builder</a>-Option <strong><em>setStartingOffsets(OffsetsInitializer)</em></strong> bezieht sich auf Offsets der Kafka-Partitionen</p></li><li><p>Mögliche Werte von <strong>OffsetsInitializer</strong> :</p><div class="ulist"><ul><li><p>OffsetsInitializer.earliest()</p></li><li><p>OffsetsInitializer.latest()</p></li><li><p>OffsetsInitializer.committedOffsets()</p><div class="ulist"><ul><li><p>Erstes commited Offset (Kafka-Feature)</p></li></ul></div></li><li><p>OffsetsInitializer.timestamp(&lt;timestamp&gt;)</p><div class="ulist"><ul><li><p>Erstes Offset ab dem Timestamp</p></li></ul></div></li><li><p>OffsetsInitializer.offsets(Map&lt;TopicPartition,Long&gt; offsets)</p><div class="ulist"><ul><li><p>individuell festgelegte Offsets</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_kafka_connector_kafkasource_4"><h2>Kafka Connector : KafkaSource (4)</h2><div class="ulist"><ul><li><p><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/kafka/source/KafkaSourceBuilder.html">Builder</a>-Option <strong>setGroupId(groupName)</strong></p><div class="ulist"><ul><li><p>Legt den Namen einer Consumer Group (Kafka Feature) fest, zu der die Quelle gehören soll</p></li></ul></div></li><li><p><strong>Deserialisierung</strong> der Kafka-Datensätze (Builder-Optionen):</p><div class="ulist"><ul><li><p><em>setValueOnlyDeserializer(DeserializationSchema&lt;T&gt;)</em></p><div class="ulist"><ul><li><p>Benutzt nur Werte</p></li></ul></div></li><li><p><em>setDeserializer(KafkaRecordDeserializationSchema&lt;T&gt;)</em></p><div class="ulist"><ul><li><p>Zugriff auf Keys und Header möglich</p></li></ul></div></li></ul></div></li><li><p>Es gibt im Flink Kafka Connector vordefinierte Deserialisierer für die in Kafka gängigsten Serialisierer</p></li></ul></div></section>
+<section id="_kafka_connector_kafkasource_5"><h2>Kafka Connector : KafkaSource (5)</h2><div class="ulist"><ul><li><p><strong>Timestamps</strong> aus Kafka-Datensätzen werden per Default übernommen</p></li><li><p><strong>State</strong> der <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/kafka/source/KafkaSource.html">KafkaSource</a> : Offsets für jede (Kafka-)Inputpartition</p></li><li><p>Einstellungen zur Sicherheit (Verschlüsselung, Authentifizierung) über den <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/kafka/source/KafkaSourceBuilder.html">Builder</a> möglich</p><div class="ulist"><ul><li><p>Beispiel :</p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">KafkaSource
+    .builder()
+    .setProperty(<span class="string"><span class="delimiter">&quot;</span><span class="content">security.protocol</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">SASL_PLAINTEXT</span><span class="delimiter">&quot;</span></span>)
+    .setProperty(<span class="string"><span class="delimiter">&quot;</span><span class="content">sasl.mechanism</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">PLAIN</span><span class="delimiter">&quot;</span></span>)
+    .setProperty(<span class="string"><span class="delimiter">&quot;</span><span class="content">sasl.jaas.config</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">org.apache.kafka.common.security.plain.PlainLoginModule required username=</span><span class="char">\&quot;</span><span class="content">username</span><span class="char">\&quot;</span><span class="content"> password=</span><span class="char">\&quot;</span><span class="content">password</span><span class="char">\&quot;</span><span class="content">;</span><span class="delimiter">&quot;</span></span>);</code></pre></section>
+<section id="_kafka_connector_kafkasink"><h2>Kafka Connector : KafkaSink</h2><div class="ulist"><ul><li><p>Erstellung einer <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/kafka/sink/KafkaSink.html"><strong>KafkaSink</strong></a> (Beispiel):</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">KafkaSink&lt;<span class="predefined-type">String</span>&gt; sink = KafkaSink
+        .&lt;<span class="predefined-type">String</span>&gt;builder()
+        .setBootstrapServers(brokers)
+        .setRecordSerializer(serializationschema)
+        .setDeliveryGuarantee(DeliveryGuarantee.AT_LEAST_ONCE)
+        .build();</code></pre>
+<div class="ulist"><ul><li><p>Angabe eines <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/kafka/sink/KafkaRecordSerializationSchema.html"><strong>KafkaRecordSerializationSchema</strong></a> für Datensätze nötig</p><div class="ulist"><ul><li><p>Beispiel für Erstellung:</p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">KafkaRecordSerializationSchema
+    .builder()
+    .setTopicSelector(MyUtil::selectTopicByElement)
+    .setValueSerializationSchema(<span class="keyword">new</span> SimpleStringSchema())
+    .setKeySerializationSchema(<span class="keyword">new</span> SimpleStringSchema())
+    .setPartitioner(<span class="keyword">new</span> FlinkFixedPartitioner())
+    .build();</code></pre></section>
+<section id="_kafka_connector_kafkasink_2"><h2>Kafka Connector : KafkaSink (2)</h2><div class="ulist"><ul><li><p><a href="https://nightlies.apache.org/flink/flink-docs-release-1.3/api/java/org/apache/flink/streaming/connectors/kafka/partitioner/FlinkKafkaPartitioner.html"><strong>FlinkKafkaPartitioner</strong></a></p><div class="ulist"><ul><li><p>Ordnet den Datensätzen die Nummer der Partition des Kafka-Topics zu</p></li><li><p><a href="https://nightlies.apache.org/flink/flink-docs-release-1.3/api/java/org/apache/flink/streaming/connectors/kafka/partitioner/FlinkFixedPartitioner.html"><strong>FlinkFixedPartitioner</strong></a></p><div class="ulist"><ul><li><p>Ordnet Datensätze der gleichen Flink Partition immer der gleichen Kafka-Partition zu</p></li></ul></div></li></ul></div></li><li><p>Outputs können (Kafka-)Keys enthalten</p><div class="ulist"><ul><li><p>&#8594; SerializationSchema für Keys aus den Datensätzen (nicht den Flink-Keys) erforderlich</p></li></ul></div></li></ul></div></section>
+<section id="_kafka_connector_kafkasink_3"><h2>Kafka Connector : KafkaSink (3)</h2><div class="ulist"><ul><li><p>Mit der Angabe einer <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/base/DeliveryGuarantee.html"><strong>DeliveryGuarantee</strong></a> lassen sich eine von 3 möglichen Verhaltensweisen der KafkaSink auswählen:</p><div class="ulist"><ul><li><p>DeliveryGuarantee.NONE</p><div class="ulist"><ul><li><p>Die Senke verwendet keine Mechanismen zum Erreichen von end-to-end Konsistenz</p></li></ul></div></li><li><p>DeliveryGuarantee.AT_LEAST_ONCE</p><div class="ulist"><ul><li><p>Die Senke wartet auf eine Bestätigung des Kafka Brokers über den Erhalt aller ausstehenden Datensätze vor jedem Checkpoint und schickt
+sie ggf. erneut</p></li></ul></div></li><li><p>DeliveryGuarantee.EXACTLY_ONCE</p><div class="ulist"><ul><li><p>Verwendet zusätzlich den vorher besprochenen Two-Phase-Commit Mechanismus</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_kafka_connector_kafkasink_4"><h2>Kafka Connector : KafkaSink (4)</h2><div class="ulist"><ul><li><p><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/connector/base/DeliveryGuarantee.html">DeliveryGuarantee.EXACTLY_ONCE</a></p><div class="ulist"><ul><li><p>Konsumenten der Kafka-Topics sollten eingestellt sein, nur "committed" Daten zu lesen</p><div class="ulist"><ul><li><p>Wenn sie auf garantierte Konsistenz angewiesen sind</p></li><li><p>Oder eigenes Rollback implementieren</p></li></ul></div></li><li><p>Im Kafkacluster sollte der folgende Parameter groß genug eingestellt sein (Dauer Checkpointing plus Puffer für Recovery):</p><div class="ulist"><ul><li><p><em>producer transaction.timeout</em></p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_eigener_connector"><h2>Eigener Connector</h2><div class="paragraph heading center"><p>Eigener Connector</p></div></section>
+<section id="_custom_source"><h2>Custom Source</h2><div class="ulist"><ul><li><p>Quellen in Flink teilen zu konsumierende Daten in sog. Splits ein</p></li><li><p>Eine Quelle besteht allgemein aus den folgenden Komponenten:</p><div class="ulist"><ul><li><p>Split Enumerator : generiert, organisiert und verteilt Splits</p><div class="ulist"><ul><li><p>pro Quelle nur eine Instanz</p></li></ul></div></li><li><p>SourceReader : erhält Splits und extrahiert Datensätze aus diesen</p><div class="ulist"><ul><li><p>Anzahl der Instanzen entspricht Parallelismus der Quelle</p></li></ul></div></li><li><p>SplitSerializer : Serialisiert Splits für den Transfer zwischen Enumerator und Reader und für Checkpointing</p></li></ul></div></li><li><p>Eine selbst erstellte Quelle muss diese Komponenten implementieren</p></li><li><p>Für Details siehe <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/sources/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/sources/</a></p></li></ul></div></section>
+<section id="_custom_sink"><h2>Custom Sink</h2><div class="ulist"><ul><li><p>Um eine eigene Senke zu erstellen, muss im Sink&lt;T&gt; interface nur die createWriter(Sink.InitContext context) Methode implementiert werden</p><div class="ulist"><ul><li><p>diese Methode wird bei der Erstellung eines Senken-Subtasks aufgerufen</p></li><li><p>Ein Sink&lt;T&gt;.InitContext enthält Metainformationen über den Job, Task und Subtask</p></li></ul></div></li><li><p>Um einen SinkWriter&lt;T&gt; zu erstellen, sind folgende Methoden zu implementieren:</p><div class="ulist"><ul><li><p>void write(T element, SinkWriter.Context context)</p><div class="ulist"><ul><li><p>schreibt ein Element an das Zielsystem (oder gibt an einen Writer weiter)</p></li></ul></div></li><li><p>void flush(boolean endOfInput)</p><div class="ulist"><ul><li><p>wird bei einem Checkpoint oder Ende des Inputs aufgerufen und löst Flushen aller verbleibenden Outputs des Writers aus</p></li></ul></div></li></ul></div></li><li><p>Falls Watermarks an das Zielsystem propagiert werden sollen, kann zusätzlich</p><div class="ulist"><ul><li><p>default void writeWatermark(Watermark watermark) implementiert werden</p></li></ul></div></li></ul></div></section>
+<section id="_custom_sink_2"><h2>Custom Sink (2)</h2><div class="ulist"><ul><li><p>Für Senken mit erweiterter Funktionalität gibt es u.a. folgende vordefinierte Subinterfaces von Sink&lt;T&gt; :</p><div class="ulist"><ul><li><p>StatefulSink&lt;T, WriterStateT&gt;</p></li><li><p>TwoPhaseCommittingSink&lt;InputT,CommT&gt;</p></li></ul></div></li><li><p>Zusätzlich bündelt die abstrakte Klasse AsyncSinkBase&lt;T,RequestEntryT&gt; die Unterstützung für Funktionalität von nicht-transaktionalen Senken, die ihren
+Output asynchron in Batches schicken</p></li></ul></div></section>
+<section id="_asynchronous_io"><h2>Asynchronous I/O</h2><div class="paragraph heading center"><p>Asynchronous I/O</p></div></section>
+<section id="_asynchronous_io_for_external_data_access"><h2>Asynchronous I/O for External Data Access</h2><div class="ulist"><ul><li><p>Async I/O API</p><div class="ulist"><ul><li><p>Ermöglicht (non-blocking) Abfragen gegen externe Systeme</p></li><li><p>Erfordert Angabe einer AsyncFunction</p><div class="ulist"><ul><li><p>Kann von allen Operatoren bei der Bearbeitung eines Datensatzes verwendet werden</p></li></ul></div></li></ul></div></li><li><p>Interface <strong>RichAsyncFunction&lt;IN,OUT&gt;</strong></p><div class="ulist"><ul><li><p><em>void open(Configuration)</em></p><div class="ulist"><ul><li><p>Verbindung zum externen System initial herstellen</p></li></ul></div></li><li><p><em>void asyncInvoke(IN, ResultFuture&lt;OUT&gt;)</em></p><div class="ulist"><ul><li><p>Bearbeitung eines Datensatzes</p></li></ul></div></li><li><p><em>void close()</em></p><div class="ulist"><ul><li><p>Verbindung schließen</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_asynchronous_io_for_external_data_access_2"><h2>Asynchronous I/O for External Data Access (2)</h2><div class="ulist"><ul><li><p>ResultFuture&lt;OUT&gt; hat eine Methode</p><div class="ulist"><ul><li><p>void complete(Collection&lt;OUT&gt; output),</p></li></ul></div></li><li><p>die nach Vollendung der asynchronen Operation mit dem Output ausgeführt werden kann</p></li><li><p>Um eine AsyncFunction in eine Pipeline einzubinden, werden statische Methoden auf der Klasse AsyncDataStream verwendet, Beispiel:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="comment">// apply the async I/O transformation without retry</span>
+DataStream&lt;Tuple2&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; resultStream =
+    AsyncDataStream.unorderedWait(stream, <span class="keyword">new</span> AsyncDatabaseRequest(), <span class="integer">1000</span>, <span class="predefined-type">TimeUnit</span>.MILLISECONDS, <span class="integer">100</span>);
+
+<span class="comment">// or apply the async I/O transformation with retry</span>
+<span class="comment">// create an async retry strategy via utility class or a user defined strategy</span>
+AsyncRetryStrategy asyncRetryStrategy =
+        <span class="keyword">new</span> AsyncRetryStrategies.FixedDelayRetryStrategyBuilder(<span class="integer">3</span>, <span class="integer">100L</span>) <span class="comment">// maxAttempts=3, fixedDelay=100ms</span>
+                .ifResult(RetryPredicates.EMPTY_RESULT_PREDICATE)
+                .ifException(RetryPredicates.HAS_EXCEPTION_PREDICATE)
+                .build();
+
+<span class="comment">// apply the async I/O transformation with retry</span>
+DataStream&lt;Tuple2&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; resultStream =
+        AsyncDataStream.unorderedWaitWithRetry(stream, <span class="keyword">new</span> AsyncDatabaseRequest(), <span class="integer">1000</span>, <span class="predefined-type">TimeUnit</span>.MILLISECONDS, <span class="integer">100</span>, asyncRetryStrategy);</code></pre></section>
+<section id="_asynchronous_io_for_external_data_access_3"><h2>Asynchronous I/O for External Data Access (3)</h2><div class="ulist"><ul><li><p>Codebeispiel aus: <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/asyncio/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/asyncio/</a></p><div class="ulist"><ul><li><p>siehe auch dort für Details zur Konfiguration von Timeouts, Retries und mehr</p></li></ul></div></li></ul></div></section>
+<section id="_aufgabe_7"><h2>Aufgabe 7</h2><div class="olist arabic"><ol class="arabic"><li><p>Öffnen Sie die Vorlage zu Aufgabe 7 im Git-Repository der Schulung</p><div class="ulist"><ul><li><p>führen Sie einmal "mvn compile" aus, um sich die fehlenden Dependencies herunterzuladen</p><div class="ulist"><ul><li><p>Ziel ist es, einen Testjob zu erstellen, der folgendes tut:</p></li></ul></div></li><li><p>Testdaten (IDs von Kunden) in ein Kafka Topic schreiben</p></li><li><p>Diese danach wieder aus dem Topic auslesen und asynchron über eine Datenbank die Kundennamen passend zu den IDs abfragen</p></li><li><p>Die Kundendaten auf dem Bildschirm ausgeben</p><div class="ulist"><ul><li><p>Hierfür ist das Gerüst des Tests schon vorgegeben. Es enthält eine Konfiguration von Dockercontainern für Kafka und eine Postgres Datenbank mit Hilfe der Open-Source Library Testcontainers</p></li></ul></div></li></ul></div></li><li><p>Ihre Aufgabe ist, an den beiden markierten Stellen im Quellcode der Klasse "Aufgabe7Test" je einen geeigneten Flinkjob zu implementieren, wobei erst auch noch
+die Implementierung von AsyncCustomerLookup abgeschlossen werden muss</p></li><li><p>Testen Sie ihren Code durch Ausführen von "mvn test"</p></li></ol></div></section>
+<section id="_aufgabe_7_hinweise"><h2>Aufgabe 7 (Hinweise)</h2><div class="ulist"><ul><li><p>Wir verwenden die Dependency flink-clients, um für Tests bei Aufruf von StreamExecutionEnvironment.getExecutionEnvironment() ein lokales ExecutionEnvironment zu erhalten</p><div class="ulist"><ul><li><p>dies ermöglicht es, Flinkjobs zu testen, ohne sie in einen Flinkcluster zu laden</p></li></ul></div></li><li><p>Die Konfiguration der Testklasse ist so, dass die benötigten Container jeweils vor Ausführung der Tests gestartet werden</p><div class="ulist"><ul><li><p>Hierfür muss ein Docker Execution Environment auf Ihrer Maschine gestartet sein</p></li><li><p>Beim ersten Start der Tests müssen wahrscheinlich erst noch die Containerimages geladen werden, daher dauert es etwas länger</p></li></ul></div></li><li><p>Eine KafkaSource kann im Builder mit .setBounded(OffsetsInitializer.latest()) so konfiguriert werden, dass der Job abbricht,
+wenn das aktuell letzte Offset des Inputtopics geladen wurde (Batchmodus)</p><div class="ulist"><ul><li><p>per default wartet die Source unbeschränkt auf weitere Datensätze im Stream (Streamingmodus)</p></li></ul></div></li></ul></div></section></div></div><script src="reveal.js-3.9.2/lib/js/head.min.js"></script><script src="reveal.js-3.9.2/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
+Reveal.initialize({
+  // Display controls in the bottom right corner
+  controls: true,
+  // Display a presentation progress bar
+  progress: true,
+  // Display the page number of the current slide
+  slideNumber: true,
+  // Push each slide change to the browser history
+  history: true,
+  // Enable keyboard shortcuts for navigation
+  keyboard: true,
+  // Enable the slide overview mode
+  overview: true,
+  // Vertical centering of slides
+  center: true,
+  // Enables touch navigation on devices with touch input
+  touch: true,
+  // Loop the presentation
+  loop: false,
+  // Change the presentation direction to be RTL
+  rtl: false,
+  // Turns fragments on and off globally
+  fragments: true,
+  // Flags if the presentation is running in an embedded mode,
+  // i.e. contained within a limited portion of the screen
+  embedded: false,
+  // Number of milliseconds between automatically proceeding to the
+  // next slide, disabled when set to 0, this value can be overwritten
+  // by using a data-autoslide attribute on your slides
+  autoSlide: 0,
+  // Stop auto-sliding after user input
+  autoSlideStoppable: true,
+  // Enable slide navigation via mouse wheel
+  mouseWheel: true,
+  // Hides the address bar on mobile devices
+  hideAddressBar: true,
+  // Opens links in an iframe preview overlay
+  previewLinks: false,
+  // Theme (e.g., beige, black, league, night, serif, simple, sky, solarized, white)
+  // NOTE setting the theme in the config no longer works in reveal.js 3.x
+  //theme: Reveal.getQueryHash().theme || 'anderscore',
+  // Transition style (e.g., none, fade, slide, convex, concave, zoom)
+  transition: Reveal.getQueryHash().transition || 'linear',
+  // Transition speed (e.g., default, fast, slow)
+  transitionSpeed: 'default',
+  // Transition style for full page slide backgrounds (e.g., none, fade, slide, convex, concave, zoom)
+  backgroundTransition: 'fade',
+  // Number of slides away from the current that are visible
+  viewDistance: 3,
+  // Parallax background image (e.g., "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'")
+  parallaxBackgroundImage: '',
+  // Parallax background size in CSS syntax (e.g., "2100px 900px")
+  parallaxBackgroundSize: '',
+
+  // The "normal" size of the presentation, aspect ratio will be preserved
+  // when the presentation is scaled to fit different resolutions. Can be
+  // specified using percentage units.
+  width: 1728,
+  height: 972,
+
+  // Factor of the display size that should remain empty around the content
+  margin: 0.1,
+
+  // Bounds for smallest/largest possible scale to apply to content
+  minScale: 0.2,
+  maxScale: 1.5,
+
+  // Optional libraries used to extend on reveal.js
+  dependencies: [
+      { src: 'reveal.js-3.9.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'reveal.js-3.9.2/plugin/title-footer/title-footer.js', async: true, callback: function()
+          {title_footer.initialize('Schulung Java Data Pipelines mit Apache Flink', 'Jan Lühr', 'anderScore GmbH • Frankenwerft 35 • 50667 Köln');}},
+      { src: 'reveal.js-3.9.2/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal.js-3.9.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      
+      { src: 'reveal.js-3.9.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: 'reveal.js-3.9.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+  ]
+});</script></body></html>

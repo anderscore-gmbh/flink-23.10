@@ -1,0 +1,766 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="description" content="description"><meta name="author" content="Jan Lühr"><title>Apache Flink Worshop</title><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport"><link href="reveal.js-3.9.2/css/reveal.css" rel="stylesheet"><link href="reveal.js-3.9.2/plugin/title-footer/title-footer.css" rel="stylesheet"><link rel="stylesheet" href="reveal.js-3.9.2/css/theme/anderscore.css" id="theme"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><style>/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
+pre.CodeRay{background:#f7f7f8}
+.CodeRay .line-numbers{border-right:1px solid currentColor;opacity:.35;padding:0 .5em 0 0}
+.CodeRay span.line-numbers{display:inline-block;margin-right:.75em}
+.CodeRay .line-numbers strong{color:#000}
+table.CodeRay{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.CodeRay td{vertical-align:top;line-height:inherit}
+table.CodeRay td.line-numbers{text-align:right}
+table.CodeRay td.code{padding:0 0 0 .75em}
+.CodeRay .debug{color:#fff !important;background:#000080 !important}
+.CodeRay .annotation{color:#007}
+.CodeRay .attribute-name{color:#000080}
+.CodeRay .attribute-value{color:#700}
+.CodeRay .binary{color:#509}
+.CodeRay .comment{color:#998;font-style:italic}
+.CodeRay .char{color:#04d}
+.CodeRay .char .content{color:#04d}
+.CodeRay .char .delimiter{color:#039}
+.CodeRay .class{color:#458;font-weight:bold}
+.CodeRay .complex{color:#a08}
+.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
+.CodeRay .color{color:#099}
+.CodeRay .class-variable{color:#369}
+.CodeRay .decorator{color:#b0b}
+.CodeRay .definition{color:#099}
+.CodeRay .delimiter{color:#000}
+.CodeRay .doc{color:#970}
+.CodeRay .doctype{color:#34b}
+.CodeRay .doc-string{color:#d42}
+.CodeRay .escape{color:#666}
+.CodeRay .entity{color:#800}
+.CodeRay .error{color:#808}
+.CodeRay .exception{color:inherit}
+.CodeRay .filename{color:#099}
+.CodeRay .function{color:#900;font-weight:bold}
+.CodeRay .global-variable{color:#008080}
+.CodeRay .hex{color:#058}
+.CodeRay .integer,.CodeRay .float{color:#099}
+.CodeRay .include{color:#555}
+.CodeRay .inline{color:#000}
+.CodeRay .inline .inline{background:#ccc}
+.CodeRay .inline .inline .inline{background:#bbb}
+.CodeRay .inline .inline-delimiter{color:#d14}
+.CodeRay .inline-delimiter{color:#d14}
+.CodeRay .important{color:#555;font-weight:bold}
+.CodeRay .interpreted{color:#b2b}
+.CodeRay .instance-variable{color:#008080}
+.CodeRay .label{color:#970}
+.CodeRay .local-variable{color:#963}
+.CodeRay .octal{color:#40e}
+.CodeRay .predefined{color:#369}
+.CodeRay .preprocessor{color:#579}
+.CodeRay .pseudo-class{color:#555}
+.CodeRay .directive{font-weight:bold}
+.CodeRay .type{font-weight:bold}
+.CodeRay .predefined-type{color:inherit}
+.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
+.CodeRay .key{color:#808}
+.CodeRay .key .delimiter{color:#606}
+.CodeRay .key .char{color:#80f}
+.CodeRay .value{color:#088}
+.CodeRay .regexp .delimiter{color:#808}
+.CodeRay .regexp .content{color:#808}
+.CodeRay .regexp .modifier{color:#808}
+.CodeRay .regexp .char{color:#d14}
+.CodeRay .regexp .function{color:#404;font-weight:bold}
+.CodeRay .string{color:#d20}
+.CodeRay .string .string .string{background:#ffd0d0}
+.CodeRay .string .content{color:#d14}
+.CodeRay .string .char{color:#d14}
+.CodeRay .string .delimiter{color:#d14}
+.CodeRay .shell{color:#d14}
+.CodeRay .shell .delimiter{color:#d14}
+.CodeRay .symbol{color:#990073}
+.CodeRay .symbol .content{color:#a60}
+.CodeRay .symbol .delimiter{color:#630}
+.CodeRay .tag{color:#008080}
+.CodeRay .tag-special{color:#d70}
+.CodeRay .variable{color:#036}
+.CodeRay .insert{background:#afa}
+.CodeRay .delete{background:#faa}
+.CodeRay .change{color:#aaf;background:#007}
+.CodeRay .head{color:#f8f;background:#505}
+.CodeRay .insert .insert{color:#080}
+.CodeRay .delete .delete{color:#800}
+.CodeRay .change .change{color:#66f}
+.CodeRay .head .head{color:#f4f}</style><link href="reveal.js-3.9.2/lib/css/zenburn.css" rel="stylesheet"><script>document.write( '<link rel="stylesheet" href="reveal.js-3.9.2/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );</script><script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script></head><body><div class="reveal"><div class="slides"><section id="_jobs_im_detail"><h2>Jobs im Detail</h2><div class="paragraph heading center"><p>Jobs im Detail</p></div></section>
+<section id="_übersicht_der_apis_für_flink_anwendungen"><h2>Übersicht der APIs für Flink-Anwendungen</h2><div class="ulist"><ul><li><p><strong>DataStream API</strong> :</p><div class="ulist"><ul><li><p>Flexible API, die mit Streams und Windows arbeitet</p></li><li><p>Ermöglicht sowohl low-level Stream-Processing Operationen (über ProcessFunctions) als auch high-level Operationen</p></li><li><p>für Java (oder Scala); Python hat eine eigene Version "PyFlink DataStream API"</p></li></ul></div></li><li><p><strong>Table API</strong> :</p><div class="ulist"><ul><li><p>high-level API, die mit dynamischen Tabellen arbeitet</p></li><li><p>für Java, Python</p></li></ul></div></li><li><p><strong>Flink SQL</strong> :</p><div class="ulist"><ul><li><p>Sehr high-level API, die mit SQL-Anfragen arbeitet, die Streams ähnlich wie Tabellen in RDBs behandeln</p></li><li><p>SQL-Unterstützung basiert auf Apache Calcite</p></li><li><p>unterstützt nur eine Teilmenge der SQL-Statements</p></li><li><p>Interaktion mit Cluster über "SQL Client" Anwendung von Flink</p></li></ul></div></li><li><p><strong>DataSet API</strong> (veraltet)</p></li></ul></div></section>
+<section id="_datastream_api"><h2>DataStream API</h2><div class="paragraph"><p>&#8594; In diesem Kapitel arbeiten wir ab jetzt mit der <strong>Data Stream API</strong></p></div></section>
+<section id="_struktur_einer_datastream_anwendung_in_java"><h2>Struktur einer DataStream-Anwendung (in Java)</h2><div class="ulist"><ul><li><p>Eine ausführbare <strong>Flink-Anwendung</strong> kann einen oder mehrere <strong>Jobs</strong> enhthalten</p></li><li><p>Für jeden auszuführenden Job:</p><div class="ulist"><ul><li><p>Definition eines <strong><a href="https://nightlies.apache.org/flink/flink-docs-release-1.16/api/java/org/apache/flink/streaming/api/environment/StreamExecutionEnvironment.html">StreamExecutionEnvironment</a></strong></p></li><li><p>Operatoren werden dem StreamExecutionEnvironment in der Reihenfolge ihrer Anwendung hinzugefügt</p></li><li><p>Auf dem StreamExecutionEnvironment wird die Methode <em>execute</em> ausgeführt</p><div class="ulist"><ul><li><p>Dies übergibt den Job zur Ausführung an einen JobManager</p></li></ul></div></li></ul></div></li><li><p>Beispiel:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="type">class</span> <span class="class">HelloFlink</span> {
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> main(<span class="predefined-type">String</span><span class="type">[]</span> args) <span class="directive">throws</span> <span class="exception">Exception</span> {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        DataStream&lt;<span class="predefined-type">String</span>&gt; dataStream = env.fromElements(
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello</span><span class="delimiter">&quot;</span></span>,
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">World</span><span class="delimiter">&quot;</span></span>);
+        dataStream.print();
+        env.execute();
+    }
+}</code></pre></section>
+<section id="_streamexecutionenvironment"><h2>StreamExecutionEnvironment</h2><div class="paragraph"><p>Erstellung eines <strong><a href="https://nightlies.apache.org/flink/flink-docs-release-1.16/api/java/org/apache/flink/streaming/api/environment/StreamExecutionEnvironment.html">StreamExecutionEnvironment</a></strong> über statische Factory-Methoden:</p></div>
+<div class="ulist"><ul><li><p><em>getExecutionEnvironment()</em> :</p><div class="ulist"><ul><li><p>erstellt Umgebung zur Ausführung im Flink-Cluster</p></li><li><p>wenn die Anwendung lokal als normale Java-Anwendung (z.B. in der IDE) gestartet wird, wird statt dessen eine lokale Umgebung in nur einer JVM erstellt (für Tests geeignet)</p><div class="ulist"><ul><li><p>JobManager und TaskManager erhalten dann jeweils einen Thread</p></li></ul></div></li></ul></div></li><li><p><em>createLocalEnvironment()</em> :</p><div class="ulist"><ul><li><p>erzwingt lokale Ausführung</p></li></ul></div></li><li><p><em>createRemoteEnvironment(String host, int port, String&#8230;&#8203; jarFiles)</em> :</p><div class="ulist"><ul><li><p>versucht Ausführung in einem Flink-Cluster an dem angegebenen Ort, ggf. mit Dependencies</p></li></ul></div></li><li><p>es gibt jeweils Varianten, die noch eine <strong>Configuration</strong> mitgeben können</p></li><li><p>Wenn man die Table API verwendet, muss statt dessen ein <strong>TableEnvironment</strong> erstellt werden</p></li></ul></div></section>
+<section id="_aufgabe_0_teil_2"><h2>Aufgabe 0, Teil 2</h2><div class="paragraph heading"><p>Erster Blick auf einen Flinkjob in Java</p></div>
+<div class="olist arabic"><ol class="arabic"><li><p>Downloaded Sie sich den Sourcecode von Aufgabe 0 und öffnen Sie das Projekt in IntelliJ</p></li><li><p>Bauen Sie das Projekt mit "mvn clean install"</p></li><li><p>Führen Sie die Klasse Aufgabe0 über die IDE mit "Run" aus, um die Flinkanwendung lokal zu starten</p><div class="ulist"><ul><li><p>Stellen Sie zunächst in der Run Configuration folgendes ein:</p><div class="ulist"><ul><li><p>die Option "Add dependencies with 'provided' scope to classpath"</p></li><li><p>Java Version 11</p></li></ul></div></li></ul></div></li><li><p>Sehen Sie sich den Log in der Konsolenausgabe gründlich an</p></li></ol></div></section>
+<section id="_aufgabe_0_teil_3"><h2>Aufgabe 0, Teil 3</h2><div class="olist arabic"><ol class="arabic"><li><p>Erstellen Sie ein eigenes Maven-Projekt über die Konsole, indem Sie in einem von Ihnen erstellen Ordner den folgenden Befehl ausführen:</p></li></ol></div>
+<pre class="CodeRay listingblock"><code>mvn archetype:generate \
+      -DarchetypeGroupId=org.apache.flink \
+      -DarchetypeArtifactId=flink-quickstart-java \
+      -DarchetypeVersion=1.17.1 \
+      -DgroupId=flinkSchulung  \
+      -DartifactId=flinkDemo \
+      -Dversion=1.0-SNAPSHOT \
+      -DinteractiveMode=false</code></pre>
+<div class="olist arabic"><ol class="arabic" start="2"><li><p>Öffnen Sie das erstellte Projekt in IntelliJ und stellen Sie sicher, dass Sie es mit Maven bauen können</p><div class="ulist"><ul><li><p>Sie können das Projekt als Basis für weitere Aufgaben verwenden</p></li></ul></div></li></ol></div></section>
+<section id="_datastream_api_datentypen"><h2>DataStream API : Datentypen</h2><div class="ulist"><ul><li><p>Welche (Java) <strong>Datentypen</strong> können mit Flink <strong>gestreamt</strong> und für <strong>State</strong> verwendet werden ?</p></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p>Flink hat einen <strong>nativen Serialisierer</strong>, der folgende Typen unterstützt:</p><div class="ulist"><ul><li><p><strong>Primitive Typen</strong> und String, Date, BigDecimal, BigInteger, void</p></li><li><p>Aus solchen Typen (rekursiv) <strong>zusammengesetzte</strong> Typen:</p><div class="ulist"><ul><li><p>Arrays, Lists, Maps, Tuples</p></li><li><p>Plain Old Java Objects (POJOs, eingeschränkt)</p></li></ul></div></li></ul></div></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p><strong>Tuples</strong> sind ein einfacher Wrapper von Flink für  zusammengesetzte Typen</p><div class="ulist"><ul><li><p>Verwendung z.B. <em>Tuple2&lt;String, Integer&gt;</em></p></li></ul></div></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p>Der native Serialisierer wird bei passenden Datentypen <strong>per Default</strong> von Flink verwendet und bietet die <strong>beste Performance</strong></p></li></ul></div></section>
+<section id="_datastream_api_datentypen_2"><h2>DataStream API : Datentypen (2)</h2><div class="ulist"><ul><li><p><strong>Regeln</strong> für nativ serialisierbare <strong>POJOs</strong> :</p><div class="ulist"><ul><li><p>Top-Level Klasse mit public access</p></li><li><p>hat einen public no-argument Konstruktor</p></li><li><p>nicht-statische Felder haben nativ serialisierbare Typen und public access oder public Getter und Setter</p></li></ul></div></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p>Jede andere Klasse, die das <strong>Serializable</strong>-Interface implementiert:</p><div class="ulist"><ul><li><p>Wird per default als <strong><em>generischer Typ</em></strong> mit dem <strong>Kryo</strong>-Framework serialisert</p></li><li><p>Kryo ist flexibel, aber langsam</p></li></ul></div></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p>Auch <strong>Apache Avro</strong> wird unterstützt und kann nach Einbinden einer geeigneten Dependency verwendet werden</p></li><li><p>Darüber hinaus lassen sich auch <strong>eigene Serialisierer</strong> definieren</p></li></ul></div></section>
+<section id="_executionconfig"><h2>ExecutionConfig</h2><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-release-1.16/api/java/org/apache/flink/streaming/api/environment/StreamExecutionEnvironment.html">StreamExecutionEnvironment</a></strong> kann über seine <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/ExecutionConfig.html">ExecutionConfig</a></strong> konfiguriert werden</p><div class="ulist"><ul><li><p>Beispiel:</p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+ExecutionConfig config = env.getConfig();
+config.setAutoWatermarkInterval(<span class="integer">100</span>);
+config.setRestartStrategy(RestartStrategies.noRestart());</code></pre></section>
+<section id="_datastreamt"><h2>DataStream&lt;T&gt;</h2><div class="ulist"><ul><li><p>Die Klasse <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/datastream/DataStream.html">DataStream&lt;T&gt;</a></strong> ist die zentrale Abstraktion der DataStream API</p><div class="ulist"><ul><li><p>steht für einen Stream, der Datensätze vom Typ <strong>T</strong> enthält</p></li></ul></div></li><li><p>DataStreams können aus einer <strong>Source</strong> (Quelle) abgeleitet werden</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">DataStream&lt;<span class="predefined-type">String</span>&gt; helloStream = env.fromElements(<span class="string"><span class="delimiter">&quot;</span><span class="content">Hello</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">World</span><span class="delimiter">&quot;</span></span>);</code></pre>
+<div class="ulist"><ul><li><p><strong>Operatoren</strong> können mittels einer Fluent API zu Streams hinzugefügt und konfiguriert werden</p><div class="ulist"><ul><li><p>der ursprüngliche Stream ist der Input des Operators, der zurückgegebene Stream der Output</p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">DataStream&lt;<span class="predefined-type">String</span>&gt; lowercaseStream = helloStream.map(<span class="predefined-type">String</span>::toLowerCase);</code></pre>
+<div class="ulist"><ul><li><p>mit der <em>sinkTo</em> Methode kann der DataStream mit einer <strong>Sink</strong> (Senke) verknüpft werden</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">lowercaseStream.sinkTo(FileSink.forRowFormat(<span class="keyword">new</span> Path(<span class="string"><span class="delimiter">&quot;</span><span class="content">path</span><span class="delimiter">&quot;</span></span>), <span class="keyword">new</span> SimpleStringEncoder&lt;<span class="predefined-type">String</span>&gt;(<span class="string"><span class="delimiter">&quot;</span><span class="content">UTF-8</span><span class="delimiter">&quot;</span></span>))
+                               .build());</code></pre></section>
+<section id="_datastream_api_source"><h2>DataStream API : Source</h2><div class="ulist"><ul><li><p>Erstellung einer <strong>Source</strong> mit einem StreamExecutionEnvironment <em>env</em>:</p><div class="ulist"><ul><li><p>Stream aus einzelnen Elementen oder einer Collection:</p><div class="ulist"><ul><li><p><em>env.fromElements(element1, element2, ..)</em></p></li><li><p><em>env.fromCollection(collection)</em></p></li></ul></div></li><li><p>Stream aus Socket mit Textdaten :</p><div class="ulist"><ul><li><p><em>env.socketTextStream(..)</em></p></li></ul></div></li><li><p>Generische Quelle :</p><div class="ulist"><ul><li><p>Interface <strong>SourceFunktion&lt;T&gt;</strong> implementieren</p></li><li><p>hinzufügen mit <em>env.addSource(sourceFunction)</em></p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_source_aus_datei"><h2>DataStream API : Source aus Datei</h2><div class="ulist"><ul><li><p>Beispiel für Stream aus einer Datei:</p><div class="ulist"><ul><li><p>benötigt Dependency <strong>flink-connector-files</strong></p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">DataStream&lt;<span class="predefined-type">String</span>&gt; inputLines = FileSource.forRecordStreamFormat(
+                                                <span class="keyword">new</span> TextLineInputFormat(),
+                                                <span class="keyword">new</span> Path(<span class="string"><span class="delimiter">&quot;</span><span class="content">path</span><span class="delimiter">&quot;</span></span>))
+                                          .build()</code></pre>
+<div class="ulist"><ul><li><p>liest Textdatei zeilenweise als Stream von Strings</p></li><li><p>Kurze Variante ohne zusätzliche Dependency (deprecated):</p></li></ul></div>
+<pre class="CodeRay listingblock"><code>DataStream&lt;String&gt; inputLines = env.readTextFile("path");</code></pre></section>
+<section id="_verwendung_von_datageneratorsource_und_kafkasource_beispiel"><h2>Verwendung von DataGeneratorSource und KafkaSource (Beispiel)</h2><div class="ulist"><ul><li><p>Erstellung einer <strong>DataGeneratorSource</strong> für einen automatisch generierten Stream:</p><div class="ulist"><ul><li><p>erfordert die Dependency <strong>flink-connector-datagen</strong></p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">DataGeneratorSource&lt;<span class="predefined-type">String</span>&gt; source =
+        <span class="keyword">new</span> DataGeneratorSource&lt;&gt;(
+                        index -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Record#</span><span class="delimiter">&quot;</span></span> + index,
+                        numRecords,
+                        RateLimiterStrategy.perSecond(<span class="integer">1</span>),
+                        <span class="predefined-type">Types</span>.STRING);</code></pre>
+<div class="ulist"><ul><li><p>Erstellung einer <strong>KafkaSource</strong> aus einem Kafka Topic:</p><div class="ulist"><ul><li><p>erfordert die Dependency <strong>flink-connector-kafka</strong></p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">KafkaSource&lt;<span class="predefined-type">String</span>&gt; source = KafkaSource.&lt;<span class="predefined-type">String</span>&gt;builder()
+        .setProperties(config)
+        .setTopics(<span class="string"><span class="delimiter">&quot;</span><span class="content">topic1</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">topic2</span><span class="delimiter">&quot;</span></span>)
+        .setValueOnlyDeserializer(<span class="keyword">new</span> SimpleStringSchema())
+        .build();</code></pre></section>
+<section id="_datastream_api_sinks"><h2>DataStream API : Sinks</h2><div class="ulist"><ul><li><p><strong>Sinks</strong> mit einem Stream verknüpfen:</p><div class="ulist"><ul><li><p>Konsolenausgabe:</p><div class="ulist"><ul><li><p>stream.print()</p></li><li><p>stream.printToErr()</p></li></ul></div></li><li><p>Dateiausgabe (deprecated zugunsten von flink-connector-files):</p><div class="ulist"><ul><li><p>stream.writeAsText(&lt;Path&gt;, &lt;FileSystem.WriteMode&gt;)</p></li><li><p>stream.writeAsCsv(&lt;Path&gt;)</p></li><li><p>stream.writeUsingOutputFormat(&lt;OutputFormat&gt;)</p></li></ul></div></li><li><p>Socket :</p><div class="ulist"><ul><li><p>stream.writeToSocket(&lt;hostName&gt;, &lt;port&gt;, &lt;SerializationSchema&gt;)</p></li></ul></div></li><li><p>Generische Sink :</p><div class="ulist"><ul><li><p>Interface <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/connector/sink2/Sink.html">Sink&lt;T&gt;</a></strong> (flexibler) bzw. <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/functions/sink/SinkFunction.html">SinkFunction&lt;T&gt;</a></strong> implementieren</p></li><li><p>hinzufügen mit <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/datastream/DataStream.html#sinkTo-org.apache.flink.api.connector.sink.Sink-">stream.sinkTo(sink)</a> bzw. <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/datastream/DataStream.html#addSink-org.apache.flink.streaming.api.functions.sink.SinkFunction-">stream.addSink(sinkFunction)</a></p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_beispiel_custom_sinkfunction"><h2>DataStream API : Beispiel Custom SinkFunction</h2><div class="ulist"><ul><li><p>Beispiel für eine SinkFunction, die Datensätze in Batches an ein (nicht gezeigtes) externes System schickt:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="type">class</span> <span class="class">BufferingSink</span>&lt;T&gt;
+        <span class="directive">implements</span> SinkFunction&lt;T&gt;{
+
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">int</span> threshold;
+
+    <span class="directive">private</span> <span class="predefined-type">List</span>&lt;T&gt; bufferedElements = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+
+    <span class="directive">public</span> BufferingSink(<span class="type">int</span> threshold) {
+        <span class="local-variable">this</span>.threshold = threshold;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> invoke(T value, <span class="predefined-type">Context</span> context) <span class="directive">throws</span> <span class="exception">Exception</span> {
+        bufferedElements.add(value);
+        <span class="keyword">if</span> (bufferedElements.size() &gt;= threshold) {
+            <span class="keyword">for</span> (T element : bufferedElements) {
+                <span class="comment">// send it to the sink</span>
+            }
+            bufferedElements.clear();
+        }
+    }
+}</code></pre>
+<div class="paragraph center small"><small>(Beispiel angepasst aus <a href="https://nightlies.apache.org/flink/flink-docs-release-1.14/docs/dev/datastream/fault-tolerance/state/" class="bare">https://nightlies.apache.org/flink/flink-docs-release-1.14/docs/dev/datastream/fault-tolerance/state/</a>)</small></div></section>
+<section id="_datastream_api_verwendung_von_kafkasink_beispiel"><h2>DataStream API : Verwendung von KafkaSink (Beispiel)</h2><div class="ulist"><ul><li><p>Festlegung der Serialisierung des Outputs der Senke:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">KafkaRecordSerializationSchema&lt;MyClass&gt; serializer =
+    KafkaRecordSerializationSchema.&lt;MyClass&gt;builder()
+                                  .setTopic(<span class="string"><span class="delimiter">&quot;</span><span class="content">topic1</span><span class="delimiter">&quot;</span></span>)
+                                  .setValueSerializationSchema(<span class="keyword">new</span> JsonSerializationSchema&lt;&gt;())
+                                  .build();</code></pre>
+<div class="ulist"><ul><li><p>Erstellung der Konfiguration für den Kafka Producer (nicht gezeigt)</p></li><li><p>Erstellung der Senke :</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">KafkaSink&lt;MyClass&gt; kafkaSink = KafkaSink.&lt;MyClass&gt;builder()
+                                        .setKafkaProducerConfig(config)
+                                        .setRecordSerializer(serializer)
+                                        .setDeliveryGuarantee(DeliveryGuarantee.NONE)
+                                        .build();</code></pre>
+<div class="ulist"><ul><li><p>Hinzufügen zum Job :</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">stream.sinkTo(kafkaSink);</code></pre></section>
+<section id="_datastream_api_einfache_transformationen"><h2>DataStream API : Einfache Transformationen</h2><div class="ulist"><ul><li><p>Wir sehen uns zunächst an, wie sich einfache <strong>stateless</strong> Operatoren erstellen lassen</p></li><li><p>Die Syntax in der DataStream API ist teilweise angelehnt an die Java Stream API</p></li><li><p>gegeben sei jeweils ein Stream "stream" vom Typ DataStream&lt;MyClass&gt; für eine serialisierbare Klasse MyClass</p></li><li><p><strong>stream.map(mapFunction)</strong></p><div class="ulist"><ul><li><p>erstellt aus jedem einzelnen Element in einem InputStream ein neues Element im Outputstream nach einer angegebenen Vorschrift</p></li><li><p>mapFunction ist vom Typ <strong>MapFunction&lt;MyClass, OtherClass&gt;</strong> und kann durch einen lambda-Ausdruck gegeben werden (ähnliches gilt für die folgenden Transformationen)</p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">DataStream&lt;<span class="predefined-type">Double</span>&gt; doublesStream = integerStream.map(
+        x -&gt; <span class="predefined-type">Double</span>.valueOf(x) / <span class="integer">2</span>
+);</code></pre></section>
+<section id="_datastream_api_filter"><h2>DataStream API : Filter</h2><div class="ulist"><ul><li><p><strong>stream.filter(filter)</strong></p><div class="ulist"><ul><li><p>gibt Teilstream der Elemente im Stream aus, für die der Filter true ergibt</p></li><li><p>filter ist vom Typ <strong>FilterFunction&lt;MyClass&gt;</strong></p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">DataStream&lt;<span class="predefined-type">Integer</span>&gt; evenNumbersStream = integerStream.filter(
+        x -&gt; x % <span class="integer">2</span> == <span class="integer">0</span>
+);</code></pre></section>
+<section id="_datastream_api_flatmap"><h2>DataStream API : FlatMap</h2><div class="ulist"><ul><li><p><strong>stream.flatMap(flatMapFunction)</strong></p><div class="ulist"><ul><li><p>erstellt aus jedem Streamelement einen Stream von neuen Elementen, die jeweils dem Outputstream angehängt werden</p></li><li><p>flatMapFunction ist vom Typ <strong>FlatMapFunction&lt;MyClass, OtherClass&gt;</strong> und implementiert die Methode flatMap(MyClass, Collector&lt;OtherClass&gt;)</p><div class="ulist"><ul><li><p>mit collector.collect(item) können Daten zum Ausgabestream hinzugefügt werden</p></li></ul></div></li><li><p>es müssen nicht zu jedem Input Outputelemente generiert werden</p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">DataStream&lt;<span class="predefined-type">String</span>&gt; stringStream = collectionStream.flatMap(
+(<span class="predefined-type">Collection</span>&lt;<span class="predefined-type">String</span>&gt; collection, Collector&lt;<span class="predefined-type">String</span>&gt; collector) -&gt; {
+        <span class="keyword">for</span> (<span class="predefined-type">String</span> item : collection) {
+            collector.collect(item);
+        }
+}).returns(<span class="predefined-type">Types</span>.STRING);</code></pre>
+<div class="ulist"><ul><li><p><strong>Der Typ des Outputstreams muss bei Verwendung eines lambda-Ausdrucks durch anschließende Anwendung der <em>returns(TypeInformation&lt;Type&gt;)</em> Methode explizit angegeben werden</strong></p></li></ul></div></section>
+<section id="_datastream_api_keyby"><h2>DataStream API : KeyBy</h2><div class="ulist"><ul><li><p><strong>stream.keyBy(keySelector)</strong></p><div class="ulist"><ul><li><p>erzeugt einen partitionierbaren <strong>KeyedStream&lt;MyClass, KeyType&gt;</strong></p><div class="ulist"><ul><li><p>KeyedStream&lt;MyClass, KeyType&gt; extends DataStream&lt;MyClass&gt;</p></li></ul></div></li><li><p>keySelector ordnet Datensätzen einen Key vom Typ KeyType zu</p></li><li><p>ermöglicht mehr Optionen für parallel processing</p></li><li><p>manche Operatoren sind nur auf KeyedStreams anwendbar</p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">KeyedStream&lt;<span class="predefined-type">Polygon</span>, <span class="predefined-type">Color</span>&gt; keyedPolygonStream = polygonStream.keyBy(
+        polygon -&gt; polygon.getColor()
+);</code></pre></section>
+<section id="_datastream_api_reduce"><h2>DataStream API : Reduce</h2><div class="ulist"><ul><li><p><strong>keyedStream.reduce(reduceFunction)</strong></p><div class="ulist"><ul><li><p>erstellt eine <strong>Rolling Aggregation (stateful)</strong>, bei der Input- und Outputtyp identisch sind</p></li><li><p>mit jedem neuen Datensatz erfährt das Aggregat für den Key dieses Datensatzes ein Update und wird ausgegeben</p></li><li><p>wird auf einen <strong>KeyedStream&lt;MyClass&gt;</strong> angewendet und produziert einen <strong>DataStream&lt;MyClass&gt;</strong></p></li><li><p>benötigt eine <strong>ReduceFuntion&lt;MyClass&gt;</strong></p></li><li><p>die ReduceFunction sollte symmetrisch in ihren beiden Eingaben sein, da diese nicht unterscheidbar sind</p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">DataStream&lt;<span class="predefined-type">Integer</span>&gt; sumsByKey = numberStream.reduce((number1, number2) -&gt; number1 + number2);</code></pre>
+<div class="ulist"><ul><li><p>im Beispiel entsteht ein Stream aus Zahlen ohne Keys</p><div class="ulist"><ul><li><p>Falls die Keys später benutzt werden sollen, müssen sie aus den Outputdatensätzen selber extrahierbar sein</p></li></ul></div></li></ul></div></section>
+<section id="_aufgabe_2"><h2>Aufgabe 2</h2><div class="olist arabic"><ol class="arabic"><li><p>Erstellen Sie mit Java einen Flink Job, der folgendes tut:</p><div class="ulist"><ul><li><p>Nimmt eine Menge von Textzeilen als Quelle (im Code als Konstante definieren oder aus Datei auslesen)</p></li><li><p>Schreibt einen Stream von Zeilen in eine Datei</p><div class="ulist"><ul><li><p>Für jedes Wort in einer der Inputzeilen gibt es eine Ausgabezeile</p></li><li><p>Die Ausgabezeilen haben das Format "Wortname : Anzahl"</p></li><li><p>wobei "Anzahl" die Anzahl der bisher verarbeiteten Vorkommen des Wortes angibt</p></li></ul></div></li><li><p>Inputzeilen, die mit dem Zeichen "#" anfangen, werden allerdings nicht berücksichtigt</p></li></ul></div></li></ol></div>
+<div class="olist arabic"><ol class="arabic" start="2"><li><p>Testen Sie ihren Job, indem Sie ihn auf einem Flink-Cluster ausführen, und verifizieren Sie die Ausgabe</p></li></ol></div></section>
+<section id="_aufgabe_2_hinweise"><h2>Aufgabe 2 (Hinweise)</h2><div class="ulist"><ul><li><p>Bauen Sie Ihren Job mit Maven als JAR, um ihn auf dem Cluster auszuführen zu können (siehe Aufgabe 0)</p></li><li><p>Um die Anzahl der Vorkommen von einem Wort mit einem reduce zu zählen, kann ein zusammengesetzter Datentyp verwendet werden, der neben dem Wort auch einen Zähler enthält</p></li></ul></div></section>
+<section id="_datastream_api_festlegen_des_parallelismus"><h2>DataStream API : Festlegen des Parallelismus</h2><div class="ulist"><ul><li><p>Setzen des <strong>Parallelismus</strong> für einen <strong>Operator</strong> :</p><div class="ulist"><ul><li><p>wende die Methode <strong><em>setParallelism(<span class="blue-font">parallelism</span>)</em></strong> auf einen Stream nach Anwenden des Operators an</p><div class="ulist"><ul><li><p><span class="blue-font">parallelism</span> ist hier eine positive ganze Zahl (1 für nicht-parallel)</p></li></ul></div></li></ul></div></li><li><p>Setzen des Parallelismus für einen <strong>Job</strong> :</p><div class="ulist"><ul><li><p>wende anfänglich die Methode <strong><em>setParallelism(<span class="blue-font">parallelism</span>)</em></strong> auf das StreamExecutionEnvironment an</p></li></ul></div></li><li><p>Setzen des Parallelismus für eine <strong>Anwendung</strong> :</p><div class="ulist"><ul><li><p>führe den Befehl "flink run" mit Parameter "-p <span class="blue-font">parallelism</span>" aus</p></li></ul></div></li><li><p>Setzen des Parallelismus für alle Jobs auf einen <strong>Cluster</strong> :</p><div class="ulist"><ul><li><p>Setzen des Parameters <em>parallelism.default</em> in conf/flink-conf.yaml (Default : 1)</p></li></ul></div></li><li><p><strong>Speziellere Einstellungen überschreiben (wenn vorhanden) immer die allgemeineren Defaults</strong></p></li></ul></div></section>
+<section id="_datastream_api_operator_chaining"><h2>DataStream API : Operator Chaining</h2><div class="ulist"><ul><li><p>Flink fasst per Default <strong>automatisch</strong> Operatoren mit einer <strong>Forward</strong>-Verbindung zu einer <strong>Kette</strong> zusammen (<strong>operator chaining</strong>)</p></li><li><p>Über die API lässt sich dieses Verhalten folgendermaßen einschränken:</p><div class="ulist"><ul><li><p>Anwendung der Methode <strong><em>disableOperatorChaining()</em></strong> auf dem StreamExecutionEnvironment deaktiviert operator chaining komplett</p></li><li><p>Anwendung der Methode <strong><em>disableChaining()</em></strong> auf einen Stream nach Anwendung eines Operators deaktiviert operator chaining für diesen Operator</p><div class="ulist"><ul><li><p>&#8594; dieser Operator erhält immer einen eigenen Task</p></li></ul></div></li><li><p>Anwendung von <strong><em>startNewChain()</em></strong> nach einem Operator verhindert, dass dieser mit seinen <strong>upstream</strong> Operatoren verkettet wird</p><div class="ulist"><ul><li><p>statt dessen wird er nur (soweit möglich) mit seinen <strong>downstream</strong> Operatoren verkettet</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_aufgabe_3_1"><h2>Aufgabe 3 (1)</h2><div class="olist arabic"><ol class="arabic"><li><p>Starten Sie Ihren Job aus Aufgabe 2 noch einmal und sehen Sie sich in der Web UI (Dashboard) an, welche Operatoren von Flink verkettet wurden und mit welchem Parallelismus die
+Tasks ausgeführt wurden</p><div class="ulist"><ul><li><p>Warum wurde die Verkettung von Flink in der Weise gewählt?</p></li></ul></div></li><li><p>Starten Sie den Job erneut, aber mit einem Parallelismus von 4</p><div class="ulist"><ul><li><p>Sie erhalten wahrscheinlich eine Fehlermeldung über nicht vorhandene Ressourcen, da Ihr Cluster nicht automatisch weitere TaskManager starten kann</p><div class="olist loweralpha"><ol class="loweralpha" type="a"><li><p>Stoppen Sie alle vorhandenen TaskManager über die Konsole</p></li><li><p>Setzen Sie in der Datei conf/flink-conf.yaml den Parameter <em>taskmanager.numberOfTaskSlots</em> auf 2</p></li><li><p>Starten Sie 2 neue TaskManager</p></li><li><p>Verifizieren Sie im Dashboard, dass es nun genau 2 TaskManager mit je 2 Slots gibt</p></li><li><p>Starten Sie den Job erneut</p></li></ol></div></li></ul></div></li><li><p>Sehen Sie sich den Job wiederum im Dashboard an</p></li></ol></div></section>
+<section id="_aufgabe_3_2"><h2>Aufgabe 3 (2)</h2><div class="olist arabic"><ol class="arabic" start="4"><li><p>Sehen Sie sich Art und Reihenfolge der Ausgaben an</p></li><li><p>Bewirken Sie durch geeignete Zuordnung von Keys, dass Wörter mit gleichen Anfangsbuchstaben von der gleichen Sink-Instanz bearbeitet werden</p><div class="ulist"><ul><li><p>Führen Sie den Job erneut aus und sehen Sie sich die Ausgabe an</p></li></ul></div></li><li><p>Modifizieren Sie nun den Job, sodass die Sink mit Parallelismus 1 arbeitet und führen ihn erneut (mit Parallelismus 4) aus</p><div class="ulist"><ul><li><p>Vergleichen Sie wieder die Ausgabe</p></li></ul></div></li><li><p>Probieren Sie aus, wie sich die Anzeige ihres JobGraph im Dashboard verändert, wenn Sie den Parallelismus eines der Operatoren auf 2 setzen oder
+das <strong>operator chaining</strong> eines Operators über die API unterbinden</p></li></ol></div></section>
+<section id="_datastream_api_processfunction"><h2>DataStream API : ProcessFunction</h2><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/functions/ProcessFunction.html">ProcessFunctions</a></strong> sind ein Grundbaustein der DataStream API, die es ermöglichen, <strong>beliebige</strong> Operatoren auf <strong>niedriger Abstraktionsebene</strong> zu implementieren</p><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/functions/KeyedProcessFunction.html">KeyedProcessFunction</a></strong> sind ein Spezialfall für KeyedStreams</p></li></ul></div></li><li><p>Anwenden einer ProcessFunction auf einen Stream geschieht über die Methode <strong><em><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/datastream/DataStream.html#process-org.apache.flink.streaming.api.functions.ProcessFunction-">process(processFunction)</a></em></strong></p></li><li><p>Die folgende Methode wird für jeden Datensatz einmal aufgerufen:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code>public abstract void processElement(I input, Context context, Collector&lt;O&gt; output)</code></pre>
+<div class="ulist"><ul><li><p>Ähnlich wie bei flatMap können mit dem <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/util/Collector.html">Collector</a></strong> auch mehrere Elemente emittiert werden</p></li><li><p>zusätzlich steht ein <strong>Context</strong> zu Verfügung, der u.a. Zugriff auf Timestamp und Key (für KeyedProcessFunction) des Elements ermöglicht</p></li></ul></div></section>
+<section id="_datastream_api_processfunction_2"><h2>DataStream API : ProcessFunction (2)</h2><div class="ulist"><ul><li><p>Beispiel: Ein Filter als ProcessFunction:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="type">class</span> <span class="class">MyLengthFilterFunction</span> <span class="directive">extends</span> ProcessFunction&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt; {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> processElement(<span class="predefined-type">String</span> input, <span class="predefined-type">Context</span> context, Collector&lt;<span class="predefined-type">String</span>&gt; collector)  {
+        <span class="keyword">if</span> (input.length() &lt; <span class="integer">5</span>) {
+            collector.collect(input);
+        }
+    }
+}</code></pre>
+<div class="ulist"><ul><li><p>Anwendung auf einen Stream:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+DataStream&lt;<span class="predefined-type">String</span>&gt; myStream = env.fromElements(<span class="string"><span class="delimiter">&quot;</span><span class="content">Test</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">TestLang</span><span class="delimiter">&quot;</span></span>);
+myStream.process(<span class="keyword">new</span> MyLengthFilterFunction())
+                .print();  <span class="comment">// &quot;Test&quot;</span></code></pre></section>
+<section id="_datastream_api_stateful_processfunction"><h2>DataStream API : Stateful ProcessFunction</h2><div class="ulist"><ul><li><p>Um in einer ProcessFunction einen <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/state/State.html">State</a></strong> nutzen zu können, müssen wir die <strong><em>open</em></strong> Methode überschreiben, um den State initial zu <strong>registrieren</strong></p><div class="ulist"><ul><li><p>Diese kommt aus dem allgemeineren <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/functions/RichFunction.html">RichFunction</a> Interface</p></li></ul></div></li><li><p>Beispiel einer KeyedProcessFunction mit <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/state/ValueState.html">ValueState</a>, die Datensätze nach Keys zählt und mit Zähler ausgibt (Aggregation):</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="type">class</span> <span class="class">CountByKeyFunction</span>&lt;K, I&gt; <span class="directive">extends</span> KeyedProcessFunction&lt;K,I, Tuple2&lt;I, <span class="predefined-type">Long</span>&gt;&gt; {
+
+    <span class="directive">private</span> ValueState&lt;<span class="predefined-type">Long</span>&gt; state;
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> open(<span class="predefined-type">Configuration</span> parameters)  {
+        state = getRuntimeContext().getState(<span class="keyword">new</span> ValueStateDescriptor&lt;&gt;(<span class="string"><span class="delimiter">&quot;</span><span class="content">countState</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class));
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> processElement(I input, <span class="predefined-type">Context</span> context, Collector&lt;Tuple2&lt;I, <span class="predefined-type">Long</span>&gt;&gt; collector) <span class="directive">throws</span> <span class="exception">Exception</span> {
+        <span class="predefined-type">Long</span> value = state.value();
+        <span class="predefined-type">Long</span> newValue = value == <span class="predefined-constant">null</span> ? <span class="integer">1</span> : value + <span class="integer">1</span>;
+        state.update(newValue);
+        collector.collect(<span class="keyword">new</span> Tuple2&lt;&gt;(input, newValue));
+    }
+}</code></pre></section>
+<section id="_datastream_api_processfunction_state_typen"><h2>DataStream API : ProcessFunction State Typen</h2><div class="ulist"><ul><li><p>Neben <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/state/ValueState.html">ValueState&lt;T&gt;</a></strong> können wir in einer ProcessFunction auch die anderen im letzten Kapitel dargestellten Arten von State verwenden:</p><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/state/ListState.html">ListState&lt;T&gt;</a></strong></p><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/state/ReducingState.html">ReducingState&lt;T&gt;</a></strong> ist eine Variation, bei der mit jedem neuen Eintrag automatisch eine ReduceFunction angewendet wird, um einen einzelnen Ergebniswert zu updaten</p></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/state/AggregatingState.html">AggregatingState&lt;IN,OUT&gt;</a></strong> ist ähnlich, aber ermöglicht allgemeinere Rolling Aggregations</p></li></ul></div></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/state/MapState.html">MapState&lt;UK, UV&gt;</a></strong></p></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/state/BroadcastState.html">BroadcastState&lt;K,V&gt;</a></strong></p><div class="ulist"><ul><li><p>für einen <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/datastream/BroadcastStream.html">BroadcastStream</a></strong>, der wiederum mit der <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/datastream/DataStream.html#broadcast--"><em>broadcast</em></a></strong> Methode eines DataStreams erzeugt wurde</p></li></ul></div></li><li><p><strong>Union List State</strong> hat keinen eigenen Typ, sondern wird als <strong>Pattern</strong> für vereinigte Streams (<em>union</em> Operation, s.u.) mit ListStates verwendet</p></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_distributionstransformationen"><h2>DataStream API : Distributionstransformationen</h2><div class="ulist"><ul><li><p><strong>Datenaustauschstrategien</strong> sind in Flink über sog. <strong>Distributionstransformationen</strong> konfigurierbar</p><div class="ulist"><ul><li><p>die Einstellung wird in den meisten Fällen besser von Flink automatisch gehandhabt</p></li></ul></div></li><li><p>Die folgenden Methoden können auf DataStreams <strong>nach Anwendung eines Operators</strong> aufgerufen werden, um zu <strong>kontrollieren, wie dieser Operator seinen Output auf seine downstream Operatoren verteilt</strong>:</p><div class="ulist"><ul><li><p><strong>shuffle()</strong> : entspricht random Strategie</p></li><li><p><strong>rebalance()</strong> : round-robin (gleichmäßig)</p></li><li><p><strong>rescale()</strong> : round-robin, aber jede Operatorinstanz schickt ihre Daten nur an eine gewisse Teilmenge der Instanzen von downstream Operatoren</p><div class="ulist"><ul><li><p>die Teilmengen werden von Flink so gewählt, dass sich eine effiziente Verarbeitung gibt</p></li><li><p>für den Fall gedacht, dass downstream Operatoren einen höheren Parallelismus haben (am besten ein Vielfaches)</p></li></ul></div></li><li><p><strong>broadcast()</strong> : entspricht broadcast Strategie</p></li><li><p><strong>global()</strong> : sendet alle Outputs an nur den ersten downstream Task</p></li><li><p><strong>partitionCustom(partitioner, keySelector)</strong> : partitioniert Output nach vorgegebenen Schema</p></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_distributionstransformation_partitioncustom"><h2>DataStream API : Distributionstransformation partitionCustom</h2><div class="ulist"><ul><li><p><strong>partitionCustom</strong></p><div class="ulist"><ul><li><p>ähnlich wie keyBy</p><div class="ulist"><ul><li><p>erfordert Angabe eines <strong>KeySelector</strong>, um einen Key aus einem Datensatz zu generieren</p></li><li><p>zusätzlich ein <strong>Partitioner</strong>, um aus einem Key und einer Anzahl von Partitionen eine Partitionsnummer zu bestimmen</p></li></ul></div></li><li><p>Unterschiede zu keyBy</p><div class="ulist"><ul><li><p>low-level</p></li><li><p>physische, aber keine logische Partitionierung : produziert aus einem DataStream wieder einen DataStream, keinen KeyedStream</p></li><li><p>erlaubt Nummer des Empfängers eines Datensatzes über den Key direkter zu steuern</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_multistream_transformationen_und_side_output"><h2>DataStream API : Multistream Transformationen und Side Output</h2><div class="ulist"><ul><li><p>Bisher haben wir nur gelernt, wie wir eine lineare <strong>Pipeline</strong> als Flink-Job umsetzen können</p></li><li><p>Um beliebige Job-Graphen zu realisieren, benötigen wir eine Möglichkeit, für einen Operator <strong>mehrere andere Operatoren</strong> als Quelle seines <strong>Inputs</strong> oder Ziel seines <strong>Outputs</strong> festzulegen</p></li><li><p>Hierfür stellt die API die Features <strong>Multistream Transformationen</strong> (mehrere Inputs) und <strong>Side Output</strong> (mehrere Outputs) zu Verfügung</p></li></ul></div></section>
+<section id="_datastream_api_multistream_transformationen"><h2>DataStream API : Multistream Transformationen</h2><div class="ulist"><ul><li><p>Der Fall, dass ein Operator <strong>mehr als einen Inputstream</strong> benötigt, wird in der API so gehandhabt, dass die Inputstreams zunächst mit gewissen Transformationen zu einem Stream <strong>zusammengefasst</strong> werden</p></li><li><p>Hierfür stehen mehrere Transformationen auf DataStreams zur Verfügung:</p><div class="ulist"><ul><li><p><strong>stream.union(otherstream1, otherstream2, ..)</strong></p><div class="ulist"><ul><li><p>leitet alle Elemente in den vereinigten DataStreams in einen einzelnen DataStream (Resultat der Operation) weiter</p></li><li><p>Die Typen der Streams müssen identisch sein</p></li><li><p>ein Stream darf mehrfach vorkommen; in dem Fall kommen die Elemente dieses Streams im Resultatstream mehrfach vor</p></li><li><p>Über die Reihenfolge der Elemente aus verschiedenen Inputstreams im Resultat gibt es keine Garantien</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_multistream_transformationen_2"><h2>DataStream API : Multistream Transformationen (2)</h2><div class="ulist"><ul><li><p><strong>stream.connect(otherStream)</strong></p><div class="ulist"><ul><li><p>ermöglicht das Kombinieren von Streams mit unterschiedlichen Typen</p></li><li><p>liefert aus einem <strong>DataStream&lt;S&gt;</strong> und einem <strong>DataStream&lt;T&gt;</strong> ein Object vom Typ <strong>ConnectedStreams&lt;S,T&gt;</strong></p></li><li><p>dies ist selbst <strong>kein</strong> DataStream, ermöglicht aber die Anwendung der Methoden <em>map</em>, <em>flatMap</em>, <em>keyBy</em> und <em>process</em></p></li><li><p>diese Methoden funktionieren wie die von DataStream, benötigen aber spezielle Funktionsobjekte, die Elemente von beiden Typen verarbeiten können</p></li><li><p>Beispiel :</p><div class="ulist"><ul><li><p><em>map</em> auf einem <strong>ConnectedStream&lt;S,T&gt;</strong> benötigt eine <strong>CoMapFunction&lt;S,T,U&gt;</strong> und erzeugt einen <strong>DataStream&lt;U&gt;</strong></p></li></ul></div></li></ul></div></li><li><p><strong>stream.join(..)</strong> und <strong>stream.cogroup(..)</strong> kombinieren zusätzlich Windows (dazu später mehr)</p></li></ul></div></section>
+<section id="_datastream_api_multistream_transformationen_beispiel"><h2>DataStream API : Multistream Transformationen Beispiel</h2><div class="ulist"><ul><li><p>Beispiel für einen Operator mit 2 Inputs:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="type">class</span> <span class="class">GenerateLogFunction</span> <span class="directive">implements</span> CoMapFunction&lt;OrderEvent, UserUpdateEvent, <span class="predefined-type">String</span>&gt; {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">String</span> map1(OrderEvent event) {
+        <span class="keyword">return</span> MyUtils.generateLogForOrderEvent(event);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">String</span> map2(UserUpdateEvent event)  {
+        <span class="keyword">return</span> MyUtils.generateLogForUserUpdateEvent(event);
+    }
+}
+
+<span class="comment">// in main Method:</span>
+
+DataStream&lt;OrderEvent&gt; orders = env.fromSource(ordersSource);
+DataStream&lt;UserUpdateEvent&gt; updates = env.fromSource(updatesSource);
+ConnectedStreams&lt;OrderEvent, UserUpdateEvent&gt; ordersAndUpdates = orders.connect(updates);
+
+ordersAndUpdates.map(<span class="keyword">new</span> LoggingCoMapFunction())
+                .sinkTo(<span class="keyword">new</span> LoggingSink());</code></pre></section>
+<section id="_datastream_api_side_output"><h2>DataStream API : Side Output</h2><div class="ulist"><ul><li><p><strong>Side Outputs</strong> ermöglichen es, den Output von einem Stream <strong>an mehrere verschiedene downstream Operatoren</strong> weiterzuleiten</p></li><li><p>Ein Operator kann beliebig viele Side Output Streams generieren und sie mit Daten von beliebigen Datentypen befüllen</p><div class="ulist"><ul><li><p>jeder Side Output Stream erhält einen <strong>identifizierenden Tag</strong></p></li></ul></div></li><li><p>Side Output kann <strong>nur</strong> unter Verwendung der <strong>Process Function API</strong> generiert werden</p></li></ul></div></section>
+<section id="_datastream_api_side_output_beispiel"><h2>DataStream API : Side Output Beispiel</h2><div class="ulist"><ul><li><p>Beispiel eines Operators mit 2 Outputs:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="type">class</span> <span class="class">SideOutputExample</span> {
+    <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> OutputTag&lt;MyEvent&gt; rejectedEventsTag = <span class="keyword">new</span> OutputTag&lt;MyEvent&gt;(<span class="string"><span class="delimiter">&quot;</span><span class="content">rejected</span><span class="delimiter">&quot;</span></span>) {};
+
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> main(<span class="predefined-type">String</span><span class="type">[]</span> args) {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        DataStream&lt;MyEvent&gt; allEvents = env.fromSource(MySourceUtil.createEventSource()); <span class="comment">// Erstellung der Quelle nicht gezeigt</span>
+        DataStream&lt;MyEvent&gt; acceptedEvents = allEvents.process(<span class="keyword">new</span> MyAuditingFunction(rejectedEventsTag));
+        DataStream&lt;MyEvent&gt; rejectedEvents = acceptedEvents.getSideOutput(rejectedEventsTag);
+        acceptedEvents.sinkTo(<span class="keyword">new</span> AcceptedEventsSink());  <span class="comment">// Akzeptierte Events verarbeiten</span>
+        rejectedEvents.sinkTo(<span class="keyword">new</span> RejectedEventsSink());  <span class="comment">// Abgelehnte Events Loggen</span>
+        env.execute();
+    }
+    <span class="directive">private</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">MyAuditingFunction</span> <span class="directive">extends</span> ProcessFunction&lt;MyEvent, MyEvent&gt; {
+        <span class="directive">private</span> OutputTag&lt;MyEvent&gt; outputTag;
+
+        <span class="directive">public</span> OrderProcessFunction(OutputTag&lt;MyEvent&gt; outputTag) {
+            <span class="local-variable">this</span>.outputTag = outputTag;
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">void</span> processElement(MyEvent event, <span class="predefined-type">Context</span> context, Collector&lt;MyEvent&gt; collector)  {
+            <span class="keyword">if</span> (MyUtils.checkEvent(event)) {
+                collector.collect(event);  <span class="comment">// Event akzeptieren</span>
+            } <span class="keyword">else</span> {
+                context.output(outputTag, event);  <span class="comment">// Event ablehnen</span>
+            }
+        }
+    }
+}</code></pre></section>
+<section id="_datastream_api_iterate"><h2>DataStream API : Iterate</h2><div class="ulist"><ul><li><p>Es folgt eine <strong>optionale</strong> Betrachtung des Features <strong>iterative Streams</strong></p><div class="ulist"><ul><li><p>Feature ist ab der Version Flink 1.19 deprecated</p></li></ul></div></li><li><p>Anwendung eines <strong>iterativen Algorithmus</strong> auf einen Stream:</p><div class="ulist"><ul><li><p>Es wird wiederholt eine Folge von Transformationen auf Elemente des Streams angewendet, bis das Resultat eine bestimmte Bedingung erfüllt</p></li></ul></div></li><li><p>Ein <strong>IterativeStream&lt;T&gt;</strong> wird durch Anwendung der <strong><em>iterate</em></strong> Methode auf einem <strong>DataStream&lt;T&gt;</strong> erzeugt</p></li><li><p>Dann können auf diesen Stream <strong>Transformationen</strong> und <strong>Filter</strong> angewendet werden, die bei jeder Iteration passieren sollen</p></li><li><p>Der resultierende Stream wird an die Iteration über <strong>iterativeStream.closeWith(transformedStream)</strong> zurückgegeben</p></li><li><p>Der resultierende Stream emittiert nach jeder Iteration seinen Output an seine downstream Operatoren</p></li></ul></div></section>
+<section id="_datastream_api_iterate_beispiel"><h2>DataStream API : Iterate (Beispiel)</h2><div class="ulist"><ul><li><p>Beispiel Iterate:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">IterativeStream&lt;<span class="predefined-type">Long</span>&gt; iteration = initialStream.iterate();  <span class="comment">// Erstellung eines iterativen Streams</span>
+DataStream&lt;<span class="predefined-type">Long</span>&gt; iterationBody = iteration.map (iterativeFunction);  <span class="comment">// Iterationsschritt</span>
+DataStream&lt;<span class="predefined-type">Long</span>&gt; feedback = iterationBody.filter(value -&gt; value &gt; <span class="integer">0</span>); <span class="comment">// Definition der Bedingung, bei der nicht abgebrochen wird</span>
+iteration.closeWith(feedback); <span class="comment">// Einstellen des Streams der Daten, die weiter bearbeitet werden sollen</span>
+DataStream&lt;<span class="predefined-type">Long</span>&gt; output = iterationBody.filter(value -&gt; value &lt;= <span class="integer">0</span>); <span class="comment">// Output extrahieren, wenn Abbruchbedingung erfüllt</span></code></pre>
+<div class="ulist"><ul><li><p>Entspricht konzeptuell einer Schleife der Form (Pseudocode) :</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">value = initialStream.getNext();
+<span class="keyword">do</span> {
+    value = iterativeFunction(value);
+    <span class="keyword">if</span> (value &lt;= <span class="integer">0</span>) {
+        output.add(value);
+     }
+   }
+<span class="keyword">while</span> (value &gt; <span class="integer">0</span>);</code></pre></section>
+<section id="_aufgabe_4_1"><h2>Aufgabe 4 (1)</h2><div class="ulist"><ul><li><p>Wir erstellen einen Flink Job, der einen <strong>Low-Level Join</strong> von 2 Inputquellen ausführt, um Daten <strong>anzureichern</strong> und dann 2 verschiedene Outputs zu generieren</p><div class="ulist"><ul><li><p>Objekte:</p><div class="ulist"><ul><li><p>Kunden, die einen Namen und eine ID haben</p></li><li><p>Transaktion eines Kunden mit Kunden-ID und einem Zahlwert</p></li></ul></div></li></ul></div></li></ul></div>
+<div class="olist arabic"><ol class="arabic" start="1"><li><p>Generieren Sie 3 Inputstreams :</p><div class="ulist"><ul><li><p>Einer enthält die Kunden</p></li><li><p>Zwei Streams enthalten Transaktionen</p><div class="ulist"><ul><li><p>Dies sollten <strong>KeyedStreams</strong> mit der ID als Key werden</p></li></ul></div></li></ul></div></li><li><p>Die letzten beiden Streams stellen äquivalente Inputs aus verschiedenen Quellen dar und sollten mit <strong>union</strong> kombiniert werden</p></li></ol></div></section>
+<section id="_aufgabe_4_2"><h2>Aufgabe 4 (2)</h2><div class="olist arabic"><ol class="arabic" start="3"><li><p>Definieren Sie dann mit der ProcessFunction API einen <strong>stateful</strong> Operator, der auf der <strong>Kombination</strong> von den Kunden- und Transaktionsstreams agiert</p><div class="ulist"><ul><li><p>die Klasse des Operators sollte <strong>KeyedCoProcessFunction</strong> erweitern</p><div class="ulist"><ul><li><p>Der Operator sollte einen <strong>KeyedState</strong> haben, um die <strong>Zuordnungen</strong> von ID zu Namen zu speichern, wenn ein Datensatz aus dem Kundenstream gelesen wird</p></li></ul></div></li><li><p>Datensätze aus dem Kundenstream erzeugen kein Output</p><div class="ulist"><ul><li><p>für jede erhaltene <strong>Transaktion</strong> sollen 2 Outputs generiert werden:</p></li></ul></div></li><li><p>Ein Output der Art "ID:Betrag"</p></li><li><p>ein Output der Art "Name:Betrag"</p><div class="ulist"><ul><li><p>wenn noch kein Name zu dieser ID gespeichert wurde, zeige einen Platzhalter</p></li></ul></div></li><li><p>diese Outputs können Sie z.B. in 2 verschiedene Dateien schreiben lassen</p></li></ul></div></li><li><p>Testen Sie ihren Job, indem Sie ihn auf einem Cluster ausführen, und verifizieren Sie die Ausgabe</p></li></ol></div></section>
+<section id="_datastream_api_watermark_strategy"><h2>DataStream API : Watermark Strategy</h2><div class="ulist"><ul><li><p>Bei der Einbindung einer <strong>Source</strong> in das StreamExecutionEnvironment, lässt sich eine <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/eventtime/WatermarkStrategy.html">WatermarkStrategy</a></strong> angeben:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">DataStreamSource&lt;<span class="predefined-type">String</span>&gt; stream = env.fromSource(source, &lt;watermark strategy&gt;, <span class="string"><span class="delimiter">&quot;</span><span class="content">SourceName</span><span class="delimiter">&quot;</span></span>);</code></pre>
+<div class="ulist"><ul><li><p>alternativ kann auch nach der Anwendung eines beliebigen <strong>Operators</strong> mit der Methode <em><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/datastream/DataStream.html#assignTimestampsAndWatermarks-org.apache.flink.api.common.eventtime.WatermarkStrategy-">assignTimestampsAndWatermarks</a></em> eine WatermarkStrategy übergeben,
+die dann auf den Output des Operators angewendet wird</p></li><li><p>Beispiel der Erstellung einer WatermarkStrategy basierend auf einem <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/eventtime/WatermarkGenerator.html">WatermarkGenerator</a></strong> und einem <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/eventtime/TimestampAssigner.html">TimestampAssigner</a></strong>:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">WatermarkStrategy&lt;T&gt; myStrategy =
+        WatermarkStrategy&lt;T&gt;.forGenerator(context -&gt; <span class="keyword">new</span> MyWatermarkGenerator())
+                            .withTimestampAssigner(context -&gt; <span class="keyword">new</span> MyTimeStampAssigner());</code></pre></section>
+<section id="_datastream_api_watermarkgenerator"><h2>DataStream API : WatermarkGenerator</h2><div class="ulist"><ul><li><p>Um einen eigenen <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/eventtime/WatermarkGenerator.html">WatermarkGenerator&lt;T&gt;</a></strong> zu erstellen, sind folgende Methoden implementieren:</p><div class="ulist"><ul><li><p><em>void onEvent(T event, long eventTimestamp, WatermarkOutput output)</em></p></li><li><p><em>void onPeriodicEmit(WatermarkOutput output)</em></p><div class="ulist"><ul><li><p>diese Methode wird von Flink in regelmäßigen Abständen aufgerufen</p></li><li><p>Die Länge des periodischen Intervalls ist über die <strong>ExecutionConfig</strong> des StreamExecutionEnvironment einstellbar (Default: 200ms)</p></li></ul></div></li></ul></div></li><li><p>Diese beiden Methoden ermöglichen es, Watermarks als Reaktion auf bestimmte Ereignisse (<strong>punctuated</strong>) oder in regelmäßigen zeitlichen Abständen (<strong>periodic</strong>) zu erstellen</p></li><li><p>innerhalb dieser Methoden kann eine Watermark auf folgenden Befehl emittiert werden :</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">output.emitWatermark(<span class="keyword">new</span> Watermark(&lt;time in millis&gt;));</code></pre></section>
+<section id="_datastream_api_beispiel_boundedoutofordernessgenerator"><h2>DataStream API : Beispiel BoundedOutOfOrdernessGenerator</h2><div class="ulist"><ul><li><p><strong>Beispiel <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/eventtime/BoundedOutOfOrdernessWatermarks.html">BoundedOutOfOrdernessGenerator</a></strong> (vereinfacht):</p><div class="ulist"><ul><li><p>Aktueller Timestamp als State</p></li><li><p>OnEvent den aktuellen Timestamp aktualisieren</p></li><li><p>OnPeriodicEmit eine Watermark mit dem gespeicherten Timestamp plus Puffer für zu späte Ereignisse emittieren</p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="type">class</span> <span class="class">BoundedOutOfOrdernessGenerator</span> <span class="directive">implements</span> WatermarkGenerator&lt;MyEvent&gt; {
+
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">long</span> maxOutOfOrderness = <span class="integer">3500</span>; <span class="comment">// 3.5 seconds</span>
+
+    <span class="directive">private</span> <span class="type">long</span> currentMaxTimestamp;
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> onEvent(MyEvent event, <span class="type">long</span> eventTimestamp, WatermarkOutput output) {
+        currentMaxTimestamp = <span class="predefined-type">Math</span>.max(currentMaxTimestamp, eventTimestamp);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> onPeriodicEmit(WatermarkOutput output) {
+        <span class="comment">// emit the watermark as current highest timestamp minus the out-of-orderness bound</span>
+        output.emitWatermark(<span class="keyword">new</span> Watermark(currentMaxTimestamp - maxOutOfOrderness - <span class="integer">1</span>));
+    }
+}</code></pre>
+<div class="paragraph center small"><small><em>(Code aus: <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/event-time/generating_watermarks/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/event-time/generating_watermarks/</a>)</em></small></div></section>
+<section id="_datastream_api_timestampassigner"><h2>DataStream API : TimestampAssigner</h2><div class="ulist"><ul><li><p>Um einen eigenen <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/eventtime/TimestampAssigner.html">TimestampAssigner&lt;T&gt;</a></strong> zu erstellen, ist folgende Methode zu implementieren:</p><div class="ulist"><ul><li><p><em>long extractTimestamp(T element, long recordTimestamp)</em></p><div class="ulist"><ul><li><p><em>recordTimestamp</em> enthält den ggf. bereits vorhandenen Timestamp</p></li><li><p>Returnwert ist der neu zu vergebende Timestamp</p></li></ul></div></li><li><p>Diese Methode wird dann von Flink auf jeden Datensatz einmal angewendet</p></li></ul></div></li><li><p>Beispiel für TimestampAssigner:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="type">class</span> <span class="class">MyTimestampAssigner</span> <span class="directive">implements</span> TimestampAssigner&lt;MyEvent&gt; {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">long</span> extractTimestamp(T element, <span class="type">long</span> recordTimestamp) {
+        <span class="keyword">if</span> (recordTimestamp != TimestampAssigner.NO_TIMESTAMP) {
+            <span class="keyword">return</span> recordTimestamp; <span class="comment">// Timestamp wurde schon vergeben -&gt; nehme diesen</span>
+        }
+        <span class="keyword">return</span> MyUtil.extractTimestamp(element); <span class="comment">// Extrahiere Timestamp neu aus dem Datensatz</span>
+    }
+}</code></pre></section>
+<section id="_datastream_api_vordefinierte_watermarkstrategy"><h2>DataStream API : Vordefinierte WatermarkStrategy</h2><div class="ulist"><ul><li><p><strong><em>WatermarkStrategy.noWatermarks()</em></strong> :</p><div class="ulist"><ul><li><p>es werden keine Watermarks erstellt</p></li></ul></div></li><li><p><strong><em>WatermarkStrategy.forBoundedOutOfOrderness(maxOutOfOrderness)</em></strong> :</p><div class="ulist"><ul><li><p>Verwendet BoundedOutOfOrdernessGenerator (s.o.) :</p><div class="ulist"><ul><li><p>es werden periodisch Watermarks emittiert, die als Timestamp den maximalen Timestamp unter den bisher gesehenen Streamelementen plus <em>maxOutOfOrderness</em> haben</p></li><li><p><em>maxOutOfOrderness</em> gibt eine Toleranz an, wie lange (event time) auf verspätete Datensätze gewartet werden soll</p></li></ul></div></li></ul></div></li><li><p><strong><em>WatermarkStrategy.forMonotonousTimestamps()</em></strong> :</p><div class="ulist"><ul><li><p>das gleiche wie WatermarkStrategy.forBoundedOutOfOrderness(Duration.ofMillis(0L))</p></li><li><p>für den Fall gedacht, wenn die Datensätze garantiert in-order ankommen</p></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_konfiguration_von_watermarkstrategy"><h2>DataStream API : Konfiguration von Watermarkstrategy</h2><div class="ulist"><ul><li><p>Eine erstellte <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/eventtime/WatermarkStrategy.html">WatermarkStrategy</a> <em>strategy</em> kann noch zusätzlich <strong>konfiguriert</strong> werden:</p><div class="ulist"><ul><li><p><strong><em>strategy.withIdleness(&lt;duration&gt;)</em></strong></p><div class="ulist"><ul><li><p>erreicht, dass sich der Stream selbst als <strong>idle</strong> deklariert, wenn für die angegebene Zeitlänge keine neuen Datensätze erschienen sind</p></li><li><p>verhindert, dass Watermark Propagation downstream blockiert wird (vgl. <strong>idle stream problem</strong>)</p></li></ul></div></li><li><p><strong><em>strategy.withWatermarkAligment("alignment-groupname", &lt;maxDrift&gt;, &lt;updateFrequency&gt;)</em></strong></p><div class="ulist"><ul><li><p>stellt Watermark Alignment ein (vgl. vorheriges Kapitel)</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_window_operators"><h2>DataStream API : Window Operators</h2><div class="ulist"><ul><li><p>Bei der Definition eines <strong>Window Operators</strong> ist Folgendes anzugeben:</p><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/assigners/WindowAssigner.html">Window Assigner</a></strong> : legt fest, wie Elemente im Stream den Fenstern zugeordnet werden</p></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/functions/windowing/WindowFunction.html">Window Function</a></strong> : eine Operator-Funktion, die mit windowed Streams arbeiten kann</p></li><li><p>Es muss entschieden werden, ob <strong>Keys</strong> verwendet werden sollen</p><div class="ulist"><ul><li><p>Falls ja, werden die Datensätze in einem Window für jeden Key separat bearbeitet (<strong>Keyed Windows</strong>)</p></li></ul></div></li></ul></div></li><li><p><strong>Optional</strong> können weitere <strong>Komponenten</strong> angegeben werden:</p><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/Trigger.html">Trigger</a></strong> : enthält eine Bedingung dafür, wann eine Bearbeitung eines Windows (Generierung von Output) stattfinden soll</p><div class="ulist"><ul><li><p>wenn nicht angegeben, wird der Default des WindowAssigners genommen</p></li></ul></div></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/evictors/Evictor.html">Evictor</a></strong> : kann Datensätze vor der abschließenden Bearbeitung eines Windows entfernen</p></li><li><p>Eine <strong>Konfiguration</strong> für den Umgang mit <strong>verspäteten</strong> Datensätzen</p></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_window_operators_2"><h2>DataStream API : Window Operators (2)</h2><div class="ulist"><ul><li><p>Definition eines Window Operator im Code:</p></li><li><p>Mit Keyed Windows</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">stream
+      .keyBy(keyAssigner)            <span class="comment">// required</span>
+      .window(windowAssigner)        <span class="comment">// required</span>
+      .trigger(trigger)              <span class="comment">// optional (else default trigger)</span>
+      .evictor(evictor)              <span class="comment">// optional (else no evictor)</span>
+      .allowedLateness(lateness)     <span class="comment">// optional (else zero)</span>
+      .sideOutputLateData(outputTag) <span class="comment">// optional (else no side output for late data)</span>
+       apply(windowFunction)         <span class="comment">// required; alternativ : .aggregate(aggregateFunction) oder .reduce(reduceFunction)</span>
+      .getSideOutput(outputTag)      <span class="comment">// optional</span>
+       <span class="comment">// .. Output verwenden</span></code></pre>
+<div class="ulist"><ul><li><p>Non-Keyed Windows</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">stream
+       .windowAll(windowAssigner)      <span class="comment">//  required</span>
+       .trigger(trigger)               <span class="comment">//  optional (else default trigger)</span>
+       .evictor(evictor)               <span class="comment">//  optional (else no evictor)</span>
+       .allowedLateness(lateness)      <span class="comment">//  optional (else zero)</span>
+       .sideOutputLateData(outputTag)  <span class="comment">//  optional: (else no side output for late data)</span>
+       .apply(allWindowFunction)       <span class="comment">//  required; alternativ : .aggregate(aggregateFunction) oder .reduce(reduceFunction)</span>
+       .getSideOutput(outputTag)       <span class="comment">//  optional</span>
+        <span class="comment">// .. Output verwenden</span></code></pre>
+<div class="ulist small"><ul><li><p>siehe auch <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/</a></p></li></ul></div></section>
+<section id="_datastream_api_window_assigners"><h2>DataStream API : Window Assigners</h2><div class="ulist"><ul><li><p>Ein <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/assigners/WindowAssigner.html">WindowAssigner</a> kann individuell definiert werden, indem die abstrakte Klasse * <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/assigners/WindowAssigner.html">WindowAssigner&lt;T,W extends Window&gt;</a>* implementiert wird</p></li><li><p>für die häufigsten Use-Cases gibt es <strong>vordefinierte Assigner</strong>:</p><div class="ulist"><ul><li><p>Tumbling Windows</p><div class="ulist"><ul><li><p>Parameter : Window Size</p></li><li><p>relevante Klassen: <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/assigners/TumblingEventTimeWindows.html">TumblingEventTimeWindows</a></strong>, <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/assigners/TumblingProcessingTimeWindows.html">TumblingProcessingTimeWindows</a></strong></p></li></ul></div></li><li><p>Sliding Windows</p><div class="ulist"><ul><li><p>Parameter : Window Size, Slide (Slide legt fest, in welchem Zeitintervall ein neues Window gestartet wird)</p></li><li><p>relevante Klassen: <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/assigners/SlidingEventTimeWindows.html">SlidingEventTimeWindows</a></strong>, <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/assigners/SlidingProcessingTimeWindows.html">SlidingProcessingTimeWindows</a></strong></p></li></ul></div></li><li><p>optional kann man bei beiden noch ein Offset (konstante zeitliche Verschiebung der Fenster) angeben</p></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_window_assigners_2"><h2>DataStream API : Window Assigners (2)</h2><table class="tableblock frame-none grid-none" style="width:100%"><colgroup><col style="width:50%"><col style="width:50%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><div><div class="ulist"><ul><li><p>Keyed Tumbling Window (Beispiel)</p></li></ul></div></div></td><td class="tableblock halign-left valign-top"><div><div class="ulist"><ul><li><p>Keyed Sliding Window (Beispiel)</p></li></ul></div></div></td></tr><tr><td class="tableblock halign-left valign-top"><div><div class="imageblock" style=""><img src="images/tumbling-windows.svg" alt="tumbling windows" height="600"></div></div></td><td class="tableblock halign-left valign-top"><div><div class="imageblock" style=""><img src="images/sliding-windows.svg" alt="sliding windows" height="600"></div></div></td></tr></table>
+<div class="paragraph center small"><small><em>(Bildquelle: <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/</a>)</em></small></div></section>
+<section id="_datastream_api_window_assigners_3"><h2>DataStream API : Window Assigners (3)</h2><div class="ulist"><ul><li><p><strong>Session Windows</strong></p><div class="ulist"><ul><li><p>Ein Window schließt, wenn es eine gewisse Zeit lang (<em>session gap</em>) keine neuen Elemente im Stream gesehen hat</p></li><li><p>Mit dem ersten danach folgenden Element beginnt ein neues Window</p></li><li><p><em>session gap</em> kann statisch (konstante Zeitlänge) gewählt werden, oder basierend auf jedem ankommenden Element im Stream dynamisch neu berechnet werden (über einen sog. <em>session gap extractor</em>)</p></li><li><p>relevante Klassen <strong><a href="https://nightlies.apache.org/flink/flink-docs-release-1.3/api/java/org/apache/flink/streaming/api/windowing/assigners/EventTimeSessionWindows.html">EventTimeSessionWindows</a></strong>, <strong><a href="https://nightlies.apache.org/flink/flink-docs-release-1.3/api/java/index.html?org/apache/flink/streaming/api/windowing/assigners/ProcessingTimeSessionWindows.html">ProcessingTimeSessionWindows</a></strong></p></li></ul></div></li><li><p><strong>Global Windows</strong> ordnen alle Element mit dem gleichen Key dem gleichen Fenster zu</p><div class="ulist"><ul><li><p>&#8594; Verhalten des Fensters wird über den angegebenen Trigger gesteuert</p></li><li><p>dieser sollte explizit angegeben werden, da der default "never trigger" ist</p></li><li><p>relevante Klasse: <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/assigners/GlobalWindows.html">GlobalWindows</a></strong></p></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_window_assigners_4"><h2>DataStream API : Window Assigners (4)</h2><table class="tableblock frame-none grid-none" style="width:100%"><colgroup><col style="width:50%"><col style="width:50%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><div><div class="ulist"><ul><li><p>Keyed Session Window</p></li></ul></div></div></td><td class="tableblock halign-left valign-top"><div><div class="ulist"><ul><li><p>Keyed Global Window</p></li></ul></div></div></td></tr><tr><td class="tableblock halign-left valign-top"><div><div class="imageblock" style=""><img src="images/session-windows.svg" alt="session windows" width="2000" height="600"></div></div></td><td class="tableblock halign-left valign-top"><div><div class="imageblock" style=""><img src="images/non-windowed.svg" alt="non windowed" width="2000" height="600"></div></div></td></tr></table>
+<div class="paragraph center small"><small><em>(Bildquelle: <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/</a>)</em></small></div></section>
+<section id="_datastream_api_window_assigners_5"><h2>DataStream API : Window Assigners (5)</h2><div class="ulist"><ul><li><p>Codebeispiele zum Einstellen der WindowAssigner:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">input1
+    .keyBy(&lt;key selector&gt;)
+    .window(TumblingEventTimeWindows.of(<span class="predefined-type">Time</span>.seconds(<span class="integer">5</span>)))
+    .&lt;windowed transformation&gt;(&lt;window function&gt;);
+
+input2
+    .keyBy(&lt;key selector&gt;)
+    .window(TumblingProcessingTimeWindows.of(<span class="predefined-type">Time</span>.seconds(<span class="integer">5</span>)))
+    .&lt;windowed transformation&gt;(&lt;window function&gt;);
+
+input3
+    .keyBy(&lt;key selector&gt;)
+    .window(EventTimeSessionWindows.withGap(<span class="predefined-type">Time</span>.minutes(<span class="integer">10</span>)))
+    .&lt;windowed transformation&gt;(&lt;window function&gt;);
+
+input4
+    .keyBy(&lt;key selector&gt;)
+    .window(GlobalWindows.create())
+    .&lt;windowed transformation&gt;(&lt;window function&gt;);</code></pre>
+<div class="paragraph center small"><small><em>(Beispiele aus: <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/</a>)</em></small></div></section>
+<section id="_datastream_api_window_functions"><h2>DataStream API : Window Functions</h2><div class="ulist"><ul><li><p>Es gibt 3 vordefinierte <strong>abstrakte Basisklassen</strong> für <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/functions/windowing/WindowFunction.html">Window Functions</a></strong></p><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/functions/ReduceFunction.html">ReduceFunction</a></strong> wird hier genau so verwendet, wie schon vorher gesehen, nur wird jeweils pro Window aggregiert</p></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/table/functions/AggregateFunction.html">AggregateFunction</a></strong> analog für allgemeine (windowed) Rolling Aggregations</p><div class="ulist"><ul><li><p>ein Akkumulator wird mit <em>createAccumulator</em> erstellt</p></li><li><p>ankommende Datensätze können mit <em>add</em> mit dem Akkumulator verrechnet werden</p></li><li><p>in der Methode <em>getResult</em> wird aus dem Akkumulator das Resultat des Windows berechnet</p></li><li><p>zusätzlich muss eine <em>merge</em> Operation für 2 Akkumulatorinstanzen definiert werden</p></li></ul></div></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-release-1.9/api/java/org/apache/flink/streaming/api/functions/windowing/ProcessWindowFunction.html">ProcessWindowFunction</a></strong> (s.u.)</p></li></ul></div></li><li><p><strong>ReduceFunction</strong> und <strong>AggregateFunction</strong> emittieren ihren aggregierten Wert automatisch bei <strong>Triggeraufrufen</strong> (Default für die vordefinierten WindowAssigner : bei Schließen eines Windows)</p></li></ul></div></section>
+<section id="_datastream_api_beispiel_aggregatefunction"><h2>DataStream API : Beispiel AggregateFunction</h2><div class="ulist"><ul><li><p>Beispiel : AggregateFunction, die Werte addiert und zählt, um einen Durchschnitt zu berechnen</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">private</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">AverageAggregate</span>
+    <span class="directive">implements</span> AggregateFunction&lt;Tuple2&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Long</span>&gt;, Tuple2&lt;<span class="predefined-type">Long</span>, <span class="predefined-type">Long</span>&gt;, <span class="predefined-type">Double</span>&gt; {
+
+      <span class="annotation">@Override</span>
+      <span class="directive">public</span> Tuple2&lt;<span class="predefined-type">Long</span>, <span class="predefined-type">Long</span>&gt; createAccumulator() {
+        <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;&gt;(<span class="integer">0L</span>, <span class="integer">0L</span>);
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="directive">public</span> Tuple2&lt;<span class="predefined-type">Long</span>, <span class="predefined-type">Long</span>&gt; add(Tuple2&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Long</span>&gt; value, Tuple2&lt;<span class="predefined-type">Long</span>, <span class="predefined-type">Long</span>&gt; accumulator) {
+        <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;&gt;(accumulator.f0 + value.f1, accumulator.f1 + <span class="integer">1L</span>);
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="directive">public</span> <span class="predefined-type">Double</span> getResult(Tuple2&lt;<span class="predefined-type">Long</span>, <span class="predefined-type">Long</span>&gt; accumulator) {
+        <span class="keyword">return</span> ((<span class="type">double</span>) accumulator.f0) / accumulator.f1;
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="directive">public</span> Tuple2&lt;<span class="predefined-type">Long</span>, <span class="predefined-type">Long</span>&gt; merge(Tuple2&lt;<span class="predefined-type">Long</span>, <span class="predefined-type">Long</span>&gt; a, Tuple2&lt;<span class="predefined-type">Long</span>, <span class="predefined-type">Long</span>&gt; b) {
+        <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;&gt;(a.f0 + b.f0, a.f1 + b.f1);
+      }
+}</code></pre>
+<div class="paragraph center small"><small>(Codebeispiel aus <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/</a>)</small></div></section>
+<section id="_datastream_api_beispiel_aggregatefunction_2"><h2>DataStream API : Beispiel AggregateFunction (2)</h2><div class="ulist"><ul><li><p>Beispiel Anwendung der AggregateFunction auf der letzten Folie:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="comment">// in der main Methode</span>
+
+DataStream&lt;Tuple2&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Long</span>&gt;&gt; input = env.fromSource(<span class="keyword">new</span> MySource());
+
+DataStream&lt;<span class="predefined-type">Double</span>&gt; averagesBySecond =   <span class="comment">// Stream von Durchschnittswerten</span>
+input
+    .keyBy(pair -&gt; MyUtils.generateKey(pair.f1))  <span class="comment">// Durchschnitt nach Keys bilden</span>
+    .window(TumblingProcessingTimeWindows.of(TumblingProcessingTimeWindows.of(<span class="predefined-type">Time</span>.seconds(<span class="integer">1</span>)))  <span class="comment">// 1 Output pro Key pro Sekunde</span>
+    .aggregate(<span class="keyword">new</span> AverageAggregate());
+<span class="comment">// (weitere Verarbeitung der Durchschnittswerte)</span></code></pre>
+<div class="paragraph center small"><small>(Codebeispiel erweitert aus <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/</a>)</small></div></section>
+<section id="_datastream_api_processwindowfunction"><h2>DataStream API : ProcessWindowFunction</h2><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-release-1.9/api/java/org/apache/flink/streaming/api/functions/windowing/ProcessWindowFunction.html">ProcessWindowFunction</a></strong> ist eine allgemeiner Prototyp für WindowFunctions</p><div class="ulist"><ul><li><p><em>process</em> Methode wird <strong>bei einem Trigger</strong> eines Windows (meist bei Schließen) aufgerufen und erhält ein Iterable mit allen Datensätzen innerhalb des Windows</p><div class="ulist"><ul><li><p>&#8594; benötigt Buffering, ineffizient für reine Aggregierungen</p></li></ul></div></li><li><p><em>process</em> hat über den <strong>Context</strong> Zugriff auf die <strong>Metataden</strong> des aktuellen Fensters und auf das zuletzt gesehene <strong>Watermark</strong></p></li><li><p>kann <strong>Window State</strong> haben</p><div class="ulist"><ul><li><p>Window State wird für jedes Window separat verwaltet</p></li><li><p>Window State sollte in der <em>clear()</em> Methode bereinigt werden</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_processwindowfunction_beispiel"><h2>DataStream API : ProcessWindowFunction Beispiel</h2><div class="ulist"><ul><li><p>Beispiel ProcessWindowFunction für Medianberechnung:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">MedianProcessWindowFunction</span>&lt;W <span class="directive">extends</span> <span class="predefined-type">Window</span>&gt;
+            <span class="directive">extends</span> ProcessWindowFunction&lt;KeyedDouble, KeyedDouble, <span class="predefined-type">Integer</span>, W&gt; {
+
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">void</span> process(<span class="predefined-type">Integer</span> key, <span class="predefined-type">Context</span> context,
+                            <span class="predefined-type">Iterable</span>&lt;KeyedDouble&gt; input, Collector&lt;KeyedDouble&gt; output)  {
+
+            <span class="predefined-type">List</span>&lt;<span class="predefined-type">Double</span>&gt; values = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>();
+            input.forEach(keyedDouble -&gt; values.add(keyedDouble.getValue()));
+            <span class="type">double</span> median = MyMathUtils.computeMedian(values);
+
+            output.collect(<span class="keyword">new</span> KeyedDouble(key, median));
+        }
+}
+
+<span class="comment">// in main Methode</span>
+DataStream&lt;<span class="predefined-type">Double</span>&gt; input = env.fromSource(source, getWatermarkStrategy(), <span class="string"><span class="delimiter">&quot;</span><span class="content">source</span><span class="delimiter">&quot;</span></span>); <span class="comment">// Source nicht gezeigt</span>
+KeyedStream&lt;KeyedDouble, <span class="predefined-type">Integer</span>&gt; keyedStream = assignKeys(stream);  <span class="comment">// Key Assigner nicht gezeigt</span>
+
+DataStream&lt;KeyedDouble&gt; medianStream =
+                keyedStream.window(TumblingEventTimeWindows.of(<span class="predefined-type">Time</span>.seconds(<span class="integer">1</span>)))  <span class="comment">// 1 Output pro Key und Sekunde</span>
+                           .process(<span class="keyword">new</span> MedianProcessWindowFunction&lt;&gt;());
+<span class="comment">// (weitere Verarbeitung)</span></code></pre></section>
+<section id="_datastream_api_kombination_von_aggregierung_und_processwindowfunction"><h2>DataStream API : Kombination von Aggregierung und ProcessWindowFunction</h2><div class="ulist"><ul><li><p><strong>Aggregierungen</strong> und <strong>ProcessWindowFunctions</strong> können auch <strong>kombiniert</strong> werden</p><div class="ulist"><ul><li><p>hierfür wird bei Aufruf von <em>reduce</em> oder <em>aggregate</em> <strong>zusätzlich</strong> zu einer ReduceFunction oder AggregateFunction noch eine ProcessWindowFunction als weiterer Parameter übergeben</p></li><li><p><em>process</em> Methode der ProcessWindowFunction erhält dann ein Iterable mit nur einem Element, nämlich dem Resultat der Aggregierung</p><div class="ulist"><ul><li><p>&#8594; ProcessWindowFunction leistet eine <strong>Nachbearbeitung</strong></p></li><li><p>&#8594; Window-Metadaten können zusätzlich das Resultat beeinflussen</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_aggregierung_mit_processwindowfunction_beispiel"><h2>DataStream API : Aggregierung mit ProcessWindowFunction Beispiel</h2><div class="ulist"><ul><li><p>Beispiel: Aggregieren von Counts von Datensätzen pro Window mit Window-Metadaten</p><div class="ulist"><ul><li><p>Gegeben: CountingAggregator zählt einfach nur die Datensätze pro Key und Window</p></li></ul></div></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">private</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">EnrichingProcessWindowFunction</span>&lt;T, W <span class="directive">extends</span> <span class="predefined-type">Window</span>&gt;
+            <span class="directive">extends</span> ProcessWindowFunction&lt;T, Tuple2&lt;T, <span class="predefined-type">String</span>&gt;, <span class="predefined-type">Long</span>, W&gt; {
+
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">void</span> process(<span class="predefined-type">Long</span> key, <span class="predefined-type">Context</span> context,
+                            <span class="predefined-type">Iterable</span>&lt;T&gt; input, Collector&lt;Tuple2&lt;T, <span class="predefined-type">String</span>&gt;&gt; output)  {
+            <span class="keyword">for</span> (T element : input) {
+                output.collect(<span class="keyword">new</span> Tuple2&lt;T, <span class="predefined-type">String</span>&gt;(element, <span class="string"><span class="delimiter">&quot;</span><span class="content">Window : </span><span class="delimiter">&quot;</span></span> + context.window() + <span class="string"><span class="delimiter">&quot;</span><span class="content"> Key : </span><span class="delimiter">&quot;</span></span> + key));
+            }
+        }
+}
+
+<span class="comment">// in main:</span>
+KeyedStream&lt;MyEvent, <span class="predefined-type">Long</span>&gt; events = env.fromSource(mySource)
+                                       .keyBy(myKeyAssigner);
+
+DataStream&lt;Tuple2&lt;<span class="predefined-type">Long</span>, <span class="predefined-type">String</span>&gt;&gt; countsWithMetaData =
+events.window(TumblingEventTimeWindows.of(<span class="predefined-type">Time</span>.seconds(<span class="integer">1</span>)))
+      .aggregate(<span class="keyword">new</span> CountingAggregate&lt;MyEvent&gt;(), <span class="keyword">new</span> EnrichingProcessWindowFunction&lt;&gt;());</code></pre></section>
+<section id="_datastream_api_trigger"><h2>DataStream API : Trigger</h2><div class="ulist"><ul><li><p>durch Erweitern der abstrakten Klasse <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/Trigger.html">Trigger&lt;T, W extends Window&gt;</a></strong> können eigene <strong>Trigger</strong> definiert werden</p></li><li><p>Trigger kann in seiner Methode <em>onElement</em> auf jedes ankommende Element reagieren</p></li><li><p>zusätzlich kann auf registrierte <strong>Timer</strong> (s.u.) mit <em>onEventTime</em> oder <em>onProcessingTime</em> reagiert werden</p></li><li><p>diese 3 Methoden geben jeweils einen <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/TriggerResult.html">TriggerResult</a></strong> zurück, das ein Enum mit 4 möglichen Werten ist:</p><div class="ulist"><ul><li><p><strong>CONTINUE</strong> : es passiert nichts</p></li><li><p><strong>FIRE</strong> : Rufe die im Operator eingestellte Window Function auf</p><div class="ulist"><ul><li><p>ReduceFunction und Aggregatefunction emittieren ihr derzeitiges Resultat</p></li><li><p>ProcessWindowFunction ruft <em>process</em> Methode auf</p></li></ul></div></li><li><p><strong>PURGE</strong> : Entferne alle Elemente aus dem Window(buffer)</p></li><li><p><strong>FIRE_AND_PURGE</strong> : erst FIRE, dann PURGE</p></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_trigger_2"><h2>DataStream API : Trigger (2)</h2><div class="ulist"><ul><li><p>Trigger können Windows nicht schließen (hierfür ist nur WindowAssigner zuständig)</p><div class="ulist"><ul><li><p>mit PURGE kann aber das Verhalten von späteren Triggeraufrufen verändert werden</p></li></ul></div></li><li><p>FIRE kann mehrmals für das gleiche Window passieren, wenn entsprechend konfiguriert</p></li><li><p>Triggermethoden haben Zugriff auf Window-Metadaten und können Timer registrieren</p></li><li><p>Trigger können über Verwendung ihres <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/Trigger.TriggerContext.html">TriggerContext</a></strong> einen <strong>State</strong> (Window bzw. Window/Key Scope) registrieren und verwenden</p><div class="ulist"><ul><li><p>in diesem Fall muss der State in der <em>clear</em> Methode bereinigt werden, und in <em>onMerge</em> berücksichtigt werden</p><div class="ulist"><ul><li><p><em>onMerge</em> wird vom Window Assigner aufgerufen, wenn 2 Windows zusammengelegt werden (passiert v.a. bei Session Windows)</p></li></ul></div></li></ul></div></li><li><p><strong>Stateful</strong> Trigger können komplexe Logik enthalten und sind genauso mächtig wie ProcessWindowFunctions</p></li></ul></div></section>
+<section id="_datastream_api_trigger_3"><h2>DataStream API : Trigger (3)</h2><div class="ulist"><ul><li><p>wenn kein komplexes Verhalten nötig ist, sind die default Trigger von WindowAssignern meist ausreichend</p></li><li><p>Weitere <strong>vordefinierte</strong> Arten von Triggern sind:</p><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/EventTimeTrigger.html">EventTimeTrigger</a></strong> und <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/ProcessingTimeTrigger.html">ProcessingTimeTrigger</a></strong></p><div class="ulist"><ul><li><p>feuern basierend auf dem Fortschritt von Watermarks bzw. Systemzeit</p></li></ul></div></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/CountTrigger.html">CountTrigger</a></strong></p><div class="ulist"><ul><li><p>feuern basierend auf der Anzahl von verarbeiteten Elementen</p></li></ul></div></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/PurgingTrigger.html">PurgingTrigger</a></strong></p><div class="ulist"><ul><li><p>nimmt einen anderen Trigger und ersetzt i.W. alle FIRE Aktionen durch FIRE_AND_PURGE</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_trigger_beispiel"><h2>DataStream API : Trigger Beispiel</h2><div class="ulist"><ul><li><p>Beispiel: Implementierung von <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/CountTrigger.html">CountTrigger</a> mit <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/state/ReducingState.html">ReducingState</a> (unvollständig):</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="type">class</span> <span class="class">CountTrigger</span>&lt;W <span class="directive">extends</span> <span class="predefined-type">Window</span>&gt; <span class="directive">extends</span> Trigger&lt;<span class="predefined-type">Object</span>, W&gt; {
+
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">long</span> maxCount;
+    <span class="directive">private</span> <span class="directive">final</span> ReducingStateDescriptor&lt;<span class="predefined-type">Long</span>&gt; stateDesc =
+            <span class="keyword">new</span> ReducingStateDescriptor&lt;&gt;(<span class="string"><span class="delimiter">&quot;</span><span class="content">count</span><span class="delimiter">&quot;</span></span>, <span class="keyword">new</span> Sum(), LongSerializer.INSTANCE);
+
+    <span class="directive">private</span> CountTrigger(<span class="type">long</span> maxCount) {
+        <span class="local-variable">this</span>.maxCount = maxCount;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> TriggerResult onElement(<span class="predefined-type">Object</span> element, <span class="type">long</span> timestamp, W window, TriggerContext ctx)
+            <span class="directive">throws</span> <span class="exception">Exception</span> {
+        ReducingState&lt;<span class="predefined-type">Long</span>&gt; count = ctx.getPartitionedState(stateDesc);
+        count.add(<span class="integer">1L</span>);
+        <span class="keyword">if</span> (count.get() &gt;= maxCount) {
+            count.clear();
+            <span class="keyword">return</span> TriggerResult.FIRE;
+        }
+        <span class="keyword">return</span> TriggerResult.CONTINUE;
+    }
+
+    <span class="directive">private</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">Sum</span> <span class="directive">implements</span> ReduceFunction&lt;<span class="predefined-type">Long</span>&gt; {
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="predefined-type">Long</span> reduce(<span class="predefined-type">Long</span> value1, <span class="predefined-type">Long</span> value2) <span class="directive">throws</span> <span class="exception">Exception</span> {
+            <span class="keyword">return</span> value1 + value2;
+        }
+    }
+}</code></pre></section>
+<section id="_datastream_api_timer"><h2>DataStream API : Timer</h2><div class="ulist"><ul><li><p><strong>Timer</strong> sind ein <strong>flexibles, low-level Feature</strong>, um zeitbasierte Logik zu implementieren</p><div class="ulist"><ul><li><p>Wenn eine gegebene Anforderung bereits nur mit <strong>Windows</strong> alleine umgesetzt werden kann, ist dies in der Regel zu bevorzugen</p></li></ul></div></li><li><p>Timer sind Teil des <strong>State</strong> eines Operators und werden in Checkpoints persistiert</p></li><li><p>sowohl <strong>ProcessFunctions</strong> als auch <strong>Trigger</strong> erhalten in ihren Hauptmethoden Zugriff auf einen <strong>Context</strong>, über den ein <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/TimerService.html">TimerService</a></strong> erhalten werden kann</p></li><li><p>TimerService enthält 2 Methoden, um einen <strong>Timer</strong> zu <strong>registrieren</strong>:</p><div class="ulist"><ul><li><p><em>registerEventTimeTimer(long time)</em></p></li><li><p><em>registerProcessingTimeTimer(long time)</em></p><div class="ulist"><ul><li><p>die Timer werden ausgelöst, wenn event time bzw. processing time den angegebenen <strong>timestamp</strong> überschreiten</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_timer_2"><h2>DataStream API : Timer (2)</h2><div class="ulist"><ul><li><p>Durch Überschreiben gewisser Methoden kann die ProcessFunction bzw. der Trigger auf das Auslösen eines Timers <strong>reagieren</strong>:</p><div class="ulist"><ul><li><p><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/functions/ProcessFunction.html">ProcessFunction</a>:</p><div class="ulist"><ul><li><p><em>onTimer(long timestamp, OnTimerContext ctx, Collector&lt;O&gt; out)</em></p></li><li><p>mit dem Collector kann wie in <em>processElement</em> Output emittiert werden</p></li></ul></div></li><li><p><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/Trigger.html">Trigger</a>:</p><div class="ulist"><ul><li><p><em>onEventTime(long time, W window, TriggerContext ctx)</em></p></li><li><p><em>onProcessingTime(long time, W window, TriggerContext ctx)</em></p></li></ul></div></li></ul></div></li><li><p><strong>Timer</strong> können im TimerService auch wieder <strong>entfernt</strong> werden :</p><div class="ulist"><ul><li><p><em>deleteEventTimeTimer(long time)</em> bzw. <em>deleteProcessingTimeTimer(long time)</em> löschen den Timer zum angegebenen Timestamp</p></li><li><p>dies ist möglich, da es zu einem Timestamp und einem Key immer nur einen Timer geben darf</p></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_timer_beispiel"><h2>DataStream API : Timer Beispiel</h2><div class="ulist"><ul><li><p>Beispiel : Timer-basierter Operator, der nach 60 Sekunden Inaktivität (für einen String Key) die Anzahl der Datensätze dieser Session emittiert:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="type">class</span> <span class="class">CountWithTimeoutFunction</span>
+        <span class="directive">extends</span> KeyedProcessFunction&lt;<span class="predefined-type">String</span>, Tuple2&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;, Tuple2&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Long</span>&gt;&gt; {
+
+    <span class="directive">private</span> ValueState&lt;CountWithTimestamp&gt; state;
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> open(OpenContext openContext) <span class="directive">throws</span> <span class="exception">Exception</span> {
+        state = getRuntimeContext().getState(<span class="keyword">new</span> ValueStateDescriptor&lt;&gt;(<span class="string"><span class="delimiter">&quot;</span><span class="content">myState</span><span class="delimiter">&quot;</span></span>, CountWithTimestamp.class));
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> processElement(Tuple2&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt; value, <span class="predefined-type">Context</span> ctx, Collector&lt;Tuple2&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Long</span>&gt;&gt; out) {
+        <span class="predefined-type">Long</span> currentCount = state.value() == <span class="predefined-constant">null</span> ? <span class="integer">0</span> : state.value().count;  <span class="comment">// retrieve the current count</span>
+        state.update(<span class="keyword">new</span> CountWithTimestamp(value.f0, currentCount + <span class="integer">1</span>, ctx.timestamp()));  <span class="comment">// write the new state back</span>
+        ctx.timerService().registerEventTimeTimer(current.lastModified + <span class="integer">60000</span>);  <span class="comment">// schedule the next timer</span>
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> onTimer(<span class="type">long</span> timestamp, OnTimerContext ctx, Collector&lt;Tuple2&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Long</span>&gt;&gt; out) {
+        CountWithTimestamp result = state.value();  <span class="comment">// get the state for the key that scheduled the timer</span>
+        <span class="keyword">if</span> (timestamp == result.lastModified + <span class="integer">60000</span>) {   <span class="comment">// check if this is an outdated timer or the latest timer</span>
+            out.collect(<span class="keyword">new</span> Tuple2&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Long</span>&gt;(result.key, result.count));  <span class="comment">// emit the state on timeout</span>
+        }
+    }
+}</code></pre>
+<div class="paragraph center small"><small>(Beispiel adaptiert aus <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/process_function/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/process_function/</a>)</small></div></section>
+<section id="_datastream_api_evictors"><h2>DataStream API : Evictors</h2><div class="ulist"><ul><li><p>ein <strong>Evictor</strong> kann durch Implementieren des <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/evictors/Evictor.html">Evictor&lt;T,W extends Window&gt;</a></strong> Interface definiert werden</p></li><li><p>folgende Methoden müssen implementiert werden:</p><div class="ulist"><ul><li><p><em>void evictBefore(Iterable&lt;TimestampedValue&lt;T&gt;&gt; elements, int size, W window, EvictorContext evictorContext)</em></p></li><li><p><em>void evictAfter(Iterable&lt;TimestampedValue&lt;T&gt;&gt; elements, int size, W window, EvictorContext evictorContext)</em></p></li></ul></div></li><li><p>Diese Methoden werden <strong>nach jedem Feuern eines Triggers</strong> aufgerufen</p><div class="ulist"><ul><li><p><em>evictBefore</em> vor Anwenden der Window Function</p></li><li><p><em>evictAfter</em> nach Anwenden der Window Function</p></li></ul></div></li><li><p><em>elements</em> enthält die Elemente im Window, <em>size</em> ist ihre Anzahl</p></li><li><p>Der Parameter <em>elements</em> ist <strong>mutable</strong> und es können nicht gewüschte Elemente darin entfernt werden</p></li></ul></div></section>
+<section id="_datastream_api_evictors_2"><h2>DataStream API : Evictors (2)</h2><div class="ulist"><ul><li><p><strong>vordefinierte</strong> Evictors sind:</p><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-stable/api/java/org/apache/flink/streaming/api/windowing/evictors/CountEvictor.html">CountEvictor</a></strong></p><div class="ulist"><ul><li><p>entfernt alle Elemente, die eine gegebene maximale Anzahl überschreiten</p></li></ul></div></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/evictors/TimeEvictor.html">TimeEvictor</a></strong></p><div class="ulist"><ul><li><p>erhält als Parameter ein <em>interval</em> und entfernt alle Elemente, die weiter als <em>interval</em> Millisekunden als das
+jüngste Element im Window zurückliegen (jeweils nach Timestamp, also event time)</p></li></ul></div></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-stable/api/java/org/apache/flink/streaming/api/windowing/evictors/DeltaEvictor.html">DeltaEvictor</a></strong></p><div class="ulist"><ul><li><p>erhält ein <em>threshold</em> (Typ double) als Parameter</p></li><li><p>erhält eine <strong>DeltaFunction</strong>, die 2 Inputs des Streamdatentyps nimmt und ein double zurückgibt</p></li><li><p>der Evictor nimmt das letzte Element im Window (nicht event time basiert) und wendet für jedes andere Element im Window einmal die DeltaFunction auf beide an</p></li><li><p>diejenigen anderen Elemente, bei denen das Resultat größer als <em>threshold</em> ist, werden entfernt</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_evictors_beispiel"><h2>DataStream API : Evictors Beispiel</h2><div class="ulist"><ul><li><p>Beispiel : Implementierung von <a href="https://nightlies.apache.org/flink/flink-docs-stable/api/java/org/apache/flink/streaming/api/windowing/evictors/CountEvictor.html">CountEvictor</a> (vereinfacht, unvollständig) :</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java"><span class="directive">public</span> <span class="type">class</span> <span class="class">CountEvictor</span>&lt;W <span class="directive">extends</span> <span class="predefined-type">Window</span>&gt; <span class="directive">implements</span> Evictor&lt;<span class="predefined-type">Object</span>, W&gt; {
+
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">long</span> maxCount;
+    <span class="directive">private</span> CountEvictor(<span class="type">long</span> count) {
+        <span class="local-variable">this</span>.maxCount = count;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> evictAfter(<span class="predefined-type">Iterable</span>&lt;TimestampedValue&lt;<span class="predefined-type">Object</span>&gt;&gt; elements, <span class="type">int</span> size, EvictorContext ctx) {
+        <span class="keyword">if</span> (size &lt;= maxCount) {
+            <span class="keyword">return</span>;
+        }
+        <span class="type">int</span> evictedCount = <span class="integer">0</span>;
+        <span class="keyword">for</span> (<span class="predefined-type">Iterator</span>&lt;TimestampedValue&lt;<span class="predefined-type">Object</span>&gt;&gt; iterator = elements.iterator(); iterator.hasNext(); ) {
+                iterator.next();
+                <span class="keyword">if</span> (++evictedCount &gt; size - maxCount) {
+                    <span class="keyword">break</span>;
+                } <span class="keyword">else</span> {
+                    iterator.remove();
+                }
+        }
+    }
+}</code></pre></section>
+<section id="_datastream_api_lateness_umgang_mit_verspäteten_datensätzen"><h2>DataStream API : Lateness (Umgang mit verspäteten Datensätzen)</h2><div class="ulist"><ul><li><p>Wenn Windows über <strong>event time</strong> definiert sind, kann es <strong>verspäteten Datensätze</strong> geben</p><div class="ulist"><ul><li><p>Per Default werden diese einfach verworfen</p></li></ul></div></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p><strong><em>allowedLateness(lateness)</em></strong></p><div class="ulist"><ul><li><p>Window wartet auf <strong>verspätete</strong> Datensätze, bis ein <strong>Watermark</strong> erreicht wurde, das <strong>die Summe aus Endzeitpunkt des Fensters und <em>lateness</em></strong> überschreitet</p></li><li><p>&#8594; Wirkt <strong>zusätzlich</strong> zu der ggf. schon eingestellten Toleranz in der <strong>WatermarkStrategy</strong></p></li><li><p>Kann je nach Trigger dazu führen, dass der <strong>Trigger</strong> für späte Elemente <strong>erneut feuert</strong></p></li></ul></div></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p><strong><em>sideOutputLateData(OutputTag)</em></strong></p><div class="ulist"><ul><li><p>Verspätete Datensätze werden an einen <strong>zusätzlichen Stream</strong> weitergeleitet (z.B. für Logging)</p></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_outputstream_von_window_operators"><h2>DataStream API : Outputstream von Window Operators</h2><div class="ulist"><ul><li><p><strong>Outputstream</strong> eines Window Operators</p><div class="ulist"><ul><li><p>DataStream <strong>ohne Keys</strong></p><div class="ulist"><ul><li><p>Auch wenn der ursprüngliche Stream ein <strong>KeyedStream</strong> war und <strong>Keyed Windows</strong> verwendet wurden</p></li><li><p>&#8594; Keys müssen ggf. in den Datensätzen festgehalten und dann <strong>neu assigned</strong> werden</p></li></ul></div></li><li><p><strong>Timestamps</strong> sind per Default gleich dem <strong>spätesten möglichen Zeitpunkt im Window</strong></p></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_window_lifecycle"><h2>DataStream API : Window Lifecycle</h2><div class="ulist"><ul><li><p><strong>Erstellung</strong> eines Windows</p><div class="ulist"><ul><li><p>wenn das erste Element im Stream erscheint, das zu diesem Window gehört</p></li></ul></div></li><li><p><strong>Löschen</strong> eines Windows</p><div class="ulist"><ul><li><p>nachdem sein Endzeitpunkt (plus ggf. <em>allowed lateness</em>) erreicht wurde</p><div class="ulist"><ul><li><p>Endzeitpunkt wird durch den WindowAssigner bestimmt (statisch oder dynamisch)</p></li></ul></div></li><li><p>Window State sowie Metadaten werden gelöscht und es sind keine weiteren Trigger mehr möglich</p><div class="ulist"><ul><li><p>Bei <strong>nicht-zeitbasierten Windows</strong> (z.B. Global Window) geschieht das <strong>nicht garantiert automatisch</strong></p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_window_join"><h2>DataStream API : Window Join</h2><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/datastream/DataStream.html#join-org.apache.flink.streaming.api.datastream.DataStream-">Join</a></strong> von 2 Streams je <strong>innerhalb gemeinsamer Fenster</strong> (Codeschema):</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">stream.join(otherStream)
+    .where(&lt;KeySelector&gt;)
+    .equalTo(&lt;KeySelector&gt;)
+    .window(&lt;WindowAssigner&gt;)
+    .apply(&lt;JoinFunction&gt;);</code></pre>
+<div class="ulist"><ul><li><p><em>stream</em> und <em>otherStream</em> werden als einfache DataStreams behandelt</p></li><li><p>Mit <em>where</em> und <em>equalTo</em> werden <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/java/functions/KeySelector.html">KeySelectors</a></strong> für die beiden Streams festgelegt</p></li><li><p>Mit <em>window</em> wird ein <strong>gemeinsamer</strong> <a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/assigners/WindowAssigner.html">WindowAssigner</a> festgelegt</p></li><li><p>Optional können danach auch noch <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/Trigger.html">Trigger</a>, Evictor und Lateness</strong> konfiguriert werden</p></li><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/functions/JoinFunction.html">JoinFunction</a></strong> nimmt als Inputs je ein Element von <em>stream</em> und <em>otherstream</em></p><div class="ulist"><ul><li><p>Alternativ: <strong><a href="https://nightlies.apache.org/flink/flink-docs-release-1.3/api/java/org/apache/flink/api/common/functions/FlatJoinFunction.html">FlatJoinFunction</a></strong>, die mehrere Datensätze ausgeben kann (analog zu FlatMapFunction)</p></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_window_join_beispiel"><h2>DataStream API : Window Join Beispiel</h2><div class="ulist"><ul><li><p>Beispiel für Window Join mit TumblingWindows :</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">DataStream&lt;<span class="predefined-type">Integer</span>&gt; orangeStream = env.fromSource(orangeSource);
+DataStream&lt;<span class="predefined-type">Integer</span>&gt; greenStream = env.fromSource(greenSource);
+
+orangeStream.join(greenStream)
+    .where(<span class="keyword">new</span> OrangeKeySelector())
+    .equalTo(<span class="keyword">new</span> GreenKeySelector())
+    .window(TumblingEventTimeWindows.of(<span class="predefined-type">Time</span>.milliseconds(<span class="integer">2</span>)))
+    .apply (<span class="keyword">new</span> JoinFunction&lt;<span class="predefined-type">Integer</span>, <span class="predefined-type">Integer</span>, <span class="predefined-type">String</span>&gt; (){
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="predefined-type">String</span> join(<span class="predefined-type">Integer</span> first, <span class="predefined-type">Integer</span> second) {
+            <span class="keyword">return</span> first + <span class="string"><span class="delimiter">&quot;</span><span class="content">,</span><span class="delimiter">&quot;</span></span> + second;
+        }
+    });</code></pre>
+<div class="ulist"><ul><li><p>Mit SlidingWindows ändert sich nur die Zeile :</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">.window(SlidingEventTimeWindows.of(<span class="predefined-type">Time</span>.milliseconds(<span class="integer">2</span>) <span class="comment">/* size */</span>, <span class="predefined-type">Time</span>.milliseconds(<span class="integer">1</span>) <span class="comment">/* slide */</span>))</code></pre>
+<div class="paragraph center small"><small>(Beispiel aus <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/joining/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/joining/</a>)</small></div></section>
+<section id="_datastream_api_window_join_beispiel_grafik"><h2>DataStream API : Window Join Beispiel : Grafik</h2><table class="tableblock frame-none grid-none" style="width:100%"><colgroup><col style="width:50%"><col style="width:50%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><div><div class="ulist"><ul><li><p>Tumbling Window Join</p></li></ul></div></div></td><td class="tableblock halign-left valign-top"><div><div class="ulist"><ul><li><p>Session Window Join</p></li></ul></div></div></td></tr><tr><td class="tableblock halign-left valign-top"><div><div class="imageblock" style=""><img src="images/tumbling-window-join.svg" alt="tumbling window join" height="700"></div></div></td><td class="tableblock halign-left valign-top"><div><div class="imageblock" style=""><img src="images/session-window-join.svg" alt="session window join" height="700"></div></div></td></tr></table>
+<div class="paragraph center small"><small><em>(Bildquelle: <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/joining/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/joining/</a>)</em></small></div></section>
+<section id="_datastream_api_window_join_2"><h2>DataStream API : Window Join (2)</h2><div class="ulist"><ul><li><p>Bei jedem <strong>Feuern des Triggers</strong> wird die JoinFunction bzw. FlatJoinFunction auf <strong>alle Datensatzpaare</strong> aus <em>stream</em> und <em>otherstream</em> im Window <strong>mit dem gleichen Key</strong> angewendet</p><div class="ulist"><ul><li><p>&#8594; <strong>inner join</strong></p></li></ul></div></li></ul></div>
+<div class="paragraph"><p>&#160;<br></p></div>
+<div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/datastream/DataStream.html#coGroup-org.apache.flink.streaming.api.datastream.DataStream-"><em>cogroup</em></a></strong></p><div class="ulist"><ul><li><p>kann statt <em>join</em> verwendet werden</p></li><li><p>es wird statt einer JoinFunction eine <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/api/common/functions/CoGroupFunction.html">CoGroupFunction</a></strong> angegeben</p></li><li><p>diese wird nur <strong>(höchstens) einmal pro Key</strong> aufgerufen und erhält <strong>Iterators</strong> über alle Datensätze im Window mit diesem Key</p><div class="ulist"><ul><li><p>&#8594; komplexere Logik möglich</p></li><li><p>&#8594; <strong>outer join</strong> möglich</p></li></ul></div></li></ul></div></li></ul></div></section>
+<section id="_datastream_api_window_join_mit_cogroup_beispiel"><h2>DataStream API : Window Join mit Cogroup Beispiel</h2><div class="ulist"><ul><li><p>Vorheriges Beispiel als Left Outer Join mit Cogroup:</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">DataStream&lt;<span class="predefined-type">Integer</span>&gt; orangeStream = env.fromSource(orangeSource);
+DataStream&lt;<span class="predefined-type">Integer</span>&gt; greenStream = env.fromSource(greenSource);
+
+orangeStream.coGroup(greenStream)
+    .where(<span class="keyword">new</span> OrangeKeySelector())
+    .equalTo(<span class="keyword">new</span> GreenKeySelector())
+    .window(TumblingEventTimeWindows.of(<span class="predefined-type">Time</span>.milliseconds(<span class="integer">2</span>)))
+    .apply(<span class="keyword">new</span> CoGroupFunction&lt;<span class="predefined-type">Integer</span>, <span class="predefined-type">Integer</span>, <span class="predefined-type">String</span>&gt; (){
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">void</span> coGroup(<span class="predefined-type">Iterable</span>&lt;<span class="predefined-type">Integer</span>&gt; firstElements, <span class="predefined-type">Iterable</span>&lt;<span class="predefined-type">Integer</span>&gt; secondElements, Collector&lt;<span class="predefined-type">String</span>&gt; out) {
+            <span class="keyword">if</span> (!secondElements.hasNext()) {
+                <span class="keyword">for</span> (<span class="predefined-type">Integer</span> first : firstElements) {
+                    out.collect(first + <span class="string"><span class="delimiter">&quot;</span><span class="content">,</span><span class="delimiter">&quot;</span></span>);
+                }
+            }
+            <span class="keyword">else</span> {
+                <span class="keyword">for</span> (<span class="predefined-type">Integer</span> first : firstElements) {
+                    <span class="keyword">for</span> (<span class="predefined-type">Integer</span> second : secondElements) {
+                        out.collect(first + <span class="string"><span class="delimiter">&quot;</span><span class="content">,</span><span class="delimiter">&quot;</span></span> + second);
+                    }
+                }
+            }
+        }
+    });</code></pre></section>
+<section id="_datastream_api_interval_join"><h2>DataStream API : Interval Join</h2><div class="ulist"><ul><li><p><strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/datastream/KeyedStream.html#intervalJoin-org.apache.flink.streaming.api.datastream.KeyedStream-">Interval Joins</a></strong></p><div class="ulist"><ul><li><p>ausgehende Streams sind <strong>KeyedStreams</strong></p></li><li><p>Parameter: Offsets <strong><em>lower</em></strong> und <strong><em>upper</em></strong> nach unten und oben</p></li><li><p>Wir betrachten dann <strong>Intervalle</strong> der Art</p><div class="ulist"><ul><li><p>[<em>t</em> - <em>lower</em>, <em>t</em> + <em>upper</em>]<br></p></li></ul></div></li><li><p>um die <strong>event time</strong> <em>t</em> von Datensätzen</p></li></ul></div></li></ul></div>
+<div class="imageblock" style=""><img src="images/interval-join.svg" alt="interval join" height="400"></div>
+<div class="paragraph center small"><small><em>(Bildquelle: <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/joining/" class="bare">https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/joining/</a>)</em></small></div></section>
+<section id="_datastream_api_interval_join_2"><h2>DataStream API : Interval Join (2)</h2><div class="ulist"><ul><li><p>2 Datensätze aus den beiden Streams werden <strong>kombiniert</strong>, wenn sie</p><div class="ulist"><ul><li><p>den <strong>gleichen Key</strong> haben <strong>und</strong></p></li><li><p>die event time eines Elements <strong>innerhalb des Intervalls</strong> um die event time des anderen Elements liegt</p></li></ul></div></li><li><p>&#8594; In dem Fall, dass <em>lower</em> und <em>upper</em> <strong>gleich</strong> sind, werden genau die Datensätze kombiniert, die zeitlich <strong>höchstens diese Anzahl von Millisekunden
+auseinanderliegen</strong></p></li><li><p>es wird auf diese Paare eine <strong><a href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/functions/co/ProcessJoinFunction.html">ProcessJoinFunction</a></strong> angewendet</p></li><li><p>Codebeispiel  :</p></li></ul></div>
+<pre class="CodeRay listingblock"><code class="java language-java">orangeStream
+    .keyBy(<span class="keyword">new</span> OrangeKeySelector())
+    .intervalJoin(greenStream.keyBy(<span class="keyword">new</span> GreenKeySelector()))
+    .between(<span class="predefined-type">Time</span>.milliseconds(-<span class="integer">2</span>), <span class="predefined-type">Time</span>.milliseconds(<span class="integer">1</span>))
+    .process (<span class="keyword">new</span> ProcessJoinFunction&lt;<span class="predefined-type">Integer</span>, <span class="predefined-type">Integer</span>, <span class="predefined-type">String</span>&gt;(){
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">void</span> processElement(<span class="predefined-type">Integer</span> left, <span class="predefined-type">Integer</span> right, <span class="predefined-type">Context</span> ctx, Collector&lt;<span class="predefined-type">String</span>&gt; out) {
+            out.collect(left + <span class="string"><span class="delimiter">&quot;</span><span class="content">,</span><span class="delimiter">&quot;</span></span> + right);
+        }
+    });</code></pre></section>
+<section id="_aufgabe_5"><h2>Aufgabe 5</h2><div class="paragraph heading"><p>Vergleich von korrelierten Metriken</p></div>
+<div class="olist arabic"><ol class="arabic"><li><p>Erstellen Sie einen Flink-Job:</p><div class="olist loweralpha"><ol class="loweralpha" type="a"><li><p>2 identische Quellen, die <strong>zufällige Zahlenwerte</strong> im Bereich von 0 bis 1 mit <strong>zufälligen Keys</strong> von 1 bis 5 generieren (10 pro Sekunde)</p></li><li><p>auf die erste Quelle folgt ein <strong>Window Operator</strong>, der sekundenweise nach Keys den <strong>Durchschnitt</strong> der Zahlen ausrechnet</p></li><li><p>auf die zweite Quelle folgt ein <strong>Window Operator</strong>, der sekundenweise nach Keys den <strong>Median</strong> der Zahlen ausrechnet</p></li><li><p>dann folgt ein <strong>Window Join</strong> mit den gleichen Windows</p><div class="ulist"><ul><li><p>Wenn der <strong>Key gleich</strong> ist und die <strong>Werte mehr als 20% Abstand</strong> haben, wird eine <strong>Warnmeldung</strong> geschickt (Datei oder stdout)</p></li></ul></div></li></ol></div></li></ol></div></section>
+<section id="_aufgabe_5_hinweise"><h2>Aufgabe 5 : Hinweise</h2><div class="ulist"><ul><li><p>Die Quellen können mit Hilfe einer <strong>DataGeneratorSource</strong> (<strong>flink-connector-datagen</strong>) erstellt werden</p><div class="ulist"><ul><li><p>zur Benutzung siehe auch <a href="https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/connectors/datastream/datagen/" class="bare">https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/connectors/datastream/datagen/</a></p></li><li><p>zu beachten: Diese <strong>Dependency</strong> wird nicht vom Flinkcluster provided, benutzte Klassen müssen also von Maven <strong>in die JAR eingebunden</strong> werden (z.B. maven-assembly-plugin nutzen
+und eine jar-with-dependencies bauen)</p></li></ul></div></li><li><p>Für Operatoren für Durchschnittsberechnung und Medianberechnung können Beispielen auf vorherigen Folien als Basis genommen werden</p></li><li><p>Keys sollten dem Output der ersten beiden Operatoren angeheftet werden</p></li></ul></div></section></div></div><script src="reveal.js-3.9.2/lib/js/head.min.js"></script><script src="reveal.js-3.9.2/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
+Reveal.initialize({
+  // Display controls in the bottom right corner
+  controls: true,
+  // Display a presentation progress bar
+  progress: true,
+  // Display the page number of the current slide
+  slideNumber: true,
+  // Push each slide change to the browser history
+  history: true,
+  // Enable keyboard shortcuts for navigation
+  keyboard: true,
+  // Enable the slide overview mode
+  overview: true,
+  // Vertical centering of slides
+  center: true,
+  // Enables touch navigation on devices with touch input
+  touch: true,
+  // Loop the presentation
+  loop: false,
+  // Change the presentation direction to be RTL
+  rtl: false,
+  // Turns fragments on and off globally
+  fragments: true,
+  // Flags if the presentation is running in an embedded mode,
+  // i.e. contained within a limited portion of the screen
+  embedded: false,
+  // Number of milliseconds between automatically proceeding to the
+  // next slide, disabled when set to 0, this value can be overwritten
+  // by using a data-autoslide attribute on your slides
+  autoSlide: 0,
+  // Stop auto-sliding after user input
+  autoSlideStoppable: true,
+  // Enable slide navigation via mouse wheel
+  mouseWheel: true,
+  // Hides the address bar on mobile devices
+  hideAddressBar: true,
+  // Opens links in an iframe preview overlay
+  previewLinks: false,
+  // Theme (e.g., beige, black, league, night, serif, simple, sky, solarized, white)
+  // NOTE setting the theme in the config no longer works in reveal.js 3.x
+  //theme: Reveal.getQueryHash().theme || 'anderscore',
+  // Transition style (e.g., none, fade, slide, convex, concave, zoom)
+  transition: Reveal.getQueryHash().transition || 'linear',
+  // Transition speed (e.g., default, fast, slow)
+  transitionSpeed: 'default',
+  // Transition style for full page slide backgrounds (e.g., none, fade, slide, convex, concave, zoom)
+  backgroundTransition: 'fade',
+  // Number of slides away from the current that are visible
+  viewDistance: 3,
+  // Parallax background image (e.g., "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'")
+  parallaxBackgroundImage: '',
+  // Parallax background size in CSS syntax (e.g., "2100px 900px")
+  parallaxBackgroundSize: '',
+
+  // The "normal" size of the presentation, aspect ratio will be preserved
+  // when the presentation is scaled to fit different resolutions. Can be
+  // specified using percentage units.
+  width: 1728,
+  height: 972,
+
+  // Factor of the display size that should remain empty around the content
+  margin: 0.1,
+
+  // Bounds for smallest/largest possible scale to apply to content
+  minScale: 0.2,
+  maxScale: 1.5,
+
+  // Optional libraries used to extend on reveal.js
+  dependencies: [
+      { src: 'reveal.js-3.9.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'reveal.js-3.9.2/plugin/title-footer/title-footer.js', async: true, callback: function()
+          {title_footer.initialize('Schulung Java Data Pipelines mit Apache Flink', 'Jan Lühr', 'anderScore GmbH • Frankenwerft 35 • 50667 Köln');}},
+      { src: 'reveal.js-3.9.2/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal.js-3.9.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      
+      { src: 'reveal.js-3.9.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: 'reveal.js-3.9.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+  ]
+});</script></body></html>

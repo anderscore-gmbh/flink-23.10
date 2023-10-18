@@ -1,0 +1,51 @@
+digraph dataflow_parallel {
+  rankdir=LR;
+  "Quelle\n(Server 1 Logs)" -> "Filter#1\n(Loglevel >= WARN)" 
+    [label=
+<<B>
+<FONT COLOR="#00BB00">:) &nbsp;</FONT>
+<FONT COLOR="ORANGE">:| &nbsp;</FONT>
+<FONT COLOR="RED">:( &nbsp;</FONT>
+</B>>
+   ];
+  "Quelle\n(Server 2 Logs)" -> "Filter#2\n(Loglevel >= WARN)" 
+  [label=
+<<B>
+<FONT COLOR="#00BB00">:-) &nbsp;</FONT>
+<FONT COLOR="ORANGE">:-| &nbsp;</FONT>
+</B>>
+  ];
+  "Filter#1\n(Loglevel >= WARN)" -> "Zähler#1\n(Warnings)" 
+  [label=
+<<B><FONT POINT-SIZE="18.0" COLOR="ORANGE">:| &nbsp;</FONT></B>>
+  ];
+  "Filter#1\n(Loglevel >= WARN)" -> "Zähler#2\n(Errors)" 
+  [label=
+<<B>
+<FONT COLOR="RED" POINT-SIZE="18.0">:( &nbsp;</FONT>
+</B>>
+  ];
+ "Filter#2\n(Loglevel >= WARN)"  -> "Zähler#1\n(Warnings)"
+  [label=
+<<B>
+<FONT COLOR="ORANGE" POINT-SIZE="18.0">:-| &nbsp;</FONT>
+</B>>
+  ];
+  "Filter#2\n(Loglevel >= WARN)"  -> "Zähler#2\n(Errors)" 
+  [label=
+<>
+  ];
+  "Zähler#1\n(Warnings)" -> "Senke\n(Update Metrics)" 
+  [label=
+<<B>
+<FONT COLOR="ORANGE" POINT-SIZE="18.0">2 </FONT>
+<FONT COLOR="ORANGE" POINT-SIZE="18.0">1 </FONT>
+</B>>
+  ];
+  "Zähler#2\n(Errors)"  -> "Senke\n(Update Metrics)"  
+  [label=
+<<B>
+<FONT COLOR="RED" POINT-SIZE="18.0">1 </FONT>
+</B>>
+  ];
+}
