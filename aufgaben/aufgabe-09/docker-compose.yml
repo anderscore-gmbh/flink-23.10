@@ -65,4 +65,4 @@ volumes:
         driver_opts:
           o: bind
           type: none
-          device: /aufgabe9-joblog
+          device: ./aufgabe9-joblog
